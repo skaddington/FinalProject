@@ -23,7 +23,7 @@ export class RegisterComponent {
         next: (registeredUser) => {
            this.auth.login(user.username, user.password).subscribe({
               next: (loggedInUser) => {
-                 this.router.navigateByUrl('todo');
+                 this.router.navigateByUrl('');
               },
               error: (issue) => {
                  console.error('RegisterComponent.register(): error logging in new user');
