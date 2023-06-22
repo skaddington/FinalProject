@@ -2,6 +2,7 @@ package com.skilldistillery.nationalparks.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,6 +45,30 @@ class AttractionTest {
 	void test_Attraction_basic_mapping() {
 		assertNotNull(attr);
 		assertEquals("burgerplace", attr.getName());
+	}
+	
+	@Test
+	void test_Attraction_Park_ManyToOne_mapping() {
+		assertNotNull(attr);
+		assertEquals(1,attr.getPark().getId());
+	}
+	
+	@Test
+	void test_Attraction_User_ManyToOne_mapping() {
+		assertNotNull(attr);
+		assertEquals(1,attr.getUser().getId());
+	}
+	
+	@Test
+	void test_Attraction_AttractionComment_OneToMany_mapping() {
+		assertNotNull(attr);
+		assertTrue(attr.getAttractionComments().size()>0);
+	}
+	
+	@Test
+	void test_Attraction_AttractionRating_OneToMany_mapping() {
+		assertNotNull(attr);
+		assertTrue(attr.getRatings().size()>0);
 	}
 
 }

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,7 +28,10 @@ public class AttractionComment {
 	private Boolean enabled;
 //	private User user;
 //	private AttractionComment reply;
-//	private Attraction attraction;
+	
+	@ManyToOne
+	@JoinColumn(name="attraction_id")
+	private Attraction attraction;
 	
 	public AttractionComment() {
 	}
@@ -79,13 +84,15 @@ public class AttractionComment {
 //		this.reply = reply;
 //	}
 //
-//	public Attraction getAttraction() {
-//		return attraction;
-//	}
-//
-//	public void setAttraction(Attraction attraction) {
-//		this.attraction = attraction;
-//	}
+	public Attraction getAttraction() {
+		return attraction;
+	}
+
+	public void setAttraction(Attraction attraction) {
+		this.attraction = attraction;
+	}
+	
+	
 
 	@Override
 	public String toString() {

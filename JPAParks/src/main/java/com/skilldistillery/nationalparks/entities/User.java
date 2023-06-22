@@ -1,6 +1,8 @@
 package com.skilldistillery.nationalparks.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -22,19 +25,24 @@ public class User {
 	private String password;
 	private boolean enabled;
 	private String role;
-	@Column(name="first_name")
+	@Column(name = "first_name")
 	private String firstName;
-	@Column(name="last_name")
+	@Column(name = "last_name")
 	private String lastName;
-	@Column(name="image_url")
+	@Column(name = "image_url")
 	private String image;
 	private String description;
-	@Column(name="created_at")
+	@Column(name = "created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	@Column(name="updated_at")
+	@Column(name = "updated_at")
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
+
+	@OneToMany(mappedBy = "user")
+	private List<Attraction> attractions;
+
+//	private List<Park> favorites;
 
 	public User() {
 
@@ -126,6 +134,36 @@ public class User {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public List<Attraction> getAttractions() {
+		return attractions;
+	}
+
+	public void setAttractions(List<Attraction> attractions) {
+		this.attractions = attractions;
+	}
+	
+	public void addAttraction(Attraction attraction) {
+		if (attractions == null) {
+			attractions = new ArrayList<>();
+		}
+		if (!attractions.contains(attraction)) {
+			attractions.add(attraction);
+			if (attraction.getUser() != null) {
+				attraction.getUser().removeAttraction(attraction);
+
+			} else {
+				attraction.setUser(this);
+			}
+		}
+	}
+
+	public void removeAttraction(Attraction attraction) {
+		if (attractions != null && attractions.contains(attraction)) {
+			attractions.remove(attraction);
+			attraction.setUser(null);
+		}
 	}
 
 	@Override

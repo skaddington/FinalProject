@@ -1,5 +1,7 @@
 package com.skilldistillery.nationalparks.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,19 +9,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Activity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String description;
-	@Column(name="image_url")
+	@Column(name = "image_url")
 	private String image;
 	private Boolean enabled;
-	
+
+	@ManyToMany
+	@JoinTable(name = "park_has_activity", 
+	joinColumns = @JoinColumn(name = "park_id"), 
+	inverseJoinColumns = @JoinColumn(name = "activity_id"))
+	private List<Park> parks;
+
 	public Activity() {
 	}
 
@@ -63,6 +74,39 @@ public class Activity {
 		this.enabled = enabled;
 	}
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Park> getParks() {
+		return parks;
+	}
+
+	public void setParks(List<Park> parks) {
+		this.parks = parks;
+	}
+	
+	public void addPark(Park park) {
+		if (parks == null) {
+			parks = new ArrayList<>();
+		}
+		if (!parks.contains(park)) {
+			parks.add(park);
+			park.addActivity(this);
+		}
+	}
+
+	public void removePark(Park park) {
+		if (parks != null && parks.contains(park)) {
+			parks.remove(park);
+			park.removeActivity(this);
+		}
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -96,6 +140,5 @@ public class Activity {
 		Activity other = (Activity) obj;
 		return id == other.id;
 	}
-	
 
 }

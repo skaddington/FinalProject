@@ -1,6 +1,8 @@
 package com.skilldistillery.nationalparks.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,32 +10,44 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class Attraction {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String description;
-	@Column(name="created_at")
+	@Column(name = "created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	@Column(name="updated_at")
+	@Column(name = "updated_at")
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	@Column(name="image_url")
+	@Column(name = "image_url")
 	private String image;
-	@Column(name="website_url")
+	@Column(name = "website_url")
 	private String website;
 	private Boolean enabled;
-//	private Park park;
-//	private User user;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "park_id")
+	private Park park;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	@OneToMany(mappedBy = "attraction")
+	private List<AttractionComment> attractionComments;
+	@OneToMany(mappedBy = "attraction")
+	private List<AttractionRating> ratings;
+
 	public Attraction() {
 	}
 
@@ -101,21 +115,81 @@ public class Attraction {
 		this.enabled = enabled;
 	}
 
-//	public Park getPark() {
-//		return park;
-//	}
-//
-//	public void setPark(Park park) {
-//		this.park = park;
-//	}
+	public Park getPark() {
+		return park;
+	}
 
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
+	public void setPark(Park park) {
+		this.park = park;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<AttractionComment> getAttractionComments() {
+		return attractionComments;
+	}
+
+	public void setAttractionComments(List<AttractionComment> attractionComments) {
+		this.attractionComments = attractionComments;
+	}
+
+	public List<AttractionRating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<AttractionRating> ratings) {
+		this.ratings = ratings;
+	}
+
+	public void addAttractionRating(AttractionRating rating) {
+		if (ratings == null) {
+			ratings = new ArrayList<>();
+		}
+		if (!ratings.contains(rating)) {
+			ratings.add(rating);
+			if (rating.getAttraction() != null) {
+				rating.getAttraction().removeAttractionRating(rating);
+
+			} else {
+				rating.setAttraction(this);
+			}
+		}
+	}
+
+	public void removeAttractionRating(AttractionRating rating) {
+		if (ratings != null && ratings.contains(rating)) {
+			ratings.remove(rating);
+			rating.setAttraction(null);
+		}
+	}
+
+	public void addAttractionComment(AttractionComment attractionComment) {
+		if (attractionComments == null) {
+			attractionComments = new ArrayList<>();
+		}
+		if (!attractionComments.contains(attractionComment)) {
+			attractionComments.add(attractionComment);
+			if (attractionComment.getAttraction() != null) {
+				attractionComment.getAttraction().removeAttractionComment(attractionComment);
+
+			} else {
+				attractionComment.setAttraction(this);
+			}
+		}
+	}
+
+	public void removeAttractionComment(AttractionComment attractionComment) {
+		if (attractionComments != null && attractionComments.contains(attractionComment)) {
+			attractionComments.remove(attractionComment);
+			attractionComment.setAttraction(null);
+		}
+	}
 
 	@Override
 	public String toString() {
@@ -156,5 +230,5 @@ public class Attraction {
 		Attraction other = (Attraction) obj;
 		return id == other.id;
 	}
-	
+
 }

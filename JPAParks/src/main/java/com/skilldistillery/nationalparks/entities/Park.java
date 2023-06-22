@@ -1,6 +1,8 @@
 package com.skilldistillery.nationalparks.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,27 +10,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Park {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String name;
-	@Column(name="date_established")
+	@Column(name = "date_established")
 	private LocalDate dateEstablished;
 	private String description;
-	@Column(name="image_url")
+	@Column(name = "image_url")
 	private String image;
-	@Column(name="website_url")
+	@Column(name = "website_url")
 	private String website;
 	private String street;
 	private String city;
 	private String state;
 	private String zip;
-	
+
+	@ManyToMany(mappedBy = "parks")
+	private List<Activity> activities;
+
+	@OneToMany(mappedBy = "park")
+	private List<Attraction> attractions;
+
 	public Park() {
 	}
 
@@ -112,6 +122,62 @@ public class Park {
 		this.zip = zip;
 	}
 
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
+	}
+
+	public List<Attraction> getAttractions() {
+		return attractions;
+	}
+
+	public void setAttractions(List<Attraction> attractions) {
+		this.attractions = attractions;
+	}
+	
+	public void addAttraction(Attraction attraction) {
+		if (attractions == null) {
+			attractions = new ArrayList<>();
+		}
+		if (!attractions.contains(attraction)) {
+			attractions.add(attraction);
+			if (attraction.getPark() != null) {
+				attraction.getPark().removeAttraction(attraction);
+
+			} else {
+				attraction.setPark(this);
+			}
+		}
+	}
+
+	public void removeAttraction(Attraction attraction) {
+		if (attractions != null && attractions.contains(attraction)) {
+			attractions.remove(attraction);
+			attraction.setPark(null);
+		}
+	}
+
+
+	public void addActivity(Activity activity) {
+		if (activities == null) {
+			activities = new ArrayList<>();
+		}
+		if (!activities.contains(activity)) {
+			activities.add(activity);
+			activity.addPark(this);
+		}
+	}
+
+	public void removeActivity(Activity activity) {
+		if (activities != null && activities.contains(activity)) {
+			activities.remove(activity);
+			activity.removePark(this);
+		}
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -155,5 +221,5 @@ public class Park {
 		Park other = (Park) obj;
 		return id == other.id;
 	}
-	
+
 }

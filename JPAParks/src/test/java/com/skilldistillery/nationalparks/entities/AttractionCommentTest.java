@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 class AttractionCommentTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
@@ -44,6 +45,12 @@ class AttractionCommentTest {
 	void test_AttractionComment_basic_mapping() {
 		assertNotNull(attrComm);
 		assertEquals("idk what to put here", attrComm.getContent());
+	}
+	
+	@Test
+	void test_AttractionComment_Attraction_ManyToOne_mapping() {
+		assertNotNull(attrComm);
+		assertEquals(1,attrComm.getAttraction().getId());
 	}
 
 }

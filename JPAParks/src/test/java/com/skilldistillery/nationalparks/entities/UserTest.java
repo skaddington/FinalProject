@@ -2,6 +2,7 @@ package com.skilldistillery.nationalparks.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,9 +42,15 @@ class UserTest {
 	}
 
 	@Test
-	void test() {
+	void test_User_Entity_mapping() {
 		assertNotNull(user);
 		assertEquals("admin", user.getUsername());
+	}
+	
+	@Test
+	void test_User_Attraction_OneToMany_mapping() {
+		assertNotNull(user);
+		assertTrue(user.getAttractions().size()>0);
 	}
 
 }
