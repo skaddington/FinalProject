@@ -355,7 +355,166 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `parksdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `image_url`, `description`, `created_at`, `updated_at`) VALUES (1, 'admin', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `image_url`, `description`, `created_at`, `updated_at`) VALUES (1, 'admin', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, NULL, NULL, NULL, 'https://static.simpsonswiki.com/images/thumb/e/e5/That%27s_a_paddlin%27.png/250px-That%27s_a_paddlin%27.png', NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `image_url`, `description`, `created_at`, `updated_at`) VALUES (2, 'coon', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, NULL, NULL, NULL, 'https://images.paramount.tech/uri/mgid:arc:imageassetref:shared.southpark.us.en:02416969-40fd-415a-96d2-4218519c613f?quality=0.7&gen=ntrn&legacyStatusCode=true', NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `image_url`, `description`, `created_at`, `updated_at`) VALUES (3, 'user3', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `image_url`, `description`, `created_at`, `updated_at`) VALUES (4, 'user4', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `image_url`, `description`, `created_at`, `updated_at`) VALUES (5, 'user5', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `park`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `park` (`id`, `name`, `date_established`, `description`, `image_url`, `website_url`, `street`, `city`, `state`, `zip`) VALUES (1, 'testPark1', '2012-05-01', 'ahhhhhhhhhhhhhhhhh', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `park` (`id`, `name`, `date_established`, `description`, `image_url`, `website_url`, `street`, `city`, `state`, `zip`) VALUES (2, 'tp2', '2000-02-10', 'stop beeping at me!', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `park` (`id`, `name`, `date_established`, `description`, `image_url`, `website_url`, `street`, `city`, `state`, `zip`) VALUES (3, 'tp3', '1201-01-01', 'mwb is being rude', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `park` (`id`, `name`, `date_established`, `description`, `image_url`, `website_url`, `street`, `city`, `state`, `zip`) VALUES (4, 'tp4', '0001-01-01', 'uggaaa ug ug do', NULL, NULL, NULL, NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `activity`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `activity` (`id`, `name`, `description`, `image_url`, `enabled`) VALUES (1, 'Hiking', 'eww nature', NULL, NULL);
+INSERT INTO `activity` (`id`, `name`, `description`, `image_url`, `enabled`) VALUES (2, 'Camping', 'testing', NULL, NULL);
+INSERT INTO `activity` (`id`, `name`, `description`, `image_url`, `enabled`) VALUES (3, 'Kayaking', 'you got something', NULL, NULL);
+INSERT INTO `activity` (`id`, `name`, `description`, `image_url`, `enabled`) VALUES (4, 'Canoing', 'asdsdf', NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `park_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `park_comment` (`id`, `user_id`, `park_id`, `content`, `reply_to_id`, `created_at`, `enabled`) VALUES (1, 1, 1, 'test. sample delete me', NULL, '2023-02-02', 1);
+INSERT INTO `park_comment` (`id`, `user_id`, `park_id`, `content`, `reply_to_id`, `created_at`, `enabled`) VALUES (2, 1, 2, 'delete it!', NULL, '2023-01-01', 1);
+INSERT INTO `park_comment` (`id`, `user_id`, `park_id`, `content`, `reply_to_id`, `created_at`, `enabled`) VALUES (3, 2, 1, 'hey you got some data!', 1, '2023-01-01', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `attraction`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `attraction` (`id`, `name`, `description`, `created_at`, `updated_at`, `park_id`, `user_id`, `image_url`, `website_url`, `enabled`) VALUES (1, 'burgerplace', 'ahhhhhhhhhhhhh', NULL, NULL, 1, 1, NULL, NULL, NULL);
+INSERT INTO `attraction` (`id`, `name`, `description`, `created_at`, `updated_at`, `park_id`, `user_id`, `image_url`, `website_url`, `enabled`) VALUES (2, 'testing', 'patrick was here', NULL, NULL, 1, 1, NULL, NULL, NULL);
+INSERT INTO `attraction` (`id`, `name`, `description`, `created_at`, `updated_at`, `park_id`, `user_id`, `image_url`, `website_url`, `enabled`) VALUES (3, 'the', 'game', NULL, NULL, 1, 1, NULL, NULL, NULL);
+INSERT INTO `attraction` (`id`, `name`, `description`, `created_at`, `updated_at`, `park_id`, `user_id`, `image_url`, `website_url`, `enabled`) VALUES (4, 'you', 'lost', NULL, NULL, 1, 1, NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `park_has_activity`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `park_has_activity` (`park_id`, `activity_id`) VALUES (1, 1);
+INSERT INTO `park_has_activity` (`park_id`, `activity_id`) VALUES (1, 2);
+INSERT INTO `park_has_activity` (`park_id`, `activity_id`) VALUES (1, 3);
+INSERT INTO `park_has_activity` (`park_id`, `activity_id`) VALUES (1, 4);
+INSERT INTO `park_has_activity` (`park_id`, `activity_id`) VALUES (2, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `park_photo`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (1, 1, 1, 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFya3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', NULL);
+INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (2, 1, 1, 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFya3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', NULL);
+INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (3, 1, 1, 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFya3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `state`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `state` (`id`, `abbreviation`, `name`) VALUES (1, 'TX', 'Texas');
+INSERT INTO `state` (`id`, `abbreviation`, `name`) VALUES (2, 'CO', 'Colorao');
+INSERT INTO `state` (`id`, `abbreviation`, `name`) VALUES (3, 'FL', 'Florida');
+INSERT INTO `state` (`id`, `abbreviation`, `name`) VALUES (4, 'OK', 'Oklahoma');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `park_has_state`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `park_has_state` (`park_id`, `state_id`) VALUES (1, 1);
+INSERT INTO `park_has_state` (`park_id`, `state_id`) VALUES (2, 2);
+INSERT INTO `park_has_state` (`park_id`, `state_id`) VALUES (3, 3);
+INSERT INTO `park_has_state` (`park_id`, `state_id`) VALUES (4, 4);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_favorites`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `user_favorites` (`user_id`, `park_id`) VALUES (1, 1);
+INSERT INTO `user_favorites` (`user_id`, `park_id`) VALUES (1, 2);
+INSERT INTO `user_favorites` (`user_id`, `park_id`) VALUES (1, 3);
+INSERT INTO `user_favorites` (`user_id`, `park_id`) VALUES (1, 4);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `park_rating`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `park_rating` (`user_id`, `park_id`, `rating`, `rating_comment`, `rating_date`) VALUES (1, 1, 4, 'messin with the wildlife,,,,, that\'s a paddlin', NULL);
+INSERT INTO `park_rating` (`user_id`, `park_id`, `rating`, `rating_comment`, `rating_date`) VALUES (2, 1, 1, 'Some jerkoff beat me with a paddle!', NULL);
+INSERT INTO `park_rating` (`user_id`, `park_id`, `rating`, `rating_comment`, `rating_date`) VALUES (3, 2, 3, NULL, NULL);
+INSERT INTO `park_rating` (`user_id`, `park_id`, `rating`, `rating_comment`, `rating_date`) VALUES (4, 3, 2, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `attraction_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `attraction_comment` (`id`, `user_id`, `content`, `reply_to_id`, `created_at`, `attraction_id`, `enabled`) VALUES (1, 1, 'idk what to put here', NULL, NULL, 1, 1);
+INSERT INTO `attraction_comment` (`id`, `user_id`, `content`, `reply_to_id`, `created_at`, `attraction_id`, `enabled`) VALUES (2, 2, 'all out of ideas', NULL, NULL, 1, 1);
+INSERT INTO `attraction_comment` (`id`, `user_id`, `content`, `reply_to_id`, `created_at`, `attraction_id`, `enabled`) VALUES (3, 1, 'ahhh', NULL, NULL, 1, 1);
+INSERT INTO `attraction_comment` (`id`, `user_id`, `content`, `reply_to_id`, `created_at`, `attraction_id`, `enabled`) VALUES (4, 3, 'aadw', 2, NULL, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `attraction_rating`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `parksdb`;
+INSERT INTO `attraction_rating` (`user_id`, `rating`, `rating_comment`, `rating_date`, `attraction_id`) VALUES (1, 2, 'testdata', '2013-12-01', 1);
+INSERT INTO `attraction_rating` (`user_id`, `rating`, `rating_comment`, `rating_date`, `attraction_id`) VALUES (1, 3, 'more testdata', '2023-05-01', 2);
+INSERT INTO `attraction_rating` (`user_id`, `rating`, `rating_comment`, `rating_date`, `attraction_id`) VALUES (2, 2, 'im out of ideas on what too put....', '2017-05-03', 3);
+INSERT INTO `attraction_rating` (`user_id`, `rating`, `rating_comment`, `rating_date`, `attraction_id`) VALUES (2, 1, 'still got nothin.', '2021-12-12', 4);
 
 COMMIT;
 
