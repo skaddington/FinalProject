@@ -5,8 +5,19 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     
     <!-- begin entities  -->
+    <class>com.skilldistillery.nationalparks.entities.Activity</class>
+    <class>com.skilldistillery.nationalparks.entities.Attraction</class>
+    <class>com.skilldistillery.nationalparks.entities.AttractionComment</class>
+    <class>com.skilldistillery.nationalparks.entities.AttractionRating</class>
+    <class>com.skilldistillery.nationalparks.entities.AttractionRatingId</class>
+    <class>com.skilldistillery.nationalparks.entities.Park</class>
+    <class>com.skilldistillery.nationalparks.entities.ParkComment</class>
+    <class>com.skilldistillery.nationalparks.entities.ParkPhoto</class>
+    <class>com.skilldistillery.nationalparks.entities.ParkRating</class>
+    <class>com.skilldistillery.nationalparks.entities.ParkRatingId</class>
+    <class>com.skilldistillery.nationalparks.entities.State</class>
     <class>com.skilldistillery.nationalparks.entities.User</class>
-    
+    <class>com.skilldistillery.nationalparks.entities.UserFavorites</class>
     <!-- end entities  -->
 
     <properties>
