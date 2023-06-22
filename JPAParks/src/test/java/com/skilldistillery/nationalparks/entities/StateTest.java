@@ -2,6 +2,7 @@ package com.skilldistillery.nationalparks.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,6 +45,12 @@ class StateTest {
 	void test_State_basic_mapping() {
 		assertNotNull(state);
 		assertEquals("Texas", state.getName());
+	}
+	
+	@Test
+	void test_State_Park_ManyToMany_mapping() {
+		assertNotNull(state);
+		assertTrue(state.getParks().size()>0);
 	}
 
 }

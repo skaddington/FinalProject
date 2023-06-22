@@ -52,5 +52,32 @@ class UserTest {
 		assertNotNull(user);
 		assertTrue(user.getAttractions().size()>0);
 	}
+	
+	@Test
+	void test_User_ParkRating_OneToMany_mapping() {
+		assertNotNull(user);
+		assertTrue(user.getParkRatings().size()>0);
+	}
+	
+	@Test
+	void test_User_Park_ManyToMany_mapping() {
+		assertNotNull(user);
+		assertTrue(user.getFavoriteParks().size()>0);
+	}
+	
+	@Test
+	void test_User_ParkComment_OneToMany_mapping() {
+		assertNotNull(user);
+		assertTrue(user.getParkComments().size()>0);
+	}
+	
+	@Test
+	void test_User_ParkPhoto_OneToMany_mapping() {
+		assertNotNull(user);
+		assertTrue(user.getParkPhotos().size()>0);
+	}
+	
+	
+	
 
 }

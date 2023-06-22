@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -41,8 +44,17 @@ public class User {
 
 	@OneToMany(mappedBy = "user")
 	private List<Attraction> attractions;
-
-//	private List<Park> favorites;
+	@ManyToMany
+	@JoinTable(name = "user_favorites", 
+	joinColumns = @JoinColumn(name = "park_id"), 
+	inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<Park> favoriteParks;
+	@OneToMany(mappedBy = "park")
+	private List<ParkComment> parkComments;
+	@OneToMany(mappedBy = "user")
+	private List<ParkRating> parkRatings;
+	@OneToMany(mappedBy = "user")
+	private List<ParkPhoto> parkPhotos;
 
 	public User() {
 
@@ -143,7 +155,122 @@ public class User {
 	public void setAttractions(List<Attraction> attractions) {
 		this.attractions = attractions;
 	}
-	
+
+	public List<Park> getFavoriteParks() {
+		return favoriteParks;
+	}
+
+	public void setFavoriteParks(List<Park> favoriteParks) {
+		this.favoriteParks = favoriteParks;
+	}
+
+	public List<ParkComment> getParkComments() {
+		return parkComments;
+	}
+
+	public void setParkComments(List<ParkComment> parkComments) {
+		this.parkComments = parkComments;
+	}
+
+	public List<ParkRating> getParkRatings() {
+		return parkRatings;
+	}
+
+	public void setParkRatings(List<ParkRating> parkRatings) {
+		this.parkRatings = parkRatings;
+	}
+
+	public List<ParkPhoto> getParkPhotos() {
+		return parkPhotos;
+	}
+
+	public void setParkPhotos(List<ParkPhoto> parkPhotos) {
+		this.parkPhotos = parkPhotos;
+	}
+
+	public void addParkPhoto(ParkPhoto parkPhoto) {
+		if (parkPhotos == null) {
+			parkPhotos = new ArrayList<>();
+		}
+		if (!parkPhotos.contains(parkPhoto)) {
+			parkPhotos.add(parkPhoto);
+			if (parkPhoto.getUser() != null) {
+				parkPhoto.getUser().removeParkPhoto(parkPhoto);
+
+			} else {
+				parkPhoto.setUser(this);
+			}
+		}
+	}
+
+	public void removeParkPhoto(ParkPhoto parkPhoto) {
+		if (parkPhotos != null && parkPhotos.contains(parkPhoto)) {
+			parkPhotos.remove(parkPhoto);
+			parkPhoto.setUser(null);
+		}
+	}
+
+	public void addParkRating(ParkRating parkRating) {
+		if (parkRatings == null) {
+			parkRatings = new ArrayList<>();
+		}
+		if (!parkRatings.contains(parkRating)) {
+			parkRatings.add(parkRating);
+			if (parkRating.getUser() != null) {
+				parkRating.getUser().removeParkRating(parkRating);
+
+			} else {
+				parkRating.setUser(this);
+			}
+		}
+	}
+
+	public void removeParkRating(ParkRating parkRating) {
+		if (parkRatings != null && parkRatings.contains(parkRating)) {
+			parkRatings.remove(parkRating);
+			parkRating.setUser(null);
+		}
+	}
+
+	public void addParkComment(ParkComment parkComment) {
+		if (parkComments == null) {
+			parkComments = new ArrayList<>();
+		}
+		if (!parkComments.contains(parkComment)) {
+			parkComments.add(parkComment);
+			if (parkComment.getUser() != null) {
+				parkComment.getUser().removeParkComment(parkComment);
+
+			} else {
+				parkComment.setUser(this);
+			}
+		}
+	}
+
+	public void removeParkComment(ParkComment parkComment) {
+		if (parkComments != null && parkComments.contains(parkComment)) {
+			parkComments.remove(parkComment);
+			parkComment.setUser(null);
+		}
+	}
+
+	public void addPark(Park favoritePark) {
+		if (favoriteParks == null) {
+			favoriteParks = new ArrayList<>();
+		}
+		if (!favoriteParks.contains(favoritePark)) {
+			favoriteParks.add(favoritePark);
+			favoritePark.addUser(this);
+		}
+	}
+
+	public void removePark(Park favoritePark) {
+		if (favoriteParks != null && favoriteParks.contains(favoritePark)) {
+			favoriteParks.remove(favoritePark);
+			favoritePark.removeUser(this);
+		}
+	}
+
 	public void addAttraction(Attraction attraction) {
 		if (attractions == null) {
 			attractions = new ArrayList<>();

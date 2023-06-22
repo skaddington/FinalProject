@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +25,13 @@ public class ParkPhoto {
 	@Column(name="image_date")
 	private LocalDate imageDate;
 	
-//	private Park park;
-//	private User user;
+	@ManyToOne
+	@JoinColumn(name="park_id")
+	private Park park;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	public ParkPhoto() {
 	}
@@ -53,21 +60,21 @@ public class ParkPhoto {
 		this.imageDate = imageDate;
 	}
 
-//	public Park getPark() {
-//		return park;
-//	}
-//
-//	public void setPark(Park park) {
-//		this.park = park;
-//	}
-//
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
+	public Park getPark() {
+		return park;
+	}
+
+	public void setPark(Park park) {
+		this.park = park;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {

@@ -58,5 +58,35 @@ class ParkTest {
 		assertNotNull(park);
 		assertTrue(park.getAttractions().size()>0);
 	}
+	
+	@Test
+	void test_Park_State_ManyToMany_mapping() {
+		assertNotNull(park);
+		assertTrue(park.getStates().size()>0);
+	}
+	
+	@Test
+	void test_Park_ParkPhoto_OneToMany_mapping() {
+		assertNotNull(park);
+		assertTrue(park.getParkPhotos().size()>0);
+	}
+	
+	@Test
+	void test_Park_UserFavorites_ManyToMany_mapping() {
+		assertNotNull(park);
+		assertTrue(park.getUsers().size()>0);
+	}
+	
+	@Test
+	void test_Park_ParkComment_OneToMany_mapping() {
+		assertNotNull(park);
+		assertTrue(park.getParkComments().size()>0);
+	}
+	
+	@Test
+	void test_Park_ParkRating_OneToMany_mapping() {
+		assertNotNull(park);
+		assertTrue(park.getParkRatings().size()>0);
+	}
 
 }

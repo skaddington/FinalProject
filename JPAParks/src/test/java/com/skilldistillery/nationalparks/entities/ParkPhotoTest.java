@@ -44,5 +44,17 @@ class ParkPhotoTest {
 		assertNotNull(photo);
 		assertNotNull(photo.getImage());
 	}
+	
+	@Test
+	void test_ParkPhoto_Park_ManyToOne_mapping() {
+		assertNotNull(photo);
+		assertNotNull(photo.getPark());
+	}
+	
+	@Test
+	void test_ParkPhoto_User_ManyToOne_mapping() {
+		assertNotNull(photo);
+		assertNotNull(photo.getUser());
+	}
 
 }

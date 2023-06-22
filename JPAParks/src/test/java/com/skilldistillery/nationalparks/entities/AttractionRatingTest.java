@@ -45,5 +45,17 @@ class AttractionRatingTest {
 		assertNotNull(attrRate);
 		assertEquals("testdata", attrRate.getRatingComment());
 	}
+	
+	@Test
+	void test_AttractionRating_Attraction_ManyToOne_mapping() {
+		assertNotNull(attrRate);
+		assertEquals(1, attrRate.getAttraction().getId());
+	}
+	
+	@Test
+	void test_AttractionRating_User_ManyToOne_mapping() {
+		assertNotNull(attrRate);
+		assertEquals(1, attrRate.getUser().getId());
+	}
 
 }

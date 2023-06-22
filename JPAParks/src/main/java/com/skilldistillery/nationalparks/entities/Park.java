@@ -35,9 +35,18 @@ public class Park {
 
 	@ManyToMany(mappedBy = "parks")
 	private List<Activity> activities;
-
 	@OneToMany(mappedBy = "park")
 	private List<Attraction> attractions;
+	@ManyToMany(mappedBy = "parks")
+	private List<State> states;
+	@ManyToMany(mappedBy = "favoriteParks")
+	private List<User> users;
+	@OneToMany(mappedBy = "park")
+	private List<ParkPhoto> parkPhotos;
+	@OneToMany(mappedBy = "park")
+	private List<ParkComment> parkComments;
+	@OneToMany(mappedBy = "park")
+	private List<ParkRating> parkRatings;
 
 	public Park() {
 	}
@@ -137,7 +146,113 @@ public class Park {
 	public void setAttractions(List<Attraction> attractions) {
 		this.attractions = attractions;
 	}
-	
+
+	public List<State> getStates() {
+		return states;
+	}
+
+	public void setStates(List<State> states) {
+		this.states = states;
+	}
+
+	public List<ParkPhoto> getParkPhotos() {
+		return parkPhotos;
+	}
+
+	public void setParkPhotos(List<ParkPhoto> parkPhotos) {
+		this.parkPhotos = parkPhotos;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public List<ParkComment> getParkComments() {
+		return parkComments;
+	}
+
+	public void setParkComments(List<ParkComment> parkComments) {
+		this.parkComments = parkComments;
+	}
+
+	public List<ParkRating> getParkRatings() {
+		return parkRatings;
+	}
+
+	public void setParkRatings(List<ParkRating> parkRatings) {
+		this.parkRatings = parkRatings;
+	}
+
+	public void addParkRating(ParkRating parkRating) {
+		if (parkRatings == null) {
+			parkRatings = new ArrayList<>();
+		}
+		if (!parkRatings.contains(parkRating)) {
+			parkRatings.add(parkRating);
+			if (parkRating.getPark() != null) {
+				parkRating.getPark().removeParkRating(parkRating);
+
+			} else {
+				parkRating.setPark(this);
+			}
+		}
+	}
+
+	public void removeParkRating(ParkRating parkRating) {
+		if (parkRatings != null && parkRatings.contains(parkRating)) {
+			parkRatings.remove(parkRating);
+			parkRating.setPark(null);
+		}
+	}
+
+	public void addParkComment(ParkComment parkComment) {
+		if (parkComments == null) {
+			parkComments = new ArrayList<>();
+		}
+		if (!parkComments.contains(parkComment)) {
+			parkComments.add(parkComment);
+			if (parkComment.getPark() != null) {
+				parkComment.getPark().removeParkComment(parkComment);
+
+			} else {
+				parkComment.setPark(this);
+			}
+		}
+	}
+
+	public void removeParkComment(ParkComment parkComment) {
+		if (parkComments != null && parkComments.contains(parkComment)) {
+			parkComments.remove(parkComment);
+			parkComment.setPark(null);
+		}
+	}
+
+	public void addParkPhoto(ParkPhoto parkPhoto) {
+		if (parkPhotos == null) {
+			parkPhotos = new ArrayList<>();
+		}
+		if (!parkPhotos.contains(parkPhoto)) {
+			parkPhotos.add(parkPhoto);
+			if (parkPhoto.getPark() != null) {
+				parkPhoto.getPark().removeParkPhoto(parkPhoto);
+
+			} else {
+				parkPhoto.setPark(this);
+			}
+		}
+	}
+
+	public void removeParkPhoto(ParkPhoto parkPhoto) {
+		if (parkPhotos != null && parkPhotos.contains(parkPhoto)) {
+			parkPhotos.remove(parkPhoto);
+			parkPhoto.setPark(null);
+		}
+	}
+
 	public void addAttraction(Attraction attraction) {
 		if (attractions == null) {
 			attractions = new ArrayList<>();
@@ -160,7 +275,6 @@ public class Park {
 		}
 	}
 
-
 	public void addActivity(Activity activity) {
 		if (activities == null) {
 			activities = new ArrayList<>();
@@ -175,6 +289,40 @@ public class Park {
 		if (activities != null && activities.contains(activity)) {
 			activities.remove(activity);
 			activity.removePark(this);
+		}
+	}
+
+	public void addState(State state) {
+		if (states == null) {
+			states = new ArrayList<>();
+		}
+		if (!states.contains(state)) {
+			states.add(state);
+			state.addPark(this);
+		}
+	}
+
+	public void removeState(State state) {
+		if (states != null && states.contains(state)) {
+			states.remove(state);
+			state.removePark(this);
+		}
+	}
+
+	public void addUser(User user) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+		if (!users.contains(user)) {
+			users.add(user);
+			user.addPark(this);
+		}
+	}
+
+	public void removeUser(User user) {
+		if (users != null && users.contains(user)) {
+			users.remove(user);
+			user.removePark(this);
 		}
 	}
 

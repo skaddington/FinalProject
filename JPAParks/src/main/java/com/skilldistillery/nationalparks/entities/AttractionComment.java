@@ -1,6 +1,8 @@
 package com.skilldistillery.nationalparks.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,29 +12,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name="attraction_comment")
+@Table(name = "attraction_comment")
 public class AttractionComment {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String content;
-	@Column(name="created_at")
+	@Column(name = "created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	private Boolean enabled;
-//	private User user;
-//	private AttractionComment reply;
 	
 	@ManyToOne
-	@JoinColumn(name="attraction_id")
+	@JoinColumn(name="user_id")
+	private User user;
+	@ManyToOne
+	@JoinColumn(name = "reply_to_id")
+	private AttractionComment comment;
+	@OneToMany(mappedBy = "comment")
+	private List<AttractionComment> replies;
+	@ManyToOne
+	@JoinColumn(name = "attraction_id")
 	private Attraction attraction;
-	
+
 	public AttractionComment() {
 	}
 
@@ -68,31 +77,60 @@ public class AttractionComment {
 		this.enabled = enabled;
 	}
 
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-//
-//	public AttractionComment getReply() {
-//		return reply;
-//	}
-//
-//	public void setReply(AttractionComment reply) {
-//		this.reply = reply;
-//	}
-//
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 	public Attraction getAttraction() {
 		return attraction;
+	}
+
+	public AttractionComment getComment() {
+		return comment;
+	}
+
+	public void setComment(AttractionComment comment) {
+		this.comment = comment;
+	}
+
+	public List<AttractionComment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<AttractionComment> replies) {
+		this.replies = replies;
 	}
 
 	public void setAttraction(Attraction attraction) {
 		this.attraction = attraction;
 	}
-	
-	
+
+	public void addAttractionCommentReply(AttractionComment attractionCommentReply) {
+		if (replies == null) {
+			replies = new ArrayList<>();
+		}
+		if (!replies.contains(attractionCommentReply)) {
+			replies.add(attractionCommentReply);
+			if (attractionCommentReply.getComment() != null) {
+				attractionCommentReply.getComment().removeAttractionCommentReply(attractionCommentReply);
+
+			} else {
+				attractionCommentReply.setComment(this);
+			}
+		}
+	}
+
+	public void removeAttractionCommentReply(AttractionComment attractionCommentReply) {
+		if (replies != null && replies.contains(attractionCommentReply)) {
+			replies.remove(attractionCommentReply);
+			attractionCommentReply.setComment(null);
+		}
+	}
 
 	@Override
 	public String toString() {
@@ -125,5 +163,5 @@ public class AttractionComment {
 		AttractionComment other = (AttractionComment) obj;
 		return id == other.id;
 	}
-	
+
 }

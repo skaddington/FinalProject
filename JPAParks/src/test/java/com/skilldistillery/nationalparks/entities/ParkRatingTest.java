@@ -45,5 +45,19 @@ class ParkRatingTest {
 		assertNotNull(rating);
 		assertEquals("messin with the wildlife,,,,, that's a paddlin", rating.getRatingComment());
 	}
+	
+	@Test
+	void test_ParkRating_User_ManyToOne_mapping() {
+		assertNotNull(rating);
+		assertEquals(1,rating.getUser().getId());
+	}
+	
+	@Test
+	void test_ParkRating_Park_ManyToOne_mapping() {
+		assertNotNull(rating);
+		assertEquals(1,rating.getPark().getId());
+	}
+	
+	
 
 }

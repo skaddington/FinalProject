@@ -1,6 +1,8 @@
 package com.skilldistillery.nationalparks.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,27 +10,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name="park_comment")
+@Table(name = "park_comment")
 public class ParkComment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String content;
-	@Column(name="created_at")
+	@Column(name = "created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	private Boolean enabled;
-//	private User user;
-//	private Park park;
-//	private ParkComment reply;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "park_id")
+	private Park park;
+	@ManyToOne
+	@JoinColumn(name = "reply_to_id")
+	private ParkComment comment;
+
+	@OneToMany(mappedBy = "comment")
+	private List<ParkComment> replies;
+
 	public ParkComment() {
 	}
 
@@ -64,29 +80,59 @@ public class ParkComment {
 		this.enabled = enabled;
 	}
 
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-//
-//	public Park getPark() {
-//		return park;
-//	}
-//
-//	public void setPark(Park park) {
-//		this.park = park;
-//	}
-//
-//	public ParkComment getReply() {
-//		return reply;
-//	}
-//
-//	public void setReply(ParkComment reply) {
-//		this.reply = reply;
-//	}
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Park getPark() {
+		return park;
+	}
+
+	public void setPark(Park park) {
+		this.park = park;
+	}
+
+	public ParkComment getComment() {
+		return comment;
+	}
+
+	public void setComment(ParkComment comment) {
+		this.comment = comment;
+	}
+
+	public List<ParkComment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<ParkComment> replies) {
+		this.replies = replies;
+	}
+
+	public void addParkComment(ParkComment comment) {
+		if (replies == null) {
+			replies = new ArrayList<>();
+		}
+		if (!replies.contains(comment)) {
+			replies.add(comment);
+			if (comment.getComment() != null) {
+				comment.getComment().removeParkComment(comment);
+
+			} else {
+				comment.setComment(this);
+			}
+		}
+	}
+
+	public void removeParkComment(ParkComment comment) {
+		if (replies != null && replies.contains(comment)) {
+			replies.remove(comment);
+			comment.setComment(null);
+		}
+	}
 
 	@Override
 	public String toString() {
@@ -119,5 +165,5 @@ public class ParkComment {
 		ParkComment other = (ParkComment) obj;
 		return id == other.id;
 	}
-	
+
 }
