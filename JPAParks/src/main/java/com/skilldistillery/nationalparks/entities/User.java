@@ -18,6 +18,9 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class User {
 
@@ -42,17 +45,24 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Attraction> attractions;
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "user_favorites", 
 	joinColumns = @JoinColumn(name = "park_id"), 
 	inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<Park> favoriteParks;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "park")
 	private List<ParkComment> parkComments;
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<ParkRating> parkRatings;
+	//@JsonIgnore
+	@JsonIgnoreProperties({"user", "park"})
 	@OneToMany(mappedBy = "user")
 	private List<ParkPhoto> parkPhotos;
 

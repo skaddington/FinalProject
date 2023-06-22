@@ -1,0 +1,20 @@
+<h1>Register an Account</h1>
+
+<div class="container registerDiv">
+   <form>
+      <label for="username">Username: </label>
+         <input type="text" name="username" [(ngModel)]="newUser.username"><br>
+      <label for="password">Password: </label>
+         <input type="password" name="password" [(ngModel)]="newUser.password"><br>
+
+         <label for="firstName">First Name: </label>
+         <input type="text" name="firstName" [(ngModel)]="newUser.firstName"><br>
+         <label for="lastName">Last Name: </label>
+         <input type="text" name="lastName" [(ngModel)]="newUser.lastName"><br>
+         <label for="image">Profile Picture: </label>
+         <input type="url" name="image" [(ngModel)]="newUser.image"><br>
+         <label for="description">About You: </label>
+         <textarea rows="3" name="description" [(ngModel)]="newUser.description"></textarea><br>
+      <button class="btn btn-outline-success" (click)="register(newUser)">Create Account</button>
+   </form>
+</div>

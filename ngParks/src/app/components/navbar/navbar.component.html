@@ -1,0 +1,22 @@
+<div class="row-auto">
+  <nav class="navbar navbar-dark bg-dark">
+    <a [routerLink]="['/home']" class="navbar-link">
+      <button class="btn btn-success" type="button">Home</button></a
+    >
+    <a [routerLink]="['/about']" class="nav-link">
+      <button class="btn btn-sm btn-primary" type="button">About</button></a
+    >
+    <a [routerLink]="['/contact']" class="nav-link">
+      <button class="btn btn-sm btn-primary" type="button">Contact</button></a
+    >
+    <a [routerLink]="['/register']" class="nav-link">
+      <button class="btn btn-sm btn-info" type="button"*ngIf="!checkLoginStatus()">Register</button></a
+    >
+    <app-login *ngIf="!checkLoginStatus()">Login</app-login>
+
+    <a [routerLink]="['/todo']" class="nav-link">
+      <button class="btn btn-sm btn-warning" type="button"*ngIf="checkLoginStatus()">Todo List</button></a
+    >
+    <app-logout *ngIf="checkLoginStatus()"></app-logout>
+  </nav>
+  </div>

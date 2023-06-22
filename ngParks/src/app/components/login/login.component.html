@@ -1,0 +1,15 @@
+<form class="form-inline">
+  <input
+     type="text"
+     name="username"
+     placeholder="username"
+     [(ngModel)]="loginUser.username"
+  />
+  <input
+     type="password"
+     name="password"
+     placeholder="password"
+     [(ngModel)]="loginUser.password"
+  />
+  <button class="btn btn-success" (click)="login(loginUser)">Login</button>
+</form>

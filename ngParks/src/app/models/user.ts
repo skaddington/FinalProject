@@ -2,7 +2,10 @@ export class User {
   id: number;
   username: string;
   password: string;
-//  email: string;
+  firstName: string;
+  lastName: string;
+  image: string;
+  description: string;
   role: string;
   enabled: boolean;
 
@@ -10,14 +13,20 @@ export class User {
     id: number = 0,
     username: string = '',
     password: string = '',
-  //  email: string =  '',
+    firstName: string = '',
+    lastName: string = '',
+    image: string = '',
+    description: string = '',
     role: string = '',
     enabled: boolean = false
   ) {
     this.id = id;
     this.username = username;
     this.password = password;
-   // this.email = email;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.image = image;
+    this.description = description;
     this.role = role;
     this.enabled = enabled;
   }
