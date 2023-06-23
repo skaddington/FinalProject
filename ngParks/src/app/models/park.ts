@@ -9,6 +9,7 @@ export class Park {
   city: string;
   state: string;
   zip: string;
+  states: any[] | undefined;
 
   constructor(
     id: number = 0,
@@ -20,7 +21,8 @@ export class Park {
     street: string = '',
     city: string = '',
     state: string = '',
-    zip: string = ''
+    zip: string = '',
+    states: any[] | undefined = []
   ) {
     this.id = id;
     this.name = name;
@@ -32,5 +34,6 @@ export class Park {
     this.city = city;
     this.state = state;
     this.zip = zip;
+    this.states = states;
   }
 }

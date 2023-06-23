@@ -12,6 +12,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { ParkComponent } from './components/park/park.component';
+import { StatePipe } from './pipes/state.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ParkComponent } from './components/park/park.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    ParkComponent
+    ParkComponent,
+    StatePipe
   ],
   imports: [
     BrowserModule,
