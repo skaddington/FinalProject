@@ -13,6 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { ParkComponent } from './components/park/park.component';
 import { StatePipe } from './pipes/state.pipe';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { StatePipe } from './pipes/state.pipe';
     LoginComponent,
     LogoutComponent,
     ParkComponent,
-    StatePipe
+    StatePipe,
+    NotFoundComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
