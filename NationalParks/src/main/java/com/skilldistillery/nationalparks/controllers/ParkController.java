@@ -1,6 +1,5 @@
 package com.skilldistillery.nationalparks.controllers;
 
-import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.nationalparks.entities.Park;
+import com.skilldistillery.nationalparks.entities.State;
 import com.skilldistillery.nationalparks.services.ParkService;
 
 @RestController
@@ -25,6 +25,7 @@ public class ParkController {
 	
 	@Autowired
 	private ParkService parkService;
+	
 	
 	@GetMapping("parks")
 	public List<Park> index(HttpServletRequest req, HttpServletResponse res) {
@@ -55,5 +56,8 @@ public class ParkController {
 		return park;
 	}
 	
-
+	@GetMapping("states")
+	public List<State> stateIndex(HttpServletRequest req, HttpServletResponse res) {
+		return parkService.stateIndex();
+	}
 }

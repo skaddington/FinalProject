@@ -2,13 +2,13 @@ package com.skilldistillery.nationalparks.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.nationalparks.entities.Park;
+import com.skilldistillery.nationalparks.entities.State;
 import com.skilldistillery.nationalparks.repositories.ParkRepository;
+import com.skilldistillery.nationalparks.repositories.StateRepository;
 
 @Service
 //@Transactional
@@ -16,10 +16,18 @@ public class ParkServiceImpl implements ParkService {
 	
 	@Autowired
 	private ParkRepository parkRepo;
+	
+	@Autowired
+	private StateRepository stateRepo;
 
 	@Override
 	public List<Park> index() {
 		return parkRepo.findAll();
+	}
+	
+	@Override 
+	public List<State> stateIndex() {
+		return stateRepo.findAll();
 	}
 
 	@Override
@@ -42,6 +50,15 @@ public class ParkServiceImpl implements ParkService {
 			}
 			return parkRepo.saveAndFlush(existingPark);
 			
+		}
+		return null;
+	}
+
+	@Override
+	public List<Park> findByState(String name) {
+		State existingState = stateRepo.findByName(name);
+		if(existingState.getParks().size() > 0) {
+			return existingState.getParks();
 		}
 		return null;
 	}

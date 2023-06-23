@@ -31,7 +31,7 @@ import { StatePipe } from './pipes/state.pipe';
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, StatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

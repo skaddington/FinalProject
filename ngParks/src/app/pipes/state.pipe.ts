@@ -5,9 +5,12 @@ import { Park } from '../models/park';
   name: 'state'
 })
 export class StatePipe implements PipeTransform {
+  index(): import("../models/state").State[] | null {
+    throw new Error('Method not implemented.');
+  }
 
   transform(parks: Park[], stateName: string): Park [] {
-    if (stateName === 'all'){
+    if (stateName === 'All'){
       return parks;
     }
 
