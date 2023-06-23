@@ -44,7 +44,7 @@ class StateTest {
 	@Test
 	void test_State_basic_mapping() {
 		assertNotNull(state);
-		assertEquals("Texas", state.getName());
+		assertEquals("Alabama", state.getName());
 	}
 	
 	@Test
