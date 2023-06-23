@@ -44,7 +44,7 @@ class ParkTest {
 	@Test
 	void test_Park_basic_mapping() {
 		assertNotNull(park);
-		assertEquals("testPark1", park.getName());
+		assertEquals("Acadia National Park", park.getName());
 	}
 	
 	@Test
