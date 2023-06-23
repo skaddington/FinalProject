@@ -11,7 +11,6 @@ import com.skilldistillery.nationalparks.entities.Park;
 import com.skilldistillery.nationalparks.repositories.ParkRepository;
 
 @Service
-//@Transactional
 public class ParkServiceImpl implements ParkService {
 	
 	@Autowired

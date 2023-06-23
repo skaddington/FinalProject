@@ -3,18 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ParkComponent } from './components/park/park.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'parks', component: ParkComponent },
   { path: 'parks/:id', component: ParkComponent },
-  // { path: 'contact', component: ContactComponent },
+  { path: 'users', component: UserComponent },
+  { path: 'users/:id', component: UserComponent },
   { path: 'register', component: RegisterComponent },
   //   { path: 'login', component: LoginComponent },   //Use when login NOT nested in the Navbar
-  //  { path: 'todo', component: TodoListComponent },
-  //{ path: 'todo/:id', component: TodoListComponent },
-  // { path: '**', component: NotFoundComponent } //page not found route
+  { path: '**', component: NotFoundComponent } //page not found route
 ];
 
 @NgModule({

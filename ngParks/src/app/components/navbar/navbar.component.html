@@ -14,8 +14,8 @@
     >
     <app-login *ngIf="!checkLoginStatus()">Login</app-login>
 
-    <a [routerLink]="['/todo']" class="nav-link">
-      <button class="btn btn-sm btn-warning" type="button"*ngIf="checkLoginStatus()">Todo List</button></a
+    <a [routerLink]="['/users']" class="nav-link">
+      <button class="btn btn-sm btn-warning" type="button"*ngIf="checkLoginStatus()">User Page</button></a
     >
     <app-logout *ngIf="checkLoginStatus()"></app-logout>
   </nav>
