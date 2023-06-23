@@ -1,0 +1,59 @@
+<div *ngIf="!selectedPark" id="parkTableDiv" class="container">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Park</th>
+        <th>Park Photo</th>
+        <th>Delete</th> //TODO admin check *ngIf
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let park of parks">
+        <td>{{park.id}}</td>
+        <td (click)="displayParkDetails(park)">{{ park.name }}</td>
+        <td><img id="allParksTablePhoto" src="{{park.image}}" alt="Photo of {{park.name}}"></td>
+        <td>
+          <button class="btn btn-warning" (click)="updatePark(park)">
+            Update(admin only) //TODO
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="selectedPark && !editPark" id="parkDetailsDiv" class="container">
+  <ul>
+    <li>Id: {{ selectedPark.id }}</li>
+    <li>Name: {{ selectedPark.name }}</li>
+    <li>Description: {{ selectedPark.description }}</li>
+    <li>Date Established: {{ selectedPark.dateEstablished }}</li>
+    <li>Website {{ selectedPark.website }}</li>
+    <li>Address: {{ selectedPark.street }}, {{ selectedPark.city }}, {{ selectedPark.state }} {{selectedPark.zip}}</li>
+    <li><img id="detailsParkPhoto" src="{{ selectedPark.image }}" alt="Photo of {{selectedPark.name}}"> </li>
+  </ul>
+  <button class="btn btn-success" (click)="setEditPark()">Edit Park(admin only)</button> //TODO *ngIf admin check
+  <button class="btn btn-primary" (click)="displayParkTable()">Back</button>
+</div>
+
+<hr />
+
+<!-- <div *ngIf="editPark" id="parkEditDiv" class="container">
+  <label for="task">Task : </label>
+  <input type="text" name="task" [(ngModel)]="editPark.task" /><br />
+  <label for="description">Description : </label>
+  <input
+    type="text"
+    name="description"
+    [(ngModel)]="editPark.description"
+  /><br />
+  <label for="completed">Completed : </label>
+  <input
+    type="checkbox"
+    name="completed"
+    [(ngModel)]="editPark.completed"
+  /><br />
+  <button class="btn btn-danger" (click)="editPark = null">Cancel</button>
+  <button class="btn btn-success" (click)="updatePark(editPark)">Save</button>
+</div> -->
