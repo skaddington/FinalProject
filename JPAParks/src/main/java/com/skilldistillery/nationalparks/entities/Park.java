@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Park {
 
@@ -33,18 +35,25 @@ public class Park {
 	private String state;
 	private String zip;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "parks")
 	private List<Activity> activities;
+	@JsonIgnore
 	@OneToMany(mappedBy = "park")
 	private List<Attraction> attractions;
+	@JsonIgnore
 	@ManyToMany(mappedBy = "parks")
 	private List<State> states;
+	@JsonIgnore
 	@ManyToMany(mappedBy = "favoriteParks")
 	private List<User> users;
+	@JsonIgnore
 	@OneToMany(mappedBy = "park")
 	private List<ParkPhoto> parkPhotos;
+	@JsonIgnore
 	@OneToMany(mappedBy = "park")
 	private List<ParkComment> parkComments;
+	@JsonIgnore
 	@OneToMany(mappedBy = "park")
 	private List<ParkRating> parkRatings;
 
