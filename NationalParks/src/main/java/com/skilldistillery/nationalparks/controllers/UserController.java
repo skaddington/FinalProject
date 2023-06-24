@@ -73,5 +73,23 @@ public class UserController {
 		return loggedInUser;
 
 	}
+	
+	@PutMapping("users/parks/{pid}")
+	public User removeParkFromUserFavorites(HttpServletResponse res, Principal principal, @PathVariable int pid) {
+			User loggedInUser = userService.findByUsername(principal.getName());
+		try {
+			loggedInUser = userService.removeParkFromUserFavorites(loggedInUser.getUsername(), pid);
+			if (loggedInUser == null) {
+				res.setStatus(404);
+				return loggedInUser;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			loggedInUser = null;
+		}
+		return loggedInUser;
+
+	}
 
 }

@@ -12,4 +12,5 @@ public interface UserService {
 	//TODO Add method if necessary for disable/enable user
 	User addParkToUserFavorites(String username, int pid);
 	User findByUsername(String username);
+	User removeParkFromUserFavorites(String username, int pid);
 }
