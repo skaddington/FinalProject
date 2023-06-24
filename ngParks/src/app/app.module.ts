@@ -15,6 +15,7 @@ import { ParkComponent } from './components/park/park.component';
 import { StatePipe } from './pipes/state.pipe';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserComponent } from './components/user/user.component';
+import { AddToFavoritesComponent } from './components/add-to-favorites/add-to-favorites.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserComponent } from './components/user/user.component';
     ParkComponent,
     StatePipe,
     NotFoundComponent,
-    UserComponent
+    UserComponent,
+    AddToFavoritesComponent
   ],
   imports: [
     BrowserModule,

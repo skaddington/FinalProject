@@ -20,17 +20,17 @@ import com.skilldistillery.nationalparks.services.UserService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http;//localhost/"})
+@CrossOrigin({ "*", "http;//localhost/" })
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@GetMapping("users")
-	public List<User> index(HttpServletRequest req, HttpServletResponse res, Principal principal){
+	public List<User> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
 		return userService.index(principal.getName());
 	}
-	
+
 	@GetMapping("users/{uid}")
 	public User show(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable int uid) {
 		User user = userService.show(principal.getName(), uid);
@@ -39,12 +39,13 @@ public class UserController {
 		}
 		return user;
 	}
-	
+
 	@PutMapping("users/{uid}")
-	public User update(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable int uid, @RequestBody User user) {
+	public User update(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable int uid,
+			@RequestBody User user) {
 		try {
 			user = userService.update(principal.getName(), uid, user);
-			if ( user == null) {
+			if (user == null) {
 				res.setStatus(404);
 			}
 		} catch (Exception e) {
@@ -55,5 +56,22 @@ public class UserController {
 		return user;
 	}
 
+	@PutMapping("users/{pid}/parks")
+	public User addParkToUserFavorites(HttpServletResponse res, Principal principal, @PathVariable int pid) {
+			User loggedInUser = userService.findByUsername(principal.getName());
+		try {
+			loggedInUser = userService.addParkToUserFavorites(loggedInUser.getUsername(), pid);
+			if (loggedInUser == null) {
+				res.setStatus(404);
+				return loggedInUser;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			loggedInUser = null;
+		}
+		return loggedInUser;
+
+	}
 
 }

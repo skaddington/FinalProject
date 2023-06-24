@@ -10,4 +10,6 @@ public interface UserService {
 	User show(String username, int id);
 	User update(String username, int id, User user);
 	//TODO Add method if necessary for disable/enable user
+	User addParkToUserFavorites(String username, int pid);
+	User findByUsername(String username);
 }
