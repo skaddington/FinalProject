@@ -48,7 +48,7 @@ public class User {
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Attraction> attractions;
-	@JsonIgnore
+	@JsonIgnoreProperties({"users"})
 	@ManyToMany
 	@JoinTable(name = "user_favorites", 
 	joinColumns = @JoinColumn(name = "user_id"), 

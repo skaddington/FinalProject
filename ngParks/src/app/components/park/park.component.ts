@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
@@ -5,9 +6,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Park } from 'src/app/models/park';
 import { State } from 'src/app/models/state';
+import { User } from 'src/app/models/user';
 import { StatePipe } from 'src/app/pipes/state.pipe';
-import { AuthService } from 'src/app/services/auth.service';
 import { ParkService } from 'src/app/services/park.service';
+import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,6 +18,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./park.component.css'],
 })
 export class ParkComponent {
+  loggedInUser:User | null = null;
   parks: Park[] = [];
 
   newPark: Park = new Park();
@@ -79,14 +82,56 @@ export class ParkComponent {
   ]
 
 
+
   constructor(
     private parkService: ParkService,
     private statePipe: StatePipe,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService:AuthService,
+    private userService:UserService
   ) {}
 
+
+  checkUser():User | null {
+    this.authService.getLoggedInUser().subscribe({
+      next: (user) => {
+       return this.loggedInUser = user;
+      },
+      error: (problem) => {
+        console.error('ParkComponent.reload(): error loading Parks');
+        console.error(problem);
+      },
+    });
+    if(this.loggedInUser) {
+    return this.loggedInUser
+    }
+    return null;
+  }
+
+  addParkToUserFavorites() {
+    if(this.selectedPark && this.loggedInUser) {
+      console.log(this.selectedPark.id)
+    this.userService.addFavoritePark(this.loggedInUser ,this.selectedPark.id).subscribe({
+      next: (result) => {
+        if(this.selectedPark && this.loggedInUser){
+            console.log( this.selectedPark.id + " selected park");
+            console.log(this.loggedInUser.id + this.loggedInUser.firstName + "logged in user")
+            console.log(this.loggedInUser.favoriteParks + "User parks");
+          this.loggedInUser.favoriteParks.push(this.selectedPark);
+          }
+      },
+      error: (nojoy) => {
+        console.error('AddFavoritesComponent.addParkToUser(): error adding Park To User:');
+        console.error(nojoy);
+      },
+    });
+  }}
+
+
+
   ngOnInit() {
+    this.checkUser();
     let idString = this.route.snapshot.paramMap.get('id');
     if (!this.selectedPark && idString) {
       console.log(idString);

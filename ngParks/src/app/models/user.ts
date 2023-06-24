@@ -1,3 +1,5 @@
+import { Park } from "./park";
+
 export class User {
   id: number;
   username: string;
@@ -8,6 +10,7 @@ export class User {
   description: string;
   role: string;
   enabled: boolean;
+  favoriteParks:Park[];
 
   constructor(
     id: number = 0,
@@ -18,7 +21,8 @@ export class User {
     image: string = '',
     description: string = '',
     role: string = '',
-    enabled: boolean = false
+    enabled: boolean = false,
+    favoriteParks:Park[] =[]
   ) {
     this.id = id;
     this.username = username;
@@ -29,5 +33,6 @@ export class User {
     this.description = description;
     this.role = role;
     this.enabled = enabled;
+    this.favoriteParks=favoriteParks;
   }
 }

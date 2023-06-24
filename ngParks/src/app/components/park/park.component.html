@@ -36,9 +36,11 @@
   </ul>
   <button class="btn btn-success" (click)="setEditPark()">Edit Park(admin only)</button> //TODO *ngIf admin check
   <button class="btn btn-primary" (click)="displayParkTable()">Back</button>
-  <app-add-to-favorites
-    [user] = "user">
-  </app-add-to-favorites>
+  <button (click)="addParkToUserFavorites()">Add To Favorites</button>
+  <!-- <app-add-to-favorites
+    [selectedPark] = "selectedPark"
+    [user] = "loggedInUser">
+  </app-add-to-favorites> -->
 </div>
 
 <hr />

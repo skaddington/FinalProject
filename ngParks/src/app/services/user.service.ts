@@ -76,6 +76,20 @@ export class UserService {
       );
   }
 
+  addFavoritePark(user: User, pid:number): Observable<User> {
+    console.log(pid);
+    return this.http
+      .put<User>(this.url + '/' + pid + "/parks", user, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.error(err);
+          return throwError(
+            () => new Error('UserService.update(): error Adding Park to User: ' + err)
+          );
+        })
+      );
+  }
+
   // destroy(todoId: number): Observable<void> {
   //   return this.http
   //     .delete<void>(this.url + '/' + todoId, this.getHttpOptions())
