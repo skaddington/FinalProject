@@ -51,8 +51,8 @@ public class User {
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "user_favorites", 
-	joinColumns = @JoinColumn(name = "park_id"), 
-	inverseJoinColumns = @JoinColumn(name = "user_id"))
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "park_id"))
 	private List<Park> favoriteParks;
 	
 	@JsonIgnore
@@ -269,8 +269,10 @@ public class User {
 			favoriteParks = new ArrayList<>();
 		}
 		if (!favoriteParks.contains(favoritePark)) {
+			System.out.println("***************************" + favoriteParks + "***" + favoritePark);
 			favoriteParks.add(favoritePark);
 			favoritePark.addUser(this);
+			System.out.println("*****************************" + favoriteParks);
 		}
 	}
 
@@ -281,7 +283,7 @@ public class User {
 		}
 	}
 
-	public void addAttraction(Attraction attraction) {
+	public void addAttraction(Attraction attraction) { 
 		if (attractions == null) {
 			attractions = new ArrayList<>();
 		}

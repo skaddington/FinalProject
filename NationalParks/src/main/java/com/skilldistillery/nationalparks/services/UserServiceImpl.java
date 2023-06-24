@@ -69,15 +69,25 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User addParkToUserFavorites(String username, int pid) {
 		User loggedInUser = userRepo.findByUsername(username);
+		System.out.println("*********************************************" + loggedInUser.getFavoriteParks()
+				+ "*********************************************");
 		Park existingPark = parkRepo.findById(pid);
-			loggedInUser.addPark(existingPark);
-			existingPark.addUser(loggedInUser);
-			userRepo.saveAndFlush(loggedInUser);
+		if (existingPark != null) {
+//			loggedInUser.addPark(existingPark);
+
+			List<Park> favoriteParks = loggedInUser.getFavoriteParks();
+			favoriteParks.add(existingPark);
+			loggedInUser.setFavoriteParks(favoriteParks);
+			System.out.println("*********************************************" + loggedInUser.getFavoriteParks()
+					+ "*********************************************");
+//		existingPark.addUser(loggedInUser);
+//			userRepo.saveAndFlush(loggedInUser);
 			parkRepo.saveAndFlush(existingPark);
-			return loggedInUser;
+		}
+		return loggedInUser;
 
 	}
-	
+
 	@Override
 	public User findByUsername(String username) {
 		return userRepo.findByUsername(username);
