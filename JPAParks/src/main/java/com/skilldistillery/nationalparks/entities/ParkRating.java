@@ -4,9 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -18,8 +17,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name="park_rating")
 public class ParkRating {
 
-	@Id
-	@Embedded
+	@EmbeddedId
 	private ParkRatingId id;
 	
 	private int rating;
