@@ -12,11 +12,11 @@
     <a [routerLink]="['/register']" class="nav-link">
       <button class="btn btn-sm btn-info" type="button"*ngIf="!checkLoginStatus()">Register</button></a
     >
-    <app-login *ngIf="!checkLoginStatus()">Login</app-login>
+    <app-login *ngIf="!checkLoginStatus()" (loginSuccess)="handleLoginSuccess($event)">Login</app-login>
 
     <a [routerLink]="['/users']" class="nav-link">
       <button class="btn btn-sm btn-warning" type="button"*ngIf="checkLoginStatus()">User Page</button></a
     >
-    <app-logout *ngIf="checkLoginStatus()"></app-logout>
+    <app-logout *ngIf="checkLoginStatus()" [loggedInUser] = "loggedInUser"></app-logout>
   </nav>
   </div>

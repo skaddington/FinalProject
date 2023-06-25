@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -31,4 +31,9 @@ export class LoginComponent {
       });
    }
 
+   @Output() loginSuccess: EventEmitter<User> = new EventEmitter<User>();
+
+   handleLoginSuccess(loggedInUser: User) {
+    this.loginSuccess.emit(loggedInUser);
+   }
 }

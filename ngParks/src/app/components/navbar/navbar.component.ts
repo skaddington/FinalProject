@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+loggedInUser:User|null=null;
 
   constructor(
     private auth: AuthService
@@ -14,5 +16,9 @@ export class NavbarComponent {
 
   checkLoginStatus(): boolean {
     return this.auth.checkLogin();
+  }
+
+  handleLoginSuccess(user: User) {
+    this.loggedInUser = user;
   }
 }
