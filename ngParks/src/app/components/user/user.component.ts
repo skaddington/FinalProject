@@ -38,6 +38,7 @@ export class UserComponent {
       }
     }
     this.reload();
+    this.checkUser();
   }
 
   checkUser(): User | null {
@@ -77,7 +78,10 @@ export class UserComponent {
   // }
 
   displayUserDetails(user: User) {
-    return (this.selectedUser = user);
+    this.selectedUser = user;
+    console.log(this.selectedUser.username)
+    console.log(this.loggedInUser?.username);
+    return this.selectedUser;
   }
 
   displayUserTable() {
@@ -119,18 +123,4 @@ export class UserComponent {
   }
 
   removeParkFromFavorites() {}
-
-  // deletePark(parkId: number): void {
-  //   this.parkService.destroy(parkId).subscribe({
-  //     next: () => {
-  //       this.reload();
-  //       this.selectedPark = null;
-  //     },
-  //     error: (somethingWentWrong) => {
-  //       console.error('ParkListComponent.deleteTodo(): error deleting Park:');
-  //       console.error(somethingWentWrong);
-  //     },
-  //   });
-  //   this.reload();
-  // }
 }

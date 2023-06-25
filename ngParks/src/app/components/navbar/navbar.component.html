@@ -4,19 +4,19 @@
       <button class="btn btn-success" type="button">Home</button></a
     >
     <a [routerLink]="['/parks']" class="nav-link">
-      <button class="btn btn-sm btn-primary" type="button">Parks</button></a
+      <button class="btn btn-primary" type="button">Parks</button></a
     >
     <a [routerLink]="['/contact']" class="nav-link">
-      <button class="btn btn-sm btn-primary" type="button">Contact</button></a
+      <button class="btn btn-primary" type="button">Contact</button></a
     >
     <a [routerLink]="['/register']" class="nav-link">
-      <button class="btn btn-sm btn-info" type="button"*ngIf="!checkLoginStatus()">Register</button></a
+      <button class="btn btn-info" type="button"*ngIf="!checkLoginStatus()">Register</button></a
+    >
+    <a [routerLink]="['/users']" class="nav-link">
+      <button class="btn btn-warning" type="button"*ngIf="checkLoginStatus()">User Page</button></a
     >
     <app-login *ngIf="!checkLoginStatus()" (loginSuccess)="handleLoginSuccess($event)">Login</app-login>
 
-    <a [routerLink]="['/users']" class="nav-link">
-      <button class="btn btn-sm btn-warning" type="button"*ngIf="checkLoginStatus()">User Page</button></a
-    >
     <app-logout *ngIf="checkLoginStatus()" [loggedInUser] = "loggedInUser"></app-logout>
   </nav>
   </div>
