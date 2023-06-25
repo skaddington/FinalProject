@@ -1,4 +1,8 @@
+import { Attraction } from "./attraction";
 import { Park } from "./park";
+import { ParkComment } from "./park-comment";
+import { ParkPhoto } from "./park-photo";
+import { ParkRating } from "./park-rating";
 
 export class User {
   id: number;
@@ -10,7 +14,11 @@ export class User {
   description: string;
   role: string;
   enabled: boolean;
-  favoriteParks:Park[];
+  favoriteParks: Park[];
+  attractions: Attraction[];
+  parkComments: ParkComment[];
+  parkRatings: ParkRating[];
+  parkPhotos: ParkPhoto[];
 
   constructor(
     id: number = 0,
@@ -22,7 +30,11 @@ export class User {
     description: string = '',
     role: string = '',
     enabled: boolean = false,
-    favoriteParks:Park[] =[]
+    favoriteParks: Park[] = [],
+    attractions: Attraction[] = [],
+    parkComments: ParkComment[] = [],
+    parkRatings: ParkRating[] = [],
+    parkPhotos: ParkPhoto[] = []
   ) {
     this.id = id;
     this.username = username;
@@ -33,6 +45,10 @@ export class User {
     this.description = description;
     this.role = role;
     this.enabled = enabled;
-    this.favoriteParks=favoriteParks;
+    this.favoriteParks = favoriteParks;
+    this.attractions = attractions;
+    this.parkComments = parkComments;
+    this.parkRatings = parkRatings;
+    this.parkPhotos = parkPhotos;
   }
 }
