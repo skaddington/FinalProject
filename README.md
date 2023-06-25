@@ -1,3 +1,5 @@
+# Final Project - Full-Stack - National Parks Travel App
+
 ## Team Members
 * Jennifer Kalkowski - Scrum Master
 * Patrick Hansen - Database Administrator
@@ -49,15 +51,24 @@
 		* Disable or Enable Users in the Database<br>
 		* View the personal Account page of All Users<br>
 		* Disable Trains stored in the Database<br>
-		* Disable Comments of ALL Users on the Train Details page<br> 
+		* Disable Comments of ALL Users on the Train Details page<br>
+
+## Workflow
+
+* **MySql Workbench -> Database Schema -> ER Diagram :**
+	![](DB/parksdbSchema.png)
+
+* **JPA & REST -> Paths :**
+	//TODO NEED TO UPDATE
+
+* **Visual Studio Code -> Angular :**
+	//TODO NEED TO UPDATE
 
 ## Technologies Used
-* Spring Tool Suite - Spring JPA, Spring Boot, Spring Security
-* Spring REST Framework
-* JPA Repositories
+* Spring Tool Suite - Spring JPA, Spring Boot, Spring REST Framework, Spring Security
 * MySQL, CRUD, MySQL Workbench
 * Gradle, Dependencies
-* HTML, POJO, Service, ServiceImpl, JUnit Tests
+* HTML, JPA Repositories, POJO, Service, ServiceImpl, JUnit Tests
 * Hibernate, Jackson, and other Annotations
 * Visual Studio Code - Angular
 * Angular - Components, Services, Models, Pipes
