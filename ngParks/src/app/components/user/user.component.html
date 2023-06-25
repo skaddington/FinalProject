@@ -73,7 +73,10 @@
             <tr *ngFor="let fav of selectedUser.favoriteParks">
                <td>{{fav.id}}</td>
                <td>{{fav.name}}</td>
-               <td><button class="btn btn-danger" (click)="removeParkFromFavorites()">X</button></td>
+               <td><app-remove-from-favorites
+                [loggedInUser] = "loggedInUser"
+                [selectedPark] = "fav"
+                ></app-remove-from-favorites></td>
             </tr>
          </tbody>
       </table>
