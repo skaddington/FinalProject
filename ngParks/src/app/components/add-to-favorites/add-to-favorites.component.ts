@@ -9,28 +9,30 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-to-favorites.component.css']
 })
 export class AddToFavoritesComponent {
-  @Input() user: User | null = null;
+  @Input() loggedInUser: User | null = null;
   @Input() selectedPark:Park | null = null;
 
   constructor(private userService:UserService){
   }
 
 
-// addParkToUserFavorites(selectedPark:Park|null) {
-//   if(this.user && this.selectedPark) {
-//   this.userService.addFavoritePark(this.user ,this.selectedPark.id).subscribe({
-//     next: (result) => {
-//       if(this.user && selectedPark) {
-//         console.log(this.user, this.selectedPark, this.user.parks)
-//         this.user.parks.push(selectedPark);
-//       }
-//     },
-//     error: (nojoy) => {
-//       console.error('AddFavoritesComponent.addParkToUser(): error adding Park To User:');
-//       console.error(nojoy);
-//     },
-//   });
-// }
-// }
+ addParkToUserFavorites() {
+  if(this.selectedPark && this.loggedInUser) {
+    console.log(this.selectedPark.id)
+  this.userService.addFavoritePark(this.loggedInUser ,this.selectedPark.id).subscribe({
+    next: (result) => {
+      if(this.selectedPark && this.loggedInUser){
+          console.log( this.selectedPark.id + " selected park");
+          console.log(this.loggedInUser.id + this.loggedInUser.firstName + "logged in user")
+          console.log(this.loggedInUser.favoriteParks + "User parks");
+        this.loggedInUser.favoriteParks.push(this.selectedPark);
+        }
+    },
+    error: (nojoy) => {
+      console.error('AddFavoritesComponent.addParkToUser(): error adding Park To User:');
+      console.error(nojoy);
+    },
+  });
+}}
 
 }
