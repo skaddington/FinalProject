@@ -16,6 +16,7 @@ import { StatePipe } from './pipes/state.pipe';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserComponent } from './components/user/user.component';
 import { AddToFavoritesComponent } from './components/add-to-favorites/add-to-favorites.component';
+import { RemoveFromFavoritesComponent } from './components/remove-from-favorites/remove-from-favorites.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AddToFavoritesComponent } from './components/add-to-favorites/add-to-fa
     StatePipe,
     NotFoundComponent,
     UserComponent,
-    AddToFavoritesComponent
+    AddToFavoritesComponent,
+    RemoveFromFavoritesComponent
   ],
   imports: [
     BrowserModule,

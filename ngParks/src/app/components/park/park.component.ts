@@ -109,24 +109,7 @@ export class ParkComponent {
     return null;
   }
 
-  addParkToUserFavorites() {
-    if(this.selectedPark && this.loggedInUser) {
-      console.log(this.selectedPark.id)
-    this.userService.addFavoritePark(this.loggedInUser ,this.selectedPark.id).subscribe({
-      next: (result) => {
-        if(this.selectedPark && this.loggedInUser){
-            console.log( this.selectedPark.id + " selected park");
-            console.log(this.loggedInUser.id + this.loggedInUser.firstName + "logged in user")
-            console.log(this.loggedInUser.favoriteParks + "User parks");
-          this.loggedInUser.favoriteParks.push(this.selectedPark);
-          }
-      },
-      error: (nojoy) => {
-        console.error('AddFavoritesComponent.addParkToUser(): error adding Park To User:');
-        console.error(nojoy);
-      },
-    });
-  }}
+
 
 
 
