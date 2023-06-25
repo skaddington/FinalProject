@@ -122,5 +122,17 @@ export class UserComponent {
     });
   }
 
+disableUser(user: User){
+  user.enabled = false;
+  this.updateUser(user, false);
+}
+
+enableUser(user: User){
+  user.enabled = true;
+  this.updateUser(user, false);
+}
+
+
+
   removeParkFromFavorites() {}
 }

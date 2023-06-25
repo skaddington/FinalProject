@@ -59,6 +59,9 @@ public class UserServiceImpl implements UserService {
 				if (user.getImage() != null) {
 					existingUser.setImage(user.getImage());
 				}
+				if (user.isEnabled() != existingUser.isEnabled()) {
+					existingUser.setEnabled(user.isEnabled());
+				}
 				return userRepo.saveAndFlush(existingUser);
 			}
 			return null;

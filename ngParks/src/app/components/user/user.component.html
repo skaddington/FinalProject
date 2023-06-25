@@ -27,9 +27,9 @@
         </td>
         <td (click)="displayUserDetails(user)">{{ user.username }}</td>
         <td *ngIf="loggedInUser?.role === 'ADMIN'">
-          <button *ngIf="user.enabled && user.role != 'ADMIN'" class="btn btn-danger" (change)="updateUser(user, false)">Disable
+          <button *ngIf="user.enabled && user.role != 'ADMIN'" class="btn btn-danger" (click)="disableUser(user)">Disable
           </button>
-          <button *ngIf="!user.enabled && user.role != 'ADMIN'" class="btn btn-success" (change)="updateUser(user, false)">Enable
+          <button *ngIf="!user.enabled && user.role != 'ADMIN'" class="btn btn-success" (click)="enableUser(user)">Enable
           </button>
         </td>
       </tr>
