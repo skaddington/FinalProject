@@ -1,4 +1,4 @@
-<div *ngIf="!selectedUser && loggedInUser" id="userTableDiv" class="container">
+<div *ngIf="!selectedUser" id="userTableDiv" class="container">
   <!-- : <span *ngFor="let state of states" (click)="selectedState = state">{{state}} : </span> -->
   <table class="table table-striped table-hover">
     <thead class="table-dark">
@@ -36,7 +36,7 @@
   </table>
 </div>
 
-<div *ngIf="loggedInUser && !selectedUser && !editUser" id="LoggedInUserDetailsDiv" class="container">
+<div *ngIf="selectedUser && !editUser" id="selectedUserDetailsDiv" class="container">
   <div class="row">
       <div class="col-10">
          <h1>User Page</h1>
@@ -50,16 +50,17 @@
     <div class="col-5">
       <img
         id="detailsUserPhoto"
-        src="{{ loggedInUser.image }}"
-        alt="Photo of {{ loggedInUser.username }}"
+        src="{{ selectedUser.image }}"
+        alt="Photo of {{ selectedUser.username }}"
       />
-      <h3>{{ loggedInUser.firstName }} {{ loggedInUser.lastName }}  |  ID No. {{ loggedInUser.id }}</h3>
-      <h4>{{ loggedInUser.username }}  |  {{loggedInUser.role}} user</h4>
-      <blockquote id="userDescription">{{ loggedInUser.description }}</blockquote>
+      <h3>{{ selectedUser.firstName }} {{ selectedUser.lastName }}  |  ID No. {{ selectedUser.id }}</h3>
+      <h4>{{ selectedUser.username }}  |  {{selectedUser.role}} user</h4>
+      <blockquote id="userDescription">{{ selectedUser.description }}</blockquote>
       <button class="btn btn-success" (click)="setEditUser()">Edit User</button>
       //TODO *ngIf loggedInUser === User profile page
     </div>
     <div class="col-7">
+      <h3>Favorite Parks</h3>
       <table class="table table-striped table-hover">
          <thead class="table-dark">
             <tr>
@@ -69,13 +70,13 @@
             </tr>
          </thead>
          <tbody>
-            <tr *ngFor="let fav of loggedInUser.favoriteParks">
+            <tr *ngFor="let fav of selectedUser.favoriteParks">
                <td>{{fav.id}}</td>
                <td>{{fav.name}}</td>
                <td><button class="btn btn-danger" (click)="removeParkFromFavorites()">X</button></td>
             </tr>
          </tbody>
-         </table>
+      </table>
     </div>
   </div>
 </div>
