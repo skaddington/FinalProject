@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Park } from 'src/app/models/park';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -14,7 +15,7 @@ export class RemoveFromFavoritesComponent {
  @Input() loggedInUser:User|null = null;
  @Input() selectedPark:Park|null = null;
 
-  constructor(private userService:UserService){}
+  constructor(private userService:UserService, private router:Router){}
 
 removeParkFromFavorites() {
   if(this.selectedPark && this.loggedInUser) {
@@ -23,7 +24,10 @@ removeParkFromFavorites() {
       if (this.loggedInUser?.favoriteParks && this.selectedPark) {
         let index = this.loggedInUser.favoriteParks.indexOf(this.selectedPark);
         if (index !== -1) {
-          this.loggedInUser.favoriteParks.splice(index, 1);
+          this.loggedInUser.favoriteParks = this.loggedInUser.favoriteParks.filter(park => park.id !== this.selectedPark?.id);
+          this.router.navigateByUrl("/users/" + this.loggedInUser.id);
+
+
 
         }
       }
@@ -34,7 +38,15 @@ removeParkFromFavorites() {
     },
   });
 }
-}}
+}
+
+@Output() removalSuccess: EventEmitter<User> = new EventEmitter<User>();
+handleRemovalSuccess(loggedInUser: User) {
+  this.removalSuccess.emit(loggedInUser);
+ }
+}
+
+}
 
 
 
