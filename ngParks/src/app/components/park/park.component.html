@@ -9,8 +9,6 @@
         <th>ID</th>
         <th>Park</th>
         <th>Park Photo</th>
-        <th>Delete</th>
-        //TODO admin check *ngIf
       </tr>
     </thead>
     <tbody>
@@ -23,11 +21,6 @@
             src="{{ park.image }}"
             alt="Photo of {{ park.name }}"
           />
-        </td>
-        <td>
-          <button class="btn btn-warning" (click)="updatePark(park)">
-            Update(admin only) //TODO
-          </button>
         </td>
       </tr>
     </tbody>
@@ -50,9 +43,8 @@
 
     <hr />
     <div class="col-5">
-      <h4>Established: {{ selectedPark.dateEstablished }}</h4>
+      <h4>Established in {{ selectedPark.dateEstablished }}</h4>
       <blockquote>{{ selectedPark.description }}</blockquote>
-      
     </div>
     <div class="col-7">
       <img
@@ -61,23 +53,39 @@
         alt="Photo of {{ selectedPark.name }}"
       />
       <a href="{{ selectedPark.website }}"
-        ><button class="btn btn-info" id="websiteButton">Visit this Park's Website</button></a
+        ><button class="btn btn-info" id="websiteButton">
+          Visit this Park's Website
+        </button></a
       >
     </div>
   </div>
 
-  <button class="btn btn-success" *ngIf="loggedInUser?.role === 'ADMIN'" (click)="setEditPark()">
-    Edit Park Information
-  </button>
-  <button class="btn btn-primary" (click)="displayParkTable()">Back</button>
-  <app-add-to-favorites
-    [selectedPark]="selectedPark"
-    [loggedInUser]="loggedInUser"
-  >
-  </app-add-to-favorites>
-</div>
+  <hr />
 
-<hr/>
+  <div class="row">
+    <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">
+      <button
+        class="btn btn-success"
+        id="editButton"
+        (click)="setEditPark()"
+      >Edit Park Information</button>
+    </div>
+    <div class="col" *ngIf="loggedInUser">
+      <app-add-to-favorites
+      [selectedPark]="selectedPark"
+      [loggedInUser]="loggedInUser"
+      >
+    </app-add-to-favorites>
+  </div>
+  <div class="col">
+    <button
+      class="btn btn-primary"
+      id="backButton"
+      (click)="displayParkTable()"
+    >Back To All Parks</button>
+  </div>
+  </div>
+</div>
 
 <!-- <div *ngIf="editPark" id="parkEditDiv" class="container">
   <label for="task">Task : </label>
