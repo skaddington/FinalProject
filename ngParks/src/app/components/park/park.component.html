@@ -1,19 +1,29 @@
 <div *ngIf="!selectedPark" id="parkTableDiv" class="container">
-  : <span *ngFor="let state of states" (click)="selectedState = state">{{state}} : </span>
+  :
+  <span *ngFor="let state of states" (click)="selectedState = state"
+    >{{ state }} :
+  </span>
   <table class="table table-striped table-hover">
     <thead class="table-dark">
       <tr>
         <th>ID</th>
         <th>Park</th>
         <th>Park Photo</th>
-        <th>Delete</th> //TODO admin check *ngIf
+        <th>Delete</th>
+        //TODO admin check *ngIf
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let park of parks | state: selectedState">
-        <td>{{park.id}}</td>
+      <tr *ngFor="let park of parks | state : selectedState">
+        <td>{{ park.id }}</td>
         <td (click)="displayParkDetails(park)">{{ park.name }}</td>
-        <td><img id="allParksTablePhoto" src="{{park.image}}" alt="Photo of {{park.name}}"></td>
+        <td (click)="displayParkDetails(park)">
+          <img
+            id="allParksTablePhoto"
+            src="{{ park.image }}"
+            alt="Photo of {{ park.name }}"
+          />
+        </td>
         <td>
           <button class="btn btn-warning" (click)="updatePark(park)">
             Update(admin only) //TODO
@@ -25,24 +35,49 @@
 </div>
 
 <div *ngIf="selectedPark && !editPark" id="parkDetailsDiv" class="container">
-  <ul>
-    <li>Id: {{ selectedPark.id }}</li>
-    <li>Name: {{ selectedPark.name }}</li>
-    <li>Description: {{ selectedPark.description }}</li>
-    <li>Date Established: {{ selectedPark.dateEstablished }}</li>
-    <li>Website {{ selectedPark.website }}</li>
-    <li>Address: {{ selectedPark.street }}, {{ selectedPark.city }}, {{ selectedPark.state }} {{selectedPark.zip}}</li>
-    <li><img id="detailsParkPhoto" src="{{ selectedPark.image }}" alt="Photo of {{selectedPark.name}}"> </li>
-  </ul>
-  <button class="btn btn-success" (click)="setEditPark()">Edit Park(admin only)</button> //TODO *ngIf admin check
+  <div class="row">
+    <div class="col-8">
+      <h1>{{ selectedPark.name }} | Id No. {{ selectedPark.id }}</h1>
+    </div>
+    <div class="col-4">
+      <blockquote id="parkAddress">
+        {{ selectedPark.street }}<br />
+        {{ selectedPark.city }},
+        {{ selectedPark.state }}
+        {{ selectedPark.zip }}
+      </blockquote>
+    </div>
+
+    <hr />
+    <div class="col-5">
+      <h4>Established: {{ selectedPark.dateEstablished }}</h4>
+      <blockquote>{{ selectedPark.description }}</blockquote>
+      
+    </div>
+    <div class="col-7">
+      <img
+        id="detailsParkPhoto"
+        src="{{ selectedPark.image }}"
+        alt="Photo of {{ selectedPark.name }}"
+      />
+      <a href="{{ selectedPark.website }}"
+        ><button class="btn btn-info" id="websiteButton">Visit this Park's Website</button></a
+      >
+    </div>
+  </div>
+
+  <button class="btn btn-success" *ngIf="loggedInUser?.role === 'ADMIN'" (click)="setEditPark()">
+    Edit Park Information
+  </button>
   <button class="btn btn-primary" (click)="displayParkTable()">Back</button>
   <app-add-to-favorites
-    [selectedPark] = "selectedPark"
-    [loggedInUser] = "loggedInUser">
+    [selectedPark]="selectedPark"
+    [loggedInUser]="loggedInUser"
+  >
   </app-add-to-favorites>
 </div>
 
-<hr />
+<hr/>
 
 <!-- <div *ngIf="editPark" id="parkEditDiv" class="container">
   <label for="task">Task : </label>
