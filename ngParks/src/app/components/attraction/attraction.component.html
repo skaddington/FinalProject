@@ -5,4 +5,15 @@
   <blockquote>{{selectedAttraction.description}}</blockquote>
   <a target="_blank" href="{{selectedAttraction.website}}"><button class="btn btn-btn-success">Go To Website</button></a>
 
+
+  <div class="attraction-comments">
+    <div *ngFor="let comment of selectedAttraction.attractionComments" class="attraction-comment">
+      <span>{{comment.user.firstName}}</span>
+      <blockquote>{{comment.content}}</blockquote>
+      <div class="attraction-comment-replies" *ngFor="let reply of comment.replies">
+        <span>{{reply.user.firstName}}</span> Replying To <span>{{reply.comment?.user?.firstName}}</span>
+      <blockquote>{{reply.content}}</blockquote>
+      </div>
+    </div>
+  </div>
 </div>

@@ -48,7 +48,7 @@ public class Attraction {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	@JsonIgnore
+	@JsonIgnoreProperties({"attractions"})
 	@OneToMany(mappedBy = "attraction")
 	private List<AttractionComment> attractionComments;
 	@JsonIgnore

@@ -15,7 +15,7 @@ export class AttractionComponent {
 
 
 displayAllAttractions() {
-  console.log(this.selectedAttraction?.website);
+  console.log(this.selectedAttraction?.attractionComments);
   this.selectedAttraction = null;
   this.handleDeselectAttraction(this.selectedAttraction);
 }

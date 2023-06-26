@@ -45,24 +45,26 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({ "user", "park" })
 	@OneToMany(mappedBy = "user")
 	private List<Attraction> attractions;
-	@JsonIgnoreProperties({"users"})
+	@JsonIgnoreProperties({"attraction", "user"})
+	@OneToMany(mappedBy = "user")
+	private List<AttractionComment> attractionComments;
+
+	@JsonIgnoreProperties({ "users" })
 	@ManyToMany
-	@JoinTable(name = "user_favorites", 
-	joinColumns = @JoinColumn(name = "user_id"), 
-	inverseJoinColumns = @JoinColumn(name = "park_id"))
+	@JoinTable(name = "user_favorites", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "park_id"))
 	private List<Park> favoriteParks;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "park")
 	private List<ParkComment> parkComments;
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<ParkRating> parkRatings;
-	//@JsonIgnore
-	@JsonIgnoreProperties({"user", "park"})
+	// @JsonIgnore
+	@JsonIgnoreProperties({ "user", "park" })
 	@OneToMany(mappedBy = "user")
 	private List<ParkPhoto> parkPhotos;
 
@@ -198,6 +200,36 @@ public class User {
 		this.parkPhotos = parkPhotos;
 	}
 
+	public List<AttractionComment> getAttractionComments() {
+		return attractionComments;
+	}
+
+	public void setAttractionComments(List<AttractionComment> attractionComments) {
+		this.attractionComments = attractionComments;
+	}
+	
+	public void addAttractionComment(AttractionComment attractionComment) {
+		if (attractionComments == null) {
+			attractionComments = new ArrayList<>();
+		}
+		if (!attractionComments.contains(attractionComment)) {
+			attractionComments.add(attractionComment);
+			if (attractionComment.getUser() != null) {
+				attractionComment.getUser().removeAttractionComment(attractionComment);
+
+			} else {
+				attractionComment.setUser(this);
+			}
+		}
+	}
+
+	public void removeAttractionComment(AttractionComment attractionComment) {
+		if (attractionComments != null && attractionComments.contains(attractionComment)) {
+			attractionComments.remove(attractionComment);
+			attractionComment.setUser(null);
+		}
+	}
+
 	public void addParkPhoto(ParkPhoto parkPhoto) {
 		if (parkPhotos == null) {
 			parkPhotos = new ArrayList<>();
@@ -283,7 +315,7 @@ public class User {
 		}
 	}
 
-	public void addAttraction(Attraction attraction) { 
+	public void addAttraction(Attraction attraction) {
 		if (attractions == null) {
 			attractions = new ArrayList<>();
 		}

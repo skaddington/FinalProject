@@ -17,6 +17,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "attraction_comment")
 public class AttractionComment {
@@ -30,14 +33,20 @@ public class AttractionComment {
 	private LocalDateTime createdAt;
 	private Boolean enabled;
 	
+	@JsonIgnoreProperties({"attractionComments", "attractions", "favoriteParks"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	@JsonIgnoreProperties({"replies"})
 	@ManyToOne
 	@JoinColumn(name = "reply_to_id")
 	private AttractionComment comment;
+	
 	@OneToMany(mappedBy = "comment")
 	private List<AttractionComment> replies;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "attraction_id")
 	private Attraction attraction;

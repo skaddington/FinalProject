@@ -1,3 +1,5 @@
+import { AttractionComment } from "./attraction-comment";
+
 export class Attraction {
   id: number;
   name: string;
@@ -7,6 +9,7 @@ export class Attraction {
   image: string;
   website: string;
   enabled: boolean;
+  attractionComments:AttractionComment[];
 
   constructor(
     id: number = 0,
@@ -16,7 +19,8 @@ export class Attraction {
     updatedAt: Date | null = null,
     image: string = '',
     website: string = '',
-    enabled: boolean = true
+    enabled: boolean = true,
+    attractionComments:AttractionComment[]=[]
   ) {
     this.id = id;
     this.name = name;
@@ -26,5 +30,6 @@ export class Attraction {
     this.image = image;
     this.website = website;
     this.enabled = enabled;
+    this.attractionComments = attractionComments;
   }
 }
