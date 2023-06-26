@@ -29,7 +29,7 @@ export class ParkService {
   }
 
   index(): Observable<Park[]> {
-    return this.http.get<Park[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<Park[]>(this.url).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(

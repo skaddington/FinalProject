@@ -18,100 +18,92 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./park.component.css'],
 })
 export class ParkComponent {
-  loggedInUser:User | null = null;
+  loggedInUser: User | null = null;
   parks: Park[] = [];
 
   newPark: Park = new Park();
   editPark: Park | null = null;
   selectedPark: Park | null = null;
-  // showComplete: boolean = false;
 
   selectedState: string = 'All';
   states = [
     'All',
     'Alabama',
-'Alaska',
-'Arizona',
-'Arkansas',
-'California',
-'Colorado',
-'Connecticut',
-'Delaware',
-'Florida',
-'Georgia',
-'Hawaii',
-'Idaho',
-'Illinois',
-'Indiana',
-'Iowa',
-'Kansas',
-'Kentucky',
-'Lousiana',
-'Maine',
-'Maryland',
-'Massachusetts',
-'Michigan',
-'Minnesota',
-'Mississippi',
-'Missouri',
-'Montana',
-'Nebraska',
-'Nevada',
-'New Hampshire',
-'New Jersey',
-'New Mexico',
-'New York',
-'North Carolina',
-'North Dakota',
-'Ohio',
-'Oklahoma',
-'Oregon',
-'Pennslyvania',
-'Rhode Island',
-'South Carolina',
-'Tennessee',
-'Texas',
-'South Dakota',
-'Utah',
-'Vermont',
-'Virginia',
-'Washington',
-'West Virgina',
-'Wisconsin',
-'Wyoming',
-  ]
-
-
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Lousiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennslyvania',
+    'Rhode Island',
+    'South Carolina',
+    'Tennessee',
+    'Texas',
+    'South Dakota',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virgina',
+    'Wisconsin',
+    'Wyoming',
+  ];
 
   constructor(
     private parkService: ParkService,
     private statePipe: StatePipe,
     private route: ActivatedRoute,
     private router: Router,
-    private authService:AuthService,
-    private userService:UserService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
-
-  checkUser():User | null {
+  checkUser(): User | null {
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
-       return this.loggedInUser = user;
+        return (this.loggedInUser = user);
       },
       error: (problem) => {
         console.error('ParkComponent.reload(): error loading Parks');
         console.error(problem);
       },
     });
-    if(this.loggedInUser) {
-    return this.loggedInUser
+    if (this.loggedInUser) {
+      return this.loggedInUser;
     }
     return null;
   }
-
-
-
-
 
   ngOnInit() {
     this.checkUser();
@@ -141,21 +133,6 @@ export class ParkComponent {
     });
   }
 
-  // getTodoCount(): number {
-  //   return this.incompletePipe.transform(this.todos, false).length;
-  // }
-
-  // getIncompleteAnxietyLevel() {
-  //   let numIncompleteTodos = this.getTodoCount();
-  //   if (numIncompleteTodos >= 10) {
-  //     return 'danger';
-  //   } else if (numIncompleteTodos >= 5) {
-  //     return 'warning';
-  //   } else {
-  //     return 'good';
-  //   }
-  // }
-
   displayParkDetails(park: Park) {
     return (this.selectedPark = park);
   }
@@ -163,20 +140,6 @@ export class ParkComponent {
   displayParkTable() {
     return (this.selectedPark = null);
   }
-
-  // addTodo(newTodo: Todo) {
-  //   this.todoService.create(newTodo).subscribe({
-  //     next: (createdTodo) => {
-  //       this.reload();
-  //       this.selected = createdTodo;
-  //       this.newTodo = new Todo();
-  //     },
-  //     error: (somethingBlewUp) => {
-  //       console.error('TodoListComponent.addTodo(): error creating todo:');
-  //       console.error(somethingBlewUp);
-  //     },
-  //   });
-  // }
 
   showPark(parkId: number) {
     this.parkService.show(parkId).subscribe({
@@ -211,18 +174,4 @@ export class ParkComponent {
       },
     });
   }
-
-  // deletePark(parkId: number): void {
-  //   this.parkService.destroy(parkId).subscribe({
-  //     next: () => {
-  //       this.reload();
-  //       this.selectedPark = null;
-  //     },
-  //     error: (somethingWentWrong) => {
-  //       console.error('ParkListComponent.deleteTodo(): error deleting Park:');
-  //       console.error(somethingWentWrong);
-  //     },
-  //   });
-  //   this.reload();
-  // }
 }
