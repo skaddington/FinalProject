@@ -52,20 +52,27 @@
         src="{{ selectedPark.image }}"
         alt="Photo of {{ selectedPark.name }}"
       />
-      <a href="{{ selectedPark.website }}"
+      <a target="_blank" href="{{ selectedPark.website }}"
         ><button class="btn btn-info" id="websiteButton">
           Visit this Park's Website
         </button></a
       >
     </div>
-    <div class="container attraction-container">
+    <div *ngIf="!selectedAttraction" class="container attraction-container">
       <div class="attractions" *ngFor="let attraction of selectedPark.attractions">
-        <img src="{{attraction}}">
+        <div class="attraction-card-header">
+        <span>{{attraction.name}}</span>
       </div>
+        <img (click)="selectAttraction(attraction)" class="attraction-img" src="{{attraction.image}}">
     </div>
   </div>
-
   <hr />
+  <div *ngIf="selectAttraction">
+    <app-attraction
+    [selectedAttraction] = "selectedAttraction"
+    (deselectAtraction)="handleDeselectAttraction($event)">
+  </app-attraction>
+  </div>
 
   <div class="row">
     <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">

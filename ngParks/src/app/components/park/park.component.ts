@@ -1,3 +1,4 @@
+import { Attraction } from './../../models/attraction';
 import { AuthService } from './../../services/auth.service';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -24,7 +25,7 @@ export class ParkComponent {
   newPark: Park = new Park();
   editPark: Park | null = null;
   selectedPark: Park | null = null;
-
+  selectedAttraction: Attraction | null = null;
   selectedState: string = 'All';
   states = [
     'All',
@@ -141,6 +142,10 @@ export class ParkComponent {
     return (this.selectedPark = null);
   }
 
+  selectAttraction(attraction:Attraction) {
+    this.selectedAttraction = attraction;
+  }
+
   showPark(parkId: number) {
     this.parkService.show(parkId).subscribe({
       next: (foundPark) => {
@@ -174,4 +179,10 @@ export class ParkComponent {
       },
     });
   }
+
+  handleDeselectAttraction(selectedAttraction:null){
+    this.selectedAttraction = selectedAttraction;
+  }
+
+
 }
