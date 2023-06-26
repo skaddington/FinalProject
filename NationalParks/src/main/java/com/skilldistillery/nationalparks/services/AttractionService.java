@@ -10,6 +10,9 @@ public interface AttractionService {
 	boolean deleteComment(String username, int attrId, int attrCommentId);
 
 	Attraction show(int id);
+
+	AttractionComment addReplyAttractionComment(String username, int attrId, int attrCommentId,
+			AttractionComment attrComReply);
 	
 	
 	
