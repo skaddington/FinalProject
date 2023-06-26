@@ -1,14 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 
-#allParksTablePhoto, #allUsersTablePhoto, #detailsUserPhoto {
+.navbar,
+.footer {
+  margin: 15px;
+  padding: 10px;
+  display: flex;
+}
+.navbar {
+  justify-content: space-between;
+}
+
+.footer {
+  justify-content: center;
+}
+
+#allParksTablePhoto,
+#allUsersTablePhoto,
+#detailsUserPhoto {
   width: 250px;
   padding: 5px;
   border-style: ridge;
   border-width: 2px;
 }
 
-#detailsParkPhoto{
+#detailsParkPhoto {
   width: 100%;
   padding: 5px;
   border-style: ridge;
@@ -16,15 +32,67 @@
   margin-bottom: 5px;
 }
 
-#editButton, #backButton, #websiteButton, #addToFavoritesButton{
+#editButton,
+#backButton,
+#websiteButton,
+#addToFavoritesButton {
   width: 100%;
 }
 
-.navbar{
-  margin: 15px;
-  padding: 10px;
+#parkAddress {
+  text-align: right;
 }
 
-#parkAddress{
-  text-align: right;
+.about-us-photo {
+  border-radius: 50%;
+  width: 75%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding: 3px;
+}
+
+.about-us-containers {
+  border: 1px solid;
+  border-color: grey;
+  background-color: rgba(128, 128, 128, 0.5);
+  margin: 3px;
+  padding: 3px;
+  flex: 1;
+}
+.about-us-photo-container {
+  display: flex;
+}
+
+.about-us-icons{
+display:flex;
+/* flex-wrap: wrap; */
+}
+
+.fab, .far{
+  width: 60%;
+}
+
+.name-line {
+  text-align: center;
+}
+
+.name-line p {
+  display: inline-block;
+  border-top: 2px solid white;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.name-line p span {
+  font-style: italic;
+  font-weight: bold;
+}
+.about-us-desc {
+  border: 1px solid;
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 3px;
+  padding: 3px;
+  flex: 1;
 }

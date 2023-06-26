@@ -17,6 +17,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserComponent } from './components/user/user.component';
 import { AddToFavoritesComponent } from './components/add-to-favorites/add-to-favorites.component';
 import { RemoveFromFavoritesComponent } from './components/remove-from-favorites/remove-from-favorites.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { TeamComponent } from './components/team/team.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { RemoveFromFavoritesComponent } from './components/remove-from-favorites
     NotFoundComponent,
     UserComponent,
     AddToFavoritesComponent,
-    RemoveFromFavoritesComponent
+    RemoveFromFavoritesComponent,
+    FooterComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
