@@ -1,6 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 
+body {
+  background-image: url('https://wallpaperaccess.com/full/1302133.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin-top: 60px;
+  height: 100%;
+}
+
+.background-image {
+  position: fixed;
+  top: 5px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: inherit;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 #allParksTablePhoto, #allUsersTablePhoto, #detailsUserPhoto {
   width: 250px;
   padding: 5px;
@@ -28,3 +49,5 @@
 #parkAddress{
   text-align: right;
 }
+
+
