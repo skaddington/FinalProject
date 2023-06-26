@@ -76,6 +76,7 @@
                <td><app-remove-from-favorites
                 [loggedInUser] = "loggedInUser"
                 [selectedPark] = "fav"
+                (removalSuccess)="handleRemovalSuccess($event)"
                 ></app-remove-from-favorites></td>
             </tr>
          </tbody>

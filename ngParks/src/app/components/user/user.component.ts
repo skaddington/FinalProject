@@ -134,5 +134,7 @@ enableUser(user: User){
 
 
 
-  // removeParkFromFavorites() {}
+  handleRemovalSuccess(loggedInUser:User) {
+    this.loggedInUser = loggedInUser;
+  }
 }
