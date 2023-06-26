@@ -22,6 +22,7 @@ export class AppComponent {
     this.auth.login('admin','test').subscribe({ // change username to match DB
       next: (data) => {
         console.log('Logged in:');
+        console.log(data);
       },
       error: (fail) => {
         console.error('Error authenticating:')
