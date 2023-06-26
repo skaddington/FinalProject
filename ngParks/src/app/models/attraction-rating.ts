@@ -1,13 +1,13 @@
-import { Park } from './park';
+import { Attraction } from './attraction';
 import { User } from './user';
 
-export class ParkRating {
+export class AttractionRating {
   id: number;
   rating: number;
   ratingComment: string;
   ratingDate: Date | null;
   user: User;
-  park: Park;
+  attraction: Attraction;
 
   constructor(
     id: number = 0,
@@ -15,13 +15,13 @@ export class ParkRating {
     ratingComment: string = '',
     ratingDate: Date | null = null,
     user: User = new User(),
-    park: Park = new Park()
+    attraction: Attraction = new Attraction()
   ) {
     this.id = id;
     this.rating = rating;
     this.ratingComment = ratingComment;
     this.ratingDate = ratingDate;
     this.user = user;
-    this.park = park;
+    this.attraction = attraction;
   }
 }
