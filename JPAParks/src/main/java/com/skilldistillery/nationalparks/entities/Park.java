@@ -39,7 +39,7 @@ public class Park {
 	@JsonIgnore
 	@ManyToMany(mappedBy = "parks")
 	private List<Activity> activities;
-	@JsonIgnore
+	@JsonIgnoreProperties("parks")
 	@OneToMany(mappedBy = "park")
 	private List<Attraction> attractions;
 	

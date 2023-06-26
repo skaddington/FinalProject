@@ -58,6 +58,11 @@
         </button></a
       >
     </div>
+    <div class="container attraction-container">
+      <div class="attractions" *ngFor="let attraction of selectedPark.attractions">
+        <img src="{{attraction}}">
+      </div>
+    </div>
   </div>
 
   <hr />
