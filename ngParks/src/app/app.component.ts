@@ -7,26 +7,6 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ngParks';
+  title = 'National Parks Travel App';
 
-  constructor(
-    private auth: AuthService //FIXME DELETE LATER
-
-  ) {}
-
-  ngOnInit() {
-    this.tempTestDeleteMeLater(); // DELETE LATER!!!
-  }
-
-  tempTestDeleteMeLater() {
-    this.auth.login('admin','test').subscribe({ // change username to match DB
-      next: (data) => {
-        console.log('Logged in:');
-      },
-      error: (fail) => {
-        console.error('Error authenticating:')
-        console.error(fail);
-      }
-    });
-  }
 }
