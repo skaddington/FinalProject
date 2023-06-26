@@ -29,7 +29,9 @@ removeParkFromFavorites() {
       }
     },
     error: (nojoy) => {
-      console.error('CardLisComponent.addCardToUser(): error adding Card To User:');
+      console.error(
+        'RemoveFromFavoritesComponent.removeParkFromFavorites(): error removing Park from User Favorites:'
+      );
       console.error(nojoy);
     },
   });
