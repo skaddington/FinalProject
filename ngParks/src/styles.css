@@ -1,25 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 
-body {
+body, html {
   background-image: url('https://wallpaperaccess.com/full/1302133.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
-  margin-top: 60px;
-  height: 100%;
+  background-position: center;
+  background-attachment: fixed;
+  background-blend-mode: overlay;
+  height: 100vw;
+  background-color: #333;
+  color: #fff;
 }
 
-.background-image {
-  position: fixed;
-  top: 5px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background-image: inherit;
-  background-repeat: no-repeat;
-  background-size: cover;
+.navbar,
+.footer {
+  margin: 15px;
+  padding: 10px;
+  display: flex;
+}
+
+.navbar {
+  justify-content: space-between;
+}
+
+.footer {
+  justify-content: center;
 }
 
 #allParksTablePhoto, #allUsersTablePhoto, #detailsUserPhoto {
@@ -29,7 +35,7 @@ body {
   border-width: 2px;
 }
 
-#detailsParkPhoto{
+#detailsParkPhoto {
   width: 100%;
   padding: 5px;
   border-style: ridge;
@@ -37,17 +43,69 @@ body {
   margin-bottom: 5px;
 }
 
-#editButton, #backButton, #websiteButton, #addToFavoritesButton{
+#editButton,
+#backButton,
+#websiteButton,
+#addToFavoritesButton {
   width: 100%;
 }
 
-.navbar{
-  margin: 15px;
-  padding: 10px;
+#parkAddress {
+  text-align: right;
 }
 
-#parkAddress{
-  text-align: right;
+.about-us-photo {
+  border-radius: 50%;
+  width: 75%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding: 3px;
+}
+
+.about-us-containers {
+  border: 1px solid;
+  border-color: grey;
+  background-color: rgba(128, 128, 128, 0.5);
+  margin: 3px;
+  padding: 3px;
+  flex: 1;
+}
+.about-us-photo-container {
+  display: flex;
+}
+
+.about-us-icons{
+display:flex;
+/* flex-wrap: wrap; */
+}
+
+.fab, .far{
+  width: 60%;
+}
+
+.name-line {
+  text-align: center;
+}
+
+.name-line p {
+  display: inline-block;
+  border-top: 2px solid white;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.name-line p span {
+  font-style: italic;
+  font-weight: bold;
+}
+.about-us-desc {
+  border: 1px solid;
+  border-color: grey;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 3px;
+  padding: 3px;
+  flex: 1;
 }
 
 

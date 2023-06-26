@@ -36,7 +36,4 @@ export class RemoveFromFavoritesComponent {
     this.removalSuccess.emit(loggedInUser);
   }
 
-
-
-
 }
