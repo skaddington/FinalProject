@@ -136,5 +136,8 @@ enableUser(user: User){
 
   handleRemovalSuccess(loggedInUser:User) {
     this.loggedInUser = loggedInUser;
+    this.selectedUser = this.loggedInUser;
+    this.reload();
+    this.showUser(loggedInUser.id);
   }
 }
