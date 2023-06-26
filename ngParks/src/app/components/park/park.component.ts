@@ -2,7 +2,7 @@ import { Attraction } from './../../models/attraction';
 import { AuthService } from './../../services/auth.service';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Park } from 'src/app/models/park';
@@ -24,7 +24,7 @@ export class ParkComponent {
 
   newPark: Park = new Park();
   editPark: Park | null = null;
-  selectedPark: Park | null = null;
+  @Input()selectedPark: Park | null = null;
   selectedAttraction: Attraction | null = null;
   selectedState: string = 'All';
   states = [

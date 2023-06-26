@@ -20,6 +20,7 @@ import { RemoveFromFavoritesComponent } from './components/remove-from-favorites
 import { FooterComponent } from './components/footer/footer.component';
 import { TeamComponent } from './components/team/team.component';
 import { AttractionComponent } from './components/attraction/attraction.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AttractionComponent } from './components/attraction/attraction.componen
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [AuthService, StatePipe],
   bootstrap: [AppComponent]
