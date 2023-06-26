@@ -19,22 +19,11 @@ export class RemoveFromFavoritesComponent {
     if (this.selectedPark && this.loggedInUser) {
       this.userService.removeFavoritePark(this.loggedInUser, this.selectedPark.id).subscribe({
           next: (result) => {
-            if (this.loggedInUser?.favoriteParks && this.selectedPark) {
-              let index = this.loggedInUser.favoriteParks.indexOf(this.selectedPark);
-              if (index !== -1) {
-                this.loggedInUser.favoriteParks =
-                  this.loggedInUser.favoriteParks.filter(
-                    (park) => park.id !== this.selectedPark?.id
-                  );
-                    this.handleRemovalSuccess(this.loggedInUser);
-
-                // this.router.navigateByUrl("/users/" + this.loggedInUser.id);
-              }
-            }
+            this.handleRemovalSuccess(result);
           },
           error: (nojoy) => {
             console.error(
-              'CardLisComponent.addCardToUser(): error adding Card To User:'
+              'reniveFromFavoritesComponent.removeParkFromFavorites(): error Removing Park From User:'
             );
             console.error(nojoy);
           },
