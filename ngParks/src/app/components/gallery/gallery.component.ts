@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ParkService } from './../../services/park.service';
 import { Component, OnInit } from '@angular/core';
 import { Park } from 'src/app/models/park';
@@ -15,16 +16,19 @@ export class GalleryComponent implements OnInit {
 
   loggedInUser: User | null = null;
   parks: Park[] = [];
+  options: string[] = [];
   selectedOption: string = '';
 
 
   constructor(
     private parkService: ParkService,
-    private parkPhotosService: ParkPhotosService
+    private parkPhotosService: ParkPhotosService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
     this.reload();
+    this.fetchOptions();
   }
 
   reload():void {
@@ -43,6 +47,12 @@ export class GalleryComponent implements OnInit {
     this.parkPhotosService.getParkPhotos().subscribe((data: Park[]) => {
       this.parks = data;
     })
+  }
+
+  fetchOptions() {
+    this.http.get<any>('api').subscribe(response => {
+      this.options = response.options;
+    });
   }
 
   onOptionSelected(event: any) {
