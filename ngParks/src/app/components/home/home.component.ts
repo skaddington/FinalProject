@@ -8,7 +8,7 @@ import { ParkService } from 'src/app/services/park.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  parks: Park[] = [];
+  parks: any[] = [];
   selectedPark: Park | null = null;
 
   constructor(private parkService: ParkService) {}
@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
   reloadCarousel(): void {
     this.parkService.index().subscribe({
       next: (parkList) => {
-        this.parks = parkList;
+        this.parks = this.chunks(parkList, 3);
+        console.log(this.parks);
       },
       error: (problem) => {
         console.error('HomeComponent.reloadCarousel(): error loading Parks');
@@ -31,5 +32,14 @@ export class HomeComponent implements OnInit {
 
   displayParkDetails(park: Park) {
     return (this.selectedPark = park);
+  }
+
+  chunks(array: Park[], size: number) {
+    let results = [];
+    results = [];
+    while (array.length) {
+      results.push(array.splice(0, size));
+    }
+    return results;
   }
 }
