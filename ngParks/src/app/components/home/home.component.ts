@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
     this.parkService.index().subscribe({
       next: (parkList) => {
         this.parks = this.chunks(parkList, 3);
+        // this.parks = parkList;
         console.log(this.parks);
       },
       error: (problem) => {
@@ -41,5 +42,18 @@ export class HomeComponent implements OnInit {
       results.push(array.splice(0, size));
     }
     return results;
+  }
+
+  prevBtnClick() {
+    let carouselObj = (document.querySelector('.carousel') as any)
+      .ej2_instances[0];
+    carouselObj.prev();
+  }
+
+  nextBtnClick() {
+    console.log('click');
+    let carouselObj = (document.querySelector('.carousel') as any)
+      .ej2_instances[0];
+    carouselObj.next();
   }
 }
