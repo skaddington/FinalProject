@@ -8,7 +8,7 @@ export class ParkComment {
   enabled: boolean;
   user: User;
   park: Park;
-  comment: ParkComment;
+  comment: ParkComment | null;
   replies: ParkComment[];
 
   constructor(
@@ -18,7 +18,7 @@ export class ParkComment {
     enabled: boolean = true,
     user: User = new User(),
     park: Park = new Park(),
-    comment: ParkComment = new ParkComment(),
+    comment: ParkComment | null = null,
     replies: ParkComment[] = []
   ) {
     this.id = id;

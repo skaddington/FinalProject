@@ -1,4 +1,5 @@
 import { Attraction } from "./attraction";
+import { AttractionComment } from "./attraction-comment";
 import { Park } from "./park";
 import { ParkComment } from "./park-comment";
 import { ParkPhoto } from "./park-photo";
@@ -16,6 +17,7 @@ export class User {
   enabled: boolean;
   favoriteParks: Park[];
   attractions: Attraction[];
+  attractionComments:AttractionComment[];
   parkComments: ParkComment[];
   parkRatings: ParkRating[];
   parkPhotos: ParkPhoto[];
@@ -32,6 +34,7 @@ export class User {
     enabled: boolean = false,
     favoriteParks: Park[] = [],
     attractions: Attraction[] = [],
+    attractionComments:AttractionComment[]=[],
     parkComments: ParkComment[] = [],
     parkRatings: ParkRating[] = [],
     parkPhotos: ParkPhoto[] = []
@@ -47,6 +50,7 @@ export class User {
     this.enabled = enabled;
     this.favoriteParks = favoriteParks;
     this.attractions = attractions;
+    this.attractionComments = attractionComments;
     this.parkComments = parkComments;
     this.parkRatings = parkRatings;
     this.parkPhotos = parkPhotos;
