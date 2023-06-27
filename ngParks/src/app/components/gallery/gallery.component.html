@@ -3,8 +3,8 @@
 <div class="gallery">
   <ng-container *ngFor="let park of parks">
     <ng-container *ngFor="let photo of park.parkPhotos">
-      <img [src]="photo.image" alt="{{photo.park.name}}">
+      <img src="photo.image" alt="{{photo.park.name}}">
     </ng-container>
-    <img [src]="'gallery/' + displayParkPhotos.name" alt="{{parks}}">
+    <!-- <img src="'gallery/' + displayParkPhotos.name" alt="{{parks}}"> -->
   </ng-container>
 </div>

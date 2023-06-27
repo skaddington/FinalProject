@@ -18,5 +18,4 @@ public class ParkPhotoServiceImpl implements ParkPhotoService {
 	public List<ParkPhoto> index() {
 		return parkPhotoRepo.findAll();
 	}
-
 }

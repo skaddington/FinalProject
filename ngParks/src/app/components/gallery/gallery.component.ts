@@ -1,18 +1,17 @@
 import { ParkService } from './../../services/park.service';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Park } from 'src/app/models/park';
 import { ParkPhoto } from 'src/app/models/park-photo';
 import { User } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/auth.service';
-import { UserService } from 'src/app/services/user.service';
+import { ParkPhotosService } from 'src/app/services/park-photos.service';
+
 
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css']
 })
-export class GalleryComponent {
+export class GalleryComponent implements OnInit {
 
   loggedInUser: User | null = null;
   parks: Park[] = [];
@@ -20,9 +19,7 @@ export class GalleryComponent {
 
   constructor(
     private parkService: ParkService,
-    private route: Router,
-    private authService: AuthService,
-    private userService: UserService
+    private parkPhotosService: ParkPhotosService
   ) {}
 
   ngOnInit() {
@@ -42,7 +39,9 @@ export class GalleryComponent {
   }
 
   displayParkPhotos() {
-    return (this.parks)
+    this.parkPhotosService.getParkPhotos().subscribe((data: Park[]) => {
+      this.parks = data;
+    })
   }
 
 }
