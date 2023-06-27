@@ -7,9 +7,11 @@
 
 
   <div class="attraction-comments">
-    <div *ngFor="let comment of selectedAttraction.attractionComments" class="attraction-comment">
+    <div *ngFor="let comment of selectedAttraction.attractionComments">
+      <div *ngIf="comment.comment===null" class="attraction-comment">
       <span>{{comment.user.firstName}}</span>
       <blockquote>{{comment.content}}</blockquote>
+    </div>
       <div class="attraction-comment-replies" *ngFor="let reply of comment.replies">
         <span>{{reply.user.firstName}}</span> Replying To <span>{{reply.comment?.user?.firstName}}</span>
       <blockquote>{{reply.content}}</blockquote>
