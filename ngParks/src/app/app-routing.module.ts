@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'users/:id', component: UserComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'team', component: TeamComponent },
-  //{ path: 'gallery', component: GalleryComponent },
+  { path: 'gallery', component: GalleryComponent },
   //   { path: 'login', component: LoginComponent },   //Use when login NOT nested in the Navbar
   { path: '**', component: NotFoundComponent }, //page not found route
 ];
