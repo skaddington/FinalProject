@@ -49,10 +49,12 @@ export class GalleryComponent implements OnInit {
     })
   }
 
-  fetchOptions() {
-    this.http.get<any>('api').subscribe(response => {
-      this.options = response.options;
-    });
+  fetchOptions(keyword?: string) {
+    // const params = keyword ? { search: keyword} : {};
+
+    // this.http.get<any>('gallery/{pid}', {params}).subscribe(response => {
+    //   this.options = response.options;
+    // });
   }
 
   onOptionSelected(event: any) {
