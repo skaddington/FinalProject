@@ -9,7 +9,8 @@ import com.skilldistillery.nationalparks.entities.ParkComment;
 public interface ParkCommentRepository extends JpaRepository<ParkComment, Integer> {
 	
 	ParkComment findById(int id);
-	List<ParkComment> findByPark_Name(String name);
-	List<ParkComment> findByPark_Id(int parkId);
+	List<ParkComment> findByPark_NameAndEnabledTrue(String name);
+	List<ParkComment> findByPark_IdAndEnabledTrue(int parkId);
+	
 
 }

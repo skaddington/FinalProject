@@ -42,6 +42,7 @@ public class ParkComment {
 	@ManyToOne
 	@JoinColumn(name = "park_id")
 	private Park park;
+	
 	@JsonIgnoreProperties({"replies"})
 	@ManyToOne
 	@JoinColumn(name = "reply_to_id")

@@ -29,21 +29,34 @@ public class ParkCommentServiceImpl implements ParkCommentService {
 	}
 
 	@Override
-	public boolean deleteComment(String username, int parkId, int parkCommentId) {
-		User managedUser = userRepo.findByUsername(username);
-		Park managedPark = parkRepo.findById(parkId);
+	public boolean deleteComment(int parkCommentId) {
 		ParkComment managedComment = parkCommentRepo.findById(parkCommentId);
-		if (managedComment != null) {
-			managedUser.removeParkComment(managedComment);
-			managedPark.removeParkComment(managedComment);
-			if (managedComment.getComment() != null) {
-				managedComment.getComment().removeParkComment(managedComment);
-			}
-			parkCommentRepo.delete(managedComment);
+		boolean currentEnabled = managedComment.getEnabled();
+		managedComment.setEnabled(!managedComment.getEnabled());
+		parkCommentRepo.saveAndFlush(managedComment);
+		if (managedComment.getEnabled() != currentEnabled) {
 			return true;
 		}
 		return false;
 	}
+
+//	@Override
+//	public boolean deleteComment(String username, int parkId, int parkCommentId) {
+//		User managedUser = userRepo.findByUsername(username);
+//		Park managedPark = parkRepo.findById(parkId);
+//		ParkComment managedComment = parkCommentRepo.findById(parkCommentId);
+//		if (managedComment != null) {
+//			managedUser.removeParkComment(managedComment);
+//			managedPark.removeParkComment(managedComment);
+//			if (managedComment.getComment() != null) {
+//				managedComment.getComment().removeParkComment(managedComment);
+//				managedComment.setComment(null);
+//			}
+//			parkCommentRepo.delete(managedComment);
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public ParkComment addCommentToPark(String username, int parkId, ParkComment parkComment) {
