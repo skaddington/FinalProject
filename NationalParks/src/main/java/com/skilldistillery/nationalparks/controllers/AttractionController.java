@@ -71,6 +71,7 @@ public class AttractionController {
 	public AttractionComment addReplyComment(HttpServletRequest req, HttpServletResponse res,
 			@PathVariable Integer attrId, @PathVariable Integer commentId,
 			@RequestBody AttractionComment attractionComment, Principal principal) {
+		
 		if (attractionComment.getContent().isEmpty()) {
 			attractionComment = null;
 			res.setStatus(404);
