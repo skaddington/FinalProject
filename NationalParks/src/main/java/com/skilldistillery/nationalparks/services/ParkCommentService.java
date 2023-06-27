@@ -4,7 +4,7 @@ import com.skilldistillery.nationalparks.entities.ParkComment;
 
 public interface ParkCommentService {
 
-	boolean deleteComment(String username, int parkId, int parkCommentId);
+//	boolean deleteComment(String username, int parkId, int parkCommentId);
 
 	ParkComment addCommentToPark(String username, int parkId, ParkComment parkComment);
 
@@ -12,6 +12,8 @@ public interface ParkCommentService {
 
 	ParkComment addReplyParkComment(String username, int parkId, int parkCommentId,
 			ParkComment parkComReply);
+
+	boolean deleteComment(int parkCommentId);
 	
 	
 }

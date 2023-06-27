@@ -63,8 +63,7 @@ public class ParkCommentController {
 	@DeleteMapping("parks/{parkId}/comments/{commentId}")
 	public void deleteComment(Principal principal, HttpServletResponse res, @PathVariable Integer parkId,
 			@PathVariable Integer commentId) {
-		System.out.println(principal.getName() + " " + parkId + " " + commentId);
-		if (parkCommentService.deleteComment(principal.getName(), parkId, commentId)) {
+		if (parkCommentService.deleteComment(commentId)) {
 			res.setStatus(204);
 		} else {
 			res.setStatus(404);
