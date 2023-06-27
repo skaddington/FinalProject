@@ -28,7 +28,15 @@ body, html {
   justify-content: center;
 }
 
-#allParksTablePhoto, #allUsersTablePhoto, #detailsUserPhoto {
+blockquote{
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+}
+
+#allParksTablePhoto, #allUsersTablePhoto, #detailsUserPhoto{
   width: 250px;
   padding: 5px;
   border-style: ridge;

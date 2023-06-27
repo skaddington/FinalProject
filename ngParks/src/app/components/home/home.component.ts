@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Park } from 'src/app/models/park';
 import { ParkService } from 'src/app/services/park.service';
 
@@ -9,9 +10,9 @@ import { ParkService } from 'src/app/services/park.service';
 })
 export class HomeComponent implements OnInit {
   parks: any[] = [];
-  selectedPark: Park | null = null;
 
-  constructor(private parkService: ParkService) {}
+  constructor(private parkService: ParkService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.reloadCarousel();
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   displayParkDetails(park: Park) {
-    return (this.selectedPark = park);
+    this.router.navigateByUrl("parks/" + park.id);
   }
 
   chunks(array: Park[], size: number) {
