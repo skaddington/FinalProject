@@ -60,51 +60,61 @@
     </div>
     <div class="park-comments">
       <app-park-comment
-      [selectedPark]= "selectedPark">
-    </app-park-comment>
+        [loggedInUser]="loggedInUser"
+        [selectedPark]="selectedPark"
+      >
+      </app-park-comment>
     </div>
     <div *ngIf="!selectedAttraction" class="container attraction-container">
-      <div class="attractions" *ngFor="let attraction of selectedPark.attractions">
-        <div class="attraction-card-header">
-        <span>{{attraction.name}}</span>
-      </div>
-        <img (click)="selectAttraction(attraction)" class="attraction-img" src="{{attraction.image}}">
-    </div>
-  </div>
-  <hr />
-  <div *ngIf="selectAttraction">
-    <app-attraction
-    [selectedAttraction] = "selectedAttraction"
-    (deselectAtraction)="handleDeselectAttraction($event)">
-  </app-attraction>
-  </div>
-
-  <div class="row">
-    <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">
-      <button
-        class="btn btn-success"
-        id="editButton"
-        (click)="setEditPark()"
-      >Edit Park Information</button>
-    </div>
-    <div class="col" *ngIf="loggedInUser">
-      <app-add-to-favorites
-      [selectedPark]="selectedPark"
-      [loggedInUser]="loggedInUser"
+      <div
+        class="attractions"
+        *ngFor="let attraction of selectedPark.attractions"
       >
-    </app-add-to-favorites>
-  </div>
-  <div class="col">
-    <button
-      class="btn btn-primary"
-      id="backButton"
-      (click)="displayParkTable()"
-    >Back To All Parks</button>
-  </div>
-  </div>
-</div>
+        <div class="attraction-card-header">
+          <span>{{ attraction.name }}</span>
+        </div>
+        <img
+          (click)="selectAttraction(attraction)"
+          class="attraction-img"
+          src="{{ attraction.image }}"
+        />
+      </div>
+    </div>
+    <hr />
+    <div *ngIf="selectAttraction">
+      <app-attraction
+        [selectedAttraction]="selectedAttraction"
+        (deselectAtraction)="handleDeselectAttraction($event)"
+      >
+      </app-attraction>
+    </div>
 
-<!-- <div *ngIf="editPark" id="parkEditDiv" class="container">
+    <div class="row">
+      <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">
+        <button class="btn btn-success" id="editButton" (click)="setEditPark()">
+          Edit Park Information
+        </button>
+      </div>
+      <div class="col" *ngIf="loggedInUser">
+        <app-add-to-favorites
+          [selectedPark]="selectedPark"
+          [loggedInUser]="loggedInUser"
+        >
+        </app-add-to-favorites>
+      </div>
+      <div class="col">
+        <button
+          class="btn btn-primary"
+          id="backButton"
+          (click)="displayParkTable()"
+        >
+          Back To All Parks
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div *ngIf="editPark" id="parkEditDiv" class="container">
   <label for="task">Task : </label>
   <input type="text" name="task" [(ngModel)]="editPark.task" /><br />
   <label for="description">Description : </label>
@@ -122,3 +132,4 @@
   <button class="btn btn-danger" (click)="editPark = null">Cancel</button>
   <button class="btn btn-success" (click)="updatePark(editPark)">Save</button>
 </div> -->
+</div>

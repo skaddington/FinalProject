@@ -11,11 +11,40 @@
       <div *ngIf="comment.comment===null" class="attraction-comment">
       <span>{{comment.user.firstName}}</span>
       <blockquote>{{comment.content}}</blockquote>
+      <button *ngIf="comment" (click)="this.replyToComment = comment">Reply</button>
     </div>
       <div class="attraction-comment-replies" *ngFor="let reply of comment.replies">
         <span>{{reply.user.firstName}}</span> Replying To <span>{{reply.comment?.user?.firstName}}</span>
       <blockquote>{{reply.content}}</blockquote>
+      <button *ngIf="comment" (click)="this.replyToComment = reply">Reply</button>
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="!replyToComment" class="add-comment-form">
+  <form>
+    <input
+      type="text"
+      name="content"
+      [(ngModel)]="comment.content"
+      placeholder="Leave a comment"
+      class="form-control"
+    />
+    <button (click)="addComment()">Submit</button>
+  </form>
+</div>
+
+<div *ngIf="replyToComment">
+  <form>
+    <input
+      type="text"
+      name="content"
+      [(ngModel)]="comment.content"
+      placeholder="Replying to {{replyToComment.user.firstName}}"
+      class="form-control"
+    />
+    <button (click)="addReplyComment()">Submit</button>
+    <button (click)="replyToComment=null">Cancel</button>
+  </form>
 </div>
