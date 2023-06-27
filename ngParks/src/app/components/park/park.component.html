@@ -58,6 +58,11 @@
         </button></a
       >
     </div>
+    <div class="park-comments">
+      <app-park-comment
+      [selectedPark]= "selectedPark">
+    </app-park-comment>
+    </div>
     <div *ngIf="!selectedAttraction" class="container attraction-container">
       <div class="attractions" *ngFor="let attraction of selectedPark.attractions">
         <div class="attraction-card-header">

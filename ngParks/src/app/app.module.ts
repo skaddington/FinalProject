@@ -21,6 +21,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { TeamComponent } from './components/team/team.component';
 import { AttractionComponent } from './components/attraction/attraction.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ParkCommentComponent } from './components/park-comment/park-comment.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddToFavoritesComponent,
     RemoveFromFavoritesComponent,
     FooterComponent,
-    TeamComponent
+    TeamComponent,
+    ParkCommentComponent
   ],
   imports: [
     BrowserModule,

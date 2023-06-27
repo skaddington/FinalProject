@@ -1,0 +1,14 @@
+<ng-container *ngFor="let comment of selectedPark?.parkComments">
+  <div *ngIf="comment.comment===null" class="park-comment">
+    <span>{{ comment.user.firstName }}</span>
+    {{comment.id}}
+    <blockquote>{{ comment.content }}</blockquote>
+    <ng-container *ngFor="let reply of comment.replies">
+      <div class="park-reply">
+        {{reply.id}}
+        <span>{{ reply.user.firstName }}</span> Replying to <span>{{ reply.comment.user.firstName }}</span>
+        <blockquote>{{ reply.content }}</blockquote>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

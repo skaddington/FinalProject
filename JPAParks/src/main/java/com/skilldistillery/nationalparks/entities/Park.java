@@ -54,7 +54,7 @@ public class Park {
 	@JsonIgnore
 	@OneToMany(mappedBy = "park")
 	private List<ParkPhoto> parkPhotos;
-	@JsonIgnore
+	@JsonIgnoreProperties({"park"})
 	@OneToMany(mappedBy = "park")
 	private List<ParkComment> parkComments;
 	@JsonIgnore

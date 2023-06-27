@@ -57,7 +57,7 @@ public class User {
 	@JoinTable(name = "user_favorites", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "park_id"))
 	private List<Park> favoriteParks;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"park", "user"})
 	@OneToMany(mappedBy = "park")
 	private List<ParkComment> parkComments;
 	@JsonIgnore

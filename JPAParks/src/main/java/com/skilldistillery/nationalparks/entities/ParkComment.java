@@ -33,12 +33,12 @@ public class ParkComment {
 	private LocalDateTime createdAt;
 	private Boolean enabled;
 	
-	@JsonIgnoreProperties({"parkComments", "favoriteParks", "attractions", "attractionComments"})
+	@JsonIgnoreProperties({"parkComments", "favoriteParks", "attractions", "attractionComments", "parkPhotos"})
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@JsonIgnoreProperties({"parkComments", "favoriteParks", "attractions", "attractionComments"})
+	@JsonIgnoreProperties({"parkComments", "favoriteParks", "attractions", "attractionComments", "parkPhotos"})
 	@ManyToOne
 	@JoinColumn(name = "park_id")
 	private Park park;
