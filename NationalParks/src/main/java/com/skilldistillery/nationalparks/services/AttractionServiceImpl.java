@@ -39,6 +39,22 @@ public class AttractionServiceImpl implements AttractionService {
 	}
 	
 	@Override
+	public AttractionComment addReplyAttractionComment(String username, int attrId, int attrCommentId, AttractionComment attrComReply) {
+		User managedUser = userRepo.findByUsername(username);
+		Attraction managedAttraction = attractionRepo.findById(attrId);
+		AttractionComment managedComment = attractionCommentRepo.findById(attrCommentId);
+		attrComReply.setAttraction(managedAttraction);
+		attrComReply.setUser(managedUser);
+		attrComReply.setComment(managedComment);
+		AttractionComment managedReply = attractionCommentRepo.saveAndFlush(attrComReply);
+		managedAttraction.addAttractionComment(managedReply);
+		managedUser.addAttractionComment(managedReply);
+		managedComment.addAttractionCommentReply(managedReply);
+		return managedReply;
+		
+	}
+	
+	@Override
 	public boolean deleteComment(String username, int attrId, int attrCommentId) {
 		User managedUser = userRepo.findByUsername(username);
 		Attraction managedAttraction = attractionRepo.findById(attrId);
@@ -46,6 +62,9 @@ public class AttractionServiceImpl implements AttractionService {
 		if(managedComment!=null) {
 			managedUser.removeAttractionComment(managedComment);
 			managedAttraction.removeAttractionComment(managedComment);
+			if(managedComment.getComment()!= null) {
+				managedComment.getComment().removeAttractionCommentReply(managedComment);
+			}
 			attractionCommentRepo.delete(managedComment);
 			return true;
 		}
