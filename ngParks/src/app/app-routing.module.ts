@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'team', component: TeamComponent },
   //   { path: 'login', component: LoginComponent },   //Use when login NOT nested in the Navbar
-  { path: '**', component: NotFoundComponent } //page not found route
+  { path: '**', component: NotFoundComponent }, //page not found route
 ];
 
 @NgModule({

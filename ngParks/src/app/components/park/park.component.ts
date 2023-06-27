@@ -24,7 +24,7 @@ export class ParkComponent {
 
   newPark: Park = new Park();
   editPark: Park | null = null;
-  @Input()selectedPark: Park | null = null;
+  @Input() selectedPark: Park | null = null;
   selectedAttraction: Attraction | null = null;
   selectedState: string = 'All';
   states = [
@@ -142,7 +142,7 @@ export class ParkComponent {
     return (this.selectedPark = null);
   }
 
-  selectAttraction(attraction:Attraction) {
+  selectAttraction(attraction: Attraction) {
     this.selectedAttraction = attraction;
   }
 
@@ -180,9 +180,7 @@ export class ParkComponent {
     });
   }
 
-  handleDeselectAttraction(selectedAttraction:null){
+  handleDeselectAttraction(selectedAttraction: null) {
     this.selectedAttraction = selectedAttraction;
   }
-
-
 }
