@@ -22,6 +22,7 @@ import { TeamComponent } from './components/team/team.component';
 import { AttractionComponent } from './components/attraction/attraction.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ParkCommentComponent } from './components/park-comment/park-comment.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ParkCommentComponent } from './components/park-comment/park-comment.com
     RemoveFromFavoritesComponent,
     FooterComponent,
     TeamComponent,
-    ParkCommentComponent
+    ParkCommentComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
