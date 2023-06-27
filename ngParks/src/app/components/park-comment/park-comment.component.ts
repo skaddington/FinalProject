@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Park } from 'src/app/models/park';
 import { ParkComment } from 'src/app/models/park-comment';
 import { User } from 'src/app/models/user';
@@ -13,7 +13,9 @@ export class ParkCommentComponent {
   @Input() loggedInUser: User | null = null;
   @Input() selectedPark: Park | null = null;
   comment: ParkComment = new ParkComment();
-  replyToComment: ParkComment | null = null;
+  selectedComment: ParkComment | null = null;
+  @Output() reloadPark = new EventEmitter<number>();
+
   constructor(private parkCommentService: ParkCommentService) {}
 
   addComment() {
@@ -35,21 +37,43 @@ export class ParkCommentComponent {
   }
 
   addReplyComment() {
-    if (this.selectedPark && this.comment && this.replyToComment) {
+    if (this.selectedPark && this.comment && this.selectedComment) {
       this.parkCommentService
-        .addReply(this.selectedPark, this.replyToComment.id, this.comment)
+        .addReply(this.selectedPark, this.selectedComment.id, this.comment)
         .subscribe({
           next: (addedComment) => {
             this.selectedPark?.parkComments.push(addedComment);
             this.loggedInUser?.parkComments.push(addedComment);
-            this.replyToComment?.replies.push(addedComment);
+            this.selectedComment?.replies.push(addedComment);
             this.comment = new ParkComment();
           },
           error: (nothingChanged) => {
-            console.error('ParkComponent.updatePark(): error updating Park:');
+            console.error('ParkCommentComponent.addReplyComment(): error adding replyParkcomment:');
             console.error(nothingChanged);
           },
         });
     }
   }
+
+  deleteComment(commentId:number) {
+    if (this.selectedPark) {
+      this.parkCommentService
+        .deleteComment(this.selectedPark.id, commentId)
+        .subscribe({
+          next: (result) => {
+            if(this.selectedPark){
+            this.reloadPark.emit(this.selectedPark.id);
+            }
+            this.selectedComment=null;
+          },
+          error: (nothingChanged) => {
+            console.error('ParkCommentComponent.deleteComment(): error removing ParkComment:');
+            console.error(nothingChanged);
+          },
+        });
+    }
+  }
+
+
+
 }

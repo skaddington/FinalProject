@@ -183,4 +183,18 @@ export class ParkComponent {
   handleDeselectAttraction(selectedAttraction: null) {
     this.selectedAttraction = selectedAttraction;
   }
+
+  refreshSelectedPark(parkId:number) {
+  this.parkService.show(parkId).subscribe({
+    next: (updatedPark) => {
+      this.selectedPark = updatedPark;
+    },
+    error: (nothingChanged) => {
+      console.error('ParkComponent.RefreshSelectedPark(): error refreshing Park:');
+      console.error(nothingChanged);
+    },
+  });
+
+
+  }
 }

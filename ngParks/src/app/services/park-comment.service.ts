@@ -46,10 +46,24 @@ export class ParkCommentService {
         catchError((err: any) => {
           console.error(err);
           return throwError(
-            () => new Error('ParkCommntService.update(): error adding ReplyParkComment: ' + err)
+            () => new Error('ParkCommntService.addReply(): error adding ReplyParkComment: ' + err)
           );
         })
       );
+  }
+
+  deleteComment(parkId: Number, cid:number): Observable<ParkComment> {
+    return this.http
+      .delete<ParkComment>(this.url + '/' + parkId + "/comments/"+ cid, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.error(err);
+          return throwError(
+            () => new Error('ParkCommntService.delete(): error deleting ParkComment: ' + err)
+          );
+        })
+      );
+      
   }
 
 
