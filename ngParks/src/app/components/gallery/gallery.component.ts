@@ -15,6 +15,7 @@ export class GalleryComponent implements OnInit {
 
   loggedInUser: User | null = null;
   parks: Park[] = [];
+  selectedOption: string = '';
 
 
   constructor(
@@ -42,6 +43,10 @@ export class GalleryComponent implements OnInit {
     this.parkPhotosService.getParkPhotos().subscribe((data: Park[]) => {
       this.parks = data;
     })
+  }
+
+  onOptionSelected(event: any) {
+    this.selectedOption = event.target.value;
   }
 
 }
