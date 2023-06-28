@@ -112,9 +112,9 @@ export class ParkComponent {
     this.checkUser();
     let idString = this.route.snapshot.paramMap.get('id');
     if (!this.selectedPark && idString) {
-      console.log(idString);
+      // console.log(idString);
       let parkId: number = Number.parseInt(idString);
-      console.log(parkId);
+      // console.log(parkId);
       if (isNaN(parkId)) {
         this.router.navigateByUrl('loser');
       } else {

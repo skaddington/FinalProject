@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ParkCommentComponent } from './components/park-comment/park-comment.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { ParkRatingComponent } from './components/park-rating/park-rating.component';
+import { AverageParkRatingPipe } from './pipes/average-park-rating.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ParkRatingComponent } from './components/park-rating/park-rating.compon
     TeamComponent,
     ParkCommentComponent,
     GalleryComponent,
-    ParkRatingComponent
+    ParkRatingComponent,
+    AverageParkRatingPipe
   ],
   imports: [
     BrowserModule,
