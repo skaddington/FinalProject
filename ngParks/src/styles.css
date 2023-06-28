@@ -13,6 +13,10 @@ body, html {
   color: #fff;
 }
 
+hr{
+border-width: 3px;
+}
+
 .navbar,
 .footer {
   margin: 15px;
@@ -56,6 +60,8 @@ blockquote{
 #websiteButton,
 #addToFavoritesButton {
   width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 tr,td {
