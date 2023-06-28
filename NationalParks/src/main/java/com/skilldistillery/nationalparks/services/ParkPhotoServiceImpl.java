@@ -21,9 +21,11 @@ public class ParkPhotoServiceImpl implements ParkPhotoService {
 	}
 	
 	@Override
-	public List<ParkPhoto> getPicturesByPark_State_Name(String stateName) {
+	public List<ParkPhoto> getPicturesByParkStateName(String stateName) {
 		List<ParkPhoto> parkPhoto = parkPhotoRepo.findByPark_States_Name(stateName);
 		return parkPhoto;
 	}
+	
+	
 	
 }

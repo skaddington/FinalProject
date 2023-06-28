@@ -93,12 +93,10 @@ export class GalleryComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  getParkPicturesByState(state: string) {
-
+  getParkPicturesByState(state: string): void {
     this.parkPhotosService.show(state).subscribe((data: any) => {
       this.parkPhotos = data;
     })
-
   }
 
   getParkPhotos(stateName:string) {
@@ -114,7 +112,9 @@ export class GalleryComponent implements OnInit {
   }
 
   onStateChange(event: any) {
+    console.log(event);
     this.selectedOption = event.target.value;
+    console.log(event.target.value);
     this.getParkPhotos(this.selectedOption);
   }
 

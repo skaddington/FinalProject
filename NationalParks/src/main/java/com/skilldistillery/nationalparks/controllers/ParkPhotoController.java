@@ -25,13 +25,13 @@ public class ParkPhotoController {
 	@Autowired
 	private ParkPhotoService parkPhotoService;
 	
-	@GetMapping("gallery")
+	@GetMapping("parkPhotos")
 	public List<ParkPhoto> index(HttpServletRequest req, HttpServletResponse res) {
 		return parkPhotoService.index();
 	}
 	
-	@GetMapping("gallery/{state}")
+	@GetMapping("parkPhotos/{state}")
 	public List<ParkPhoto> getPicturesByState(@PathVariable String state) {
-		return parkPhotoService.getPicturesByPark_State_Name(state);
+		return parkPhotoService.getPicturesByParkStateName(state);
 	}
 }

@@ -8,6 +8,6 @@ public interface ParkPhotoService {
 	
 	public List<ParkPhoto> index();
 	
-	public List<ParkPhoto> getPicturesByPark_State_Name(String state);
+	public List<ParkPhoto> getPicturesByParkStateName(String state);
 
 }
