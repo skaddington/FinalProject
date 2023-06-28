@@ -24,6 +24,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ParkCommentComponent } from './components/park-comment/park-comment.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { NgPipesModule } from 'ngx-pipes';
+import { ParkRatingComponent } from './components/park-rating/park-rating.component';
+import { AverageParkRatingPipe } from './pipes/average-park-rating.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { NgPipesModule } from 'ngx-pipes';
     FooterComponent,
     TeamComponent,
     ParkCommentComponent,
-    GalleryComponent
+    GalleryComponent,
+    ParkRatingComponent,
+    AverageParkRatingPipe
   ],
   imports: [
     BrowserModule,

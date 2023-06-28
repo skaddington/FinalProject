@@ -28,11 +28,11 @@
 </div>
 
 <div *ngIf="selectedPark && !editPark" id="parkDetailsDiv" class="container">
-  <div class="row">
-    <div class="col-8">
+  <div class="row parkDetailsHeader">
+    <div class="col-auto">
       <h1>{{ selectedPark.name }} | Id No. {{ selectedPark.id }}</h1>
     </div>
-    <div class="col-4">
+    <div class="col-auto">
       <blockquote id="parkAddress">
         {{ selectedPark.street }}<br />
         {{ selectedPark.city }},
@@ -40,11 +40,19 @@
         {{ selectedPark.zip }}
       </blockquote>
     </div>
+  </div>
 
-    <hr />
+<hr>
+
+  <div class="row">
     <div class="col-5">
       <h4>Established in {{ selectedPark.dateEstablished }}</h4>
       <blockquote>{{ selectedPark.description }}</blockquote>
+      <p>{{selectedPark.parkRatings | averageParkRating}}</p>
+
+      <!-- <app-park-rating
+        [selectedPark]="selectedPark"
+      ></app-park-rating> -->
     </div>
     <div class="col-7">
       <img
@@ -58,14 +66,37 @@
         </button></a
       >
     </div>
+  </div>
+
+<hr>
+<div class="row ">
+  <h6 style="text-align: center;">Activities Available</h6>
+  <span class="activitiesDiv">
+    <ng-container *ngFor="let activity of selectedPark?.activities">
+      <img
+        id="activity-img"
+        src="{{activity.image}}"
+        alt="{{activity.name}}"
+      />
+    </ng-container>
+  </span>
+</div>
+
+<hr>
+
+  <div class="row">
     <div class="park-comments">
       <app-park-comment
         [loggedInUser]="loggedInUser"
         [selectedPark]="selectedPark"
-        (reloadPark)= "refreshSelectedPark($event)"
+        (reloadPark)="refreshSelectedPark($event)"
       >
       </app-park-comment>
     </div>
+  </div>
+
+<hr>
+
     <div *ngIf="!selectedAttraction" class="container attraction-container">
       <div
         class="attractions"
@@ -86,9 +117,14 @@
       <app-attraction
         [selectedAttraction]="selectedAttraction"
         (deselectAtraction)="handleDeselectAttraction($event)"
+        [selectedPark] = "selectedPark"
+        [loggedInUser]="loggedInUser"
+        (reloadPark)="refreshSelectedPark($event)"
       >
       </app-attraction>
     </div>
+
+<hr>
 
     <div class="row">
       <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">
@@ -133,4 +169,4 @@
   <button class="btn btn-danger" (click)="editPark = null">Cancel</button>
   <button class="btn btn-success" (click)="updatePark(editPark)">Save</button>
 </div> -->
-</div>
+

@@ -1,8 +1,8 @@
 <h1>Gallery</h1>
 
-<select name="states" id="selectState" (change)="onOptionSelected($event)">
+<select name="states" id="selectState" (change)="onStateChange($event)">
   <option value="">Select a State</option>
-  <option *ngFor="let state of states" value="option">{{states}}</option>
+  <option *ngFor="let state of states" value="state">{{state}}</option>
 </select>
 
 <p>Selected State: {{selectedOption}}</p>

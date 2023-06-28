@@ -16,7 +16,57 @@ export class GalleryComponent implements OnInit {
 
   loggedInUser: User | null = null;
   parks: Park[] = [];
-  states: string[] = [];
+  states: string[] = [
+  'Alabama',
+  'Alaska',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'Florida',
+  'Georgia',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Lousiana',
+  'Maine',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Pennslyvania',
+  'Rhode Island',
+  'South Carolina',
+  'Tennessee',
+  'Texas',
+  'South Dakota',
+  'Utah',
+  'Vermont',
+  'Virginia',
+  'Washington',
+  'West Virgina',
+  'Wisconsin',
+  'Wyoming',];
   selectedOption: string = '';
 
 
@@ -28,7 +78,6 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit() {
     this.reload();
-    this.fetchOptions();
   }
 
   reload():void {
@@ -49,15 +98,7 @@ export class GalleryComponent implements OnInit {
     })
   }
 
-  fetchOptions(keyword?: string) {
-    // const params = keyword ? { search: keyword} : {};
-
-    // this.http.get<any>('gallery/{pid}', {params}).subscribe(response => {
-    //   this.options = response.options;
-    // });
-  }
-
-  onOptionSelected(event: any) {
+  onStateChange(event: any) {
     this.selectedOption = event.target.value;
   }
 

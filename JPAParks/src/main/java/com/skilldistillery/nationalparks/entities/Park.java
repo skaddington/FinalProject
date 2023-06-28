@@ -36,7 +36,7 @@ public class Park {
 	private String state;
 	private String zip;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"parks"})
 	@ManyToMany(mappedBy = "parks")
 	private List<Activity> activities;
 	
@@ -57,7 +57,7 @@ public class Park {
 	@JsonIgnoreProperties({"park"})
 	@OneToMany(mappedBy = "park")
 	private List<ParkComment> parkComments;
-	@JsonIgnore
+	@JsonIgnoreProperties({"park", "user"})
 	@OneToMany(mappedBy = "park")
 	private List<ParkRating> parkRatings;
 

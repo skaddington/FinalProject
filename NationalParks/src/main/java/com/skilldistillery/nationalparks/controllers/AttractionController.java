@@ -27,6 +27,15 @@ public class AttractionController {
 
 	@Autowired
 	private AttractionService attrService;
+	
+	@GetMapping("attractions/{attrId}")
+	Attraction showAttraction(@PathVariable Integer attrId, HttpServletResponse res) {
+		Attraction attraction = attrService.show(attrId);
+		if(attraction == null) {
+			res.setStatus(404);
+		}
+		return attraction;
+	}
 
 	@GetMapping("attractions/{attrId}/comments")
 	List<AttractionComment> getAttrComments(@PathVariable Integer attrId, HttpServletResponse res) {
@@ -60,7 +69,7 @@ public class AttractionController {
 	public void deleteComment(Principal principal, HttpServletResponse res, @PathVariable Integer attrId,
 			@PathVariable Integer commentId) {
 
-		if (attrService.deleteComment(principal.getName(), attrId, commentId)) {
+		if (attrService.deleteComment(commentId)) {
 			res.setStatus(204);
 		} else {
 			res.setStatus(404);
