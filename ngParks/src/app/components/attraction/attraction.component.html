@@ -22,7 +22,7 @@
           {{ comment.user.firstName }} {{ comment.user.lastName }}
         </div>
         <div class="col-2">
-          <button class="btn btn-warning" *ngIf="comment" (click)="this.selectedComment = comment">Reply</button>
+          <button class="btn btn-warning" *ngIf="comment && loggedInUser" (click)="this.selectedComment = comment">Reply</button>
         </div>
         <div class="col-2" *ngIf="this.loggedInUser?.id === comment.user.id">
           <button class="btn btn-danger" (click)="deleteComment(comment.id)">Delete</button>
@@ -37,7 +37,7 @@
                 to {{ comment.user.firstName }} {{ comment.user.lastName }}
               </div>
               <div class="col-2">
-                <button class="btn btn-warning" *ngIf="comment" (click)="this.selectedComment = reply">Reply</button>
+                <button class="btn btn-warning" *ngIf="comment && loggedInUser" (click)="this.selectedComment = reply">Reply</button>
               </div>
               <div class="col-2" *ngIf="this.loggedInUser?.id === reply.user.id">
                 <button class="btn btn-danger" (click)="deleteComment(reply.id)">Delete</button>
@@ -49,7 +49,7 @@
     </div>
   </ng-container>
 
-  <div *ngIf="!selectedComment" class="add-comment-form">
+  <div *ngIf="!selectedComment && loggedInUser" class="add-comment-form">
     <form class="row">
       <input
         type="text"
@@ -62,7 +62,7 @@
     </form>
   </div>
 
-  <div *ngIf="selectedComment">
+  <div *ngIf="selectedComment && loggedInUser">
     <form class="row">
       <input
         type="text"
