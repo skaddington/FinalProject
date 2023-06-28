@@ -1,7 +1,10 @@
 .attraction-details {
   margin-top: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid white;
+  border-radius: 10px;
   padding: 20px;
+  background-color: rgba(0, 0, 0, 0.3)
+
 }
 
 .attraction-details-container {
@@ -17,14 +20,12 @@
   margin-left: auto;
 }
 
-.attraction-img-container {
-  flex: 0 0 200px;
-  margin-right: 20px;
-}
-
-.attraction-img {
+#attraction-img {
   width: 100%;
   height: auto;
+  padding: 5px;
+  border: 3px solid white;
+  border-radius: 10px;
 }
 
 .attraction-details span {
@@ -36,40 +37,16 @@
   margin: 10px 0;
 }
 
-.attraction-comments {
-  margin-top: 20px;
+h5{
+  text-align: center;
 }
 
-.attraction-comment {
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-}
-
-.attraction-comment span {
-  font-weight: bold;
-}
-
-.attraction-comment blockquote {
-  margin: 5px 0;
-}
-
-.add-comment-form {
-  margin-top: 20px;
-}
-
-.add-comment-form input[type="text"] {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-}
-
-.add-comment-form button {
-  margin-right: 10px;
-}
-
-.attraction-comment-replies {
-  margin-left: 20px;
-  border-left: 1px solid #ccc;
-  padding-left: 10px;
+.attraction-comments{
+  display: flex;
+  align-items: center;
+  text-align: left;
+  border: 1px;
+  border-color: white;
+  border-style: solid;
+  margin-top: 10px;
 }

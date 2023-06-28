@@ -40,6 +40,9 @@
       <h5>Established in {{ selectedPark.dateEstablished }}</h5>
       <blockquote>{{ selectedPark.description }}</blockquote>
       <h4>Average Park Rating : {{ selectedPark.parkRatings | averageParkRating }}</h4>
+        <div *ngFor="let state of selectedPark.states">
+        <h4>{{state.name}}</h4>
+        </div>
     </div>
     <div class="col-7">
       <img
@@ -56,8 +59,9 @@
   </div>
 
   <hr />
+
   <div class="row">
-    <h6 style="text-align: center">Activities Available</h6>
+    <h5 style="text-align: center">Activities Available</h5>
     <span class="activitiesDiv">
       <ng-container *ngFor="let activity of selectedPark?.activities">
         <img
@@ -94,12 +98,11 @@
       </div>
       <img
         (click)="selectAttraction(attraction)"
-        class="attraction-img"
+        id="attraction-img"
         src="{{ attraction.image }}"
       />
     </div>
   </div>
-  <hr />
   <div *ngIf="selectAttraction">
     <app-attraction
       [selectedAttraction]="selectedAttraction"

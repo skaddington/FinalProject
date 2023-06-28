@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Park } from '../models/park';
 import { AuthService } from './auth.service';
@@ -11,6 +11,7 @@ import { User } from '../models/user';
 })
 export class UserService {
   private url = environment.baseUrl + 'api/users';
+  private selectedUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
   constructor(
     private http: HttpClient,
@@ -103,6 +104,15 @@ export class UserService {
       );
   }
 
+  setSelectedUser(user: User | null) {
+    this.selectedUserSubject.next(user);
+  }
+
+  getSelectedUser(): Observable<User | null> {
+    return this.selectedUserSubject.asObservable();
+  }
+
+}
   // destroy(todoId: number): Observable<void> {
   //   return this.http
   //     .delete<void>(this.url + '/' + todoId, this.getHttpOptions())
@@ -116,4 +126,3 @@ export class UserService {
   //       })
   //     );
   // }
-}

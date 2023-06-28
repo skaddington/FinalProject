@@ -23,7 +23,11 @@ export class UserComponent {
     private authService:AuthService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.userService.getSelectedUser().subscribe(selectedUser => {
+      this.selectedUser = selectedUser;
+    });
+  }
 
   ngOnInit() {
     let idString = this.route.snapshot.paramMap.get('id');
