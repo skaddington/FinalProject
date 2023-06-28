@@ -10,6 +10,7 @@ import { State } from 'src/app/models/state';
 import { User } from 'src/app/models/user';
 import { StatePipe } from 'src/app/pipes/state.pipe';
 import { ParkService } from 'src/app/services/park.service';
+import { StateService } from 'src/app/services/state.service';
 import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 
@@ -82,6 +83,7 @@ export class ParkComponent {
   ];
 
   constructor(
+    private stateService:StateService,
     private parkService: ParkService,
     private statePipe: StatePipe,
     private route: ActivatedRoute,

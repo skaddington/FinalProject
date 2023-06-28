@@ -5,7 +5,7 @@ import com.skilldistillery.nationalparks.entities.AttractionComment;
 
 public interface AttractionService {
 
-	boolean deleteComment(String username, int attrId, int attrCommentId);
+//	boolean deleteComment(String username, int attrId, int attrCommentId);
 
 	AttractionComment addCommentToAttraction(String username, int attrId, AttractionComment attrComment);
 
@@ -13,6 +13,8 @@ public interface AttractionService {
 
 	AttractionComment addReplyAttractionComment(String username, int attrId, int attrCommentId,
 			AttractionComment attrComReply);
+
+	boolean deleteComment(int attrCommentId);
 	
 	
 	
