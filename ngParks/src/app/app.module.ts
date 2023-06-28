@@ -26,6 +26,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { NgPipesModule } from 'ngx-pipes';
 import { ParkRatingComponent } from './components/park-rating/park-rating.component';
 import { AverageParkRatingPipe } from './pipes/average-park-rating.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { AverageParkRatingPipe } from './pipes/average-park-rating.pipe';
     NgbModule,
     NgPipesModule
   ],
-  providers: [AuthService, StatePipe],
+  providers: [AuthService, StatePipe, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,30 +1,21 @@
 <div *ngIf="!selectedPark" id="parkTableDiv" class="container">
-  :
   <span *ngFor="let state of states" (click)="selectedState = state"
-    >{{ state }} :
-  </span>
-  <table class="table table-striped table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Park</th>
-        <th>Park Photo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let park of parks | state : selectedState">
-        <td>{{ park.id }}</td>
-        <td (click)="displayParkDetails(park)">{{ park.name }}</td>
-        <td (click)="displayParkDetails(park)">
-          <img
-            id="allParksTablePhoto"
-            src="{{ park.image }}"
-            alt="Photo of {{ park.name }}"
-          />
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    >{{ state }} :</span
+  >
+  <div class="parks-container">
+    <div class="parks" *ngFor="let park of parks | state : selectedState">
+      <div class="parks-header">
+        <p (click)="displayParkDetails(park)">{{ park.name }}</p>
+      </div>
+      <img
+        class="parks-img"
+        (click)="displayParkDetails(park)"
+        id="allParksTablePhoto"
+        src="{{ park.image }}"
+        alt="Photo of {{ park.name }}"
+      />
+    </div>
+  </div>
 </div>
 
 <div *ngIf="selectedPark && !editPark" id="parkDetailsDiv" class="container">
@@ -42,17 +33,13 @@
     </div>
   </div>
 
-<hr>
+  <hr />
 
   <div class="row">
     <div class="col-5">
-      <h4>Established in {{ selectedPark.dateEstablished }}</h4>
+      <h5>Established in {{ selectedPark.dateEstablished }}</h5>
       <blockquote>{{ selectedPark.description }}</blockquote>
-      <p>{{selectedPark.parkRatings | averageParkRating}}</p>
-
-      <!-- <app-park-rating
-        [selectedPark]="selectedPark"
-      ></app-park-rating> -->
+      <h4>Average Park Rating : {{ selectedPark.parkRatings | averageParkRating }}</h4>
     </div>
     <div class="col-7">
       <img
@@ -68,21 +55,21 @@
     </div>
   </div>
 
-<hr>
-<div class="row ">
-  <h6 style="text-align: center;">Activities Available</h6>
-  <span class="activitiesDiv">
-    <ng-container *ngFor="let activity of selectedPark?.activities">
-      <img
-        id="activity-img"
-        src="{{activity.image}}"
-        alt="{{activity.name}}"
-      />
-    </ng-container>
-  </span>
-</div>
+  <hr />
+  <div class="row">
+    <h6 style="text-align: center">Activities Available</h6>
+    <span class="activitiesDiv">
+      <ng-container *ngFor="let activity of selectedPark?.activities">
+        <img
+          id="activity-img"
+          src="{{ activity.image }}"
+          alt="{{ activity.name }}"
+        />
+      </ng-container>
+    </span>
+  </div>
 
-<hr>
+  <hr />
 
   <div class="row">
     <div class="park-comments">
@@ -95,63 +82,63 @@
     </div>
   </div>
 
-<hr>
+  <hr />
 
-    <div *ngIf="!selectedAttraction" class="container attraction-container">
-      <div
-        class="attractions"
-        *ngFor="let attraction of selectedPark.attractions"
-      >
-        <div class="attraction-card-header">
-          <span>{{ attraction.name }}</span>
-        </div>
-        <img
-          (click)="selectAttraction(attraction)"
-          class="attraction-img"
-          src="{{ attraction.image }}"
-        />
+  <div *ngIf="!selectedAttraction" class="container attraction-container">
+    <div
+      class="attractions"
+      *ngFor="let attraction of selectedPark.attractions"
+    >
+      <div class="attraction-card-header">
+        <span>{{ attraction.name }}</span>
       </div>
-    </div>
-    <hr />
-    <div *ngIf="selectAttraction">
-      <app-attraction
-        [selectedAttraction]="selectedAttraction"
-        (deselectAtraction)="handleDeselectAttraction($event)"
-        [selectedPark] = "selectedPark"
-        [loggedInUser]="loggedInUser"
-        (reloadPark)="refreshSelectedPark($event)"
-      >
-      </app-attraction>
-    </div>
-
-<hr>
-
-    <div class="row">
-      <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">
-        <button class="btn btn-success" id="editButton" (click)="setEditPark()">
-          Edit Park Information
-        </button>
-      </div>
-      <div class="col" *ngIf="loggedInUser">
-        <app-add-to-favorites
-          [selectedPark]="selectedPark"
-          [loggedInUser]="loggedInUser"
-        >
-        </app-add-to-favorites>
-      </div>
-      <div class="col">
-        <button
-          class="btn btn-primary"
-          id="backButton"
-          (click)="displayParkTable()"
-        >
-          Back To All Parks
-        </button>
-      </div>
+      <img
+        (click)="selectAttraction(attraction)"
+        class="attraction-img"
+        src="{{ attraction.image }}"
+      />
     </div>
   </div>
+  <hr />
+  <div *ngIf="selectAttraction">
+    <app-attraction
+      [selectedAttraction]="selectedAttraction"
+      (deselectAtraction)="handleDeselectAttraction($event)"
+      [selectedPark]="selectedPark"
+      [loggedInUser]="loggedInUser"
+      (reloadPark)="refreshSelectedPark($event)"
+    >
+    </app-attraction>
+  </div>
 
-  <!-- <div *ngIf="editPark" id="parkEditDiv" class="container">
+  <hr />
+
+  <div class="row">
+    <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">
+      <button class="btn btn-success" id="editButton" (click)="setEditPark()">
+        Edit Park Information
+      </button>
+    </div>
+    <div class="col" *ngIf="loggedInUser">
+      <app-add-to-favorites
+        [selectedPark]="selectedPark"
+        [loggedInUser]="loggedInUser"
+      >
+      </app-add-to-favorites>
+    </div>
+    <div class="col">
+      <button
+        class="btn btn-primary"
+        id="backButton"
+        (click)="displayParkTable()"
+      >
+        Back To All Parks
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- <div *ngIf="editPark" id="parkEditDiv" class="container">
   <label for="task">Task : </label>
   <input type="text" name="task" [(ngModel)]="editPark.task" /><br />
   <label for="description">Description : </label>
@@ -169,4 +156,3 @@
   <button class="btn btn-danger" (click)="editPark = null">Cancel</button>
   <button class="btn btn-success" (click)="updatePark(editPark)">Save</button>
 </div> -->
-
