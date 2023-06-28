@@ -5,6 +5,7 @@ import { Park } from 'src/app/models/park';
 import { ParkPhoto } from 'src/app/models/park-photo';
 import { User } from 'src/app/models/user';
 import { ParkPhotosService } from 'src/app/services/park-photos.service';
+import { state } from '@angular/animations';
 
 
 @Component({
@@ -68,6 +69,7 @@ export class GalleryComponent implements OnInit {
   'Wisconsin',
   'Wyoming',];
   selectedOption: string = '';
+  parkPhotos: ParkPhoto[] = [];
 
 
   constructor(
@@ -81,25 +83,29 @@ export class GalleryComponent implements OnInit {
   }
 
   reload():void {
-    this.parkService.index().subscribe({
-      next: (parkList) => {
-        this.parks = parkList;
-      },
-      error: (boo) => {
-        console.error('ParkPhotoComponent.reload(): error loading Park Photos');
-        console.error(boo);
-      }
-    })
   }
 
-  displayParkPhotos() {
-    this.parkPhotosService.getParkPhotos().subscribe((data: Park[]) => {
-      this.parks = data;
-    })
+  // getParkPicturesByState(state: string): void {
+  //   this.parkPhotosService.show(state).subscribe((data: any) => {
+  //     this.parkPhoto = data;
+  //   })
+  // }
+
+  getParkPhotos(stateName:string) {
+    this.parkPhotosService.show(stateName).subscribe({
+      next: (parkPhotoList) => {
+        this.parkPhotos = parkPhotoList;
+      },
+      error: (problem) => {
+        console.error('ParkComponent.reload(): error loading Parks');
+        console.error(problem);
+      },
+    });
   }
 
   onStateChange(event: any) {
     this.selectedOption = event.target.value;
+    this.getParkPhotos(this.selectedOption);
   }
 
 }

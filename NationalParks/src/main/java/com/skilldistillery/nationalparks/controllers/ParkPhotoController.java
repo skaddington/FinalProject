@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.nationalparks.entities.ParkPhoto;
+import com.skilldistillery.nationalparks.repositories.ParkPhotoRepository;
 import com.skilldistillery.nationalparks.services.ParkPhotoService;
 
 @RestController
@@ -29,9 +30,8 @@ public class ParkPhotoController {
 		return parkPhotoService.index();
 	}
 	
-	@GetMapping("gallery/{pid}")
-	public List<ParkPhoto> filterByState(@RequestParam String keyword) {
-		List<ParkPhoto> filter = parkPhotoService.filterOptions(keyword);
-		return filter;
+	@GetMapping("gallery/{state}")
+	public List<ParkPhoto> getPicturesByState(@PathVariable String state) {
+		return parkPhotoService.getPicturesByPark_State_Name(state);
 	}
 }
