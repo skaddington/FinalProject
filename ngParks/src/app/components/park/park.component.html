@@ -58,7 +58,7 @@
   <hr />
 
   <div class="row">
-    <h6 style="text-align: center">Activities Available</h6>
+    <h5 style="text-align: center">Activities Available</h5>
     <span class="activitiesDiv">
       <ng-container *ngFor="let activity of selectedPark?.activities">
         <img
@@ -95,7 +95,7 @@
       </div>
       <img
         (click)="selectAttraction(attraction)"
-        class="attraction-img"
+        id="attraction-img"
         src="{{ attraction.image }}"
       />
     </div>

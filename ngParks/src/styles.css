@@ -22,6 +22,7 @@ border-width: 3px;
   margin: 15px;
   padding: 10px;
   display: flex;
+  border-radius: 5px;
 }
 
 .navbar {
@@ -36,22 +37,22 @@ blockquote{
   background-color: rgba(0, 0, 0, 0.3);
   padding: 10px;
   text-align: center;
-  border: none;
-  border-radius: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
 #allParksTablePhoto, #allUsersTablePhoto, #detailsUserPhoto{
   width: 250px;
   padding: 5px;
-  border-style: ridge;
-  border-width: 2px;
+  border: 3px solid white;
+  border-radius: 5px;
 }
 
 #detailsParkPhoto {
   width: 100%;
   padding: 5px;
-  border-style: ridge;
-  border-width: 2px;
+  border: 3px solid white;
+  border-radius: 5px;
   margin-bottom: 5px;
 }
 
@@ -66,4 +67,9 @@ blockquote{
 
 tr,td {
   text-align: center;
+}
+
+input{
+  border: none;
+  border-radius: 5px;
 }

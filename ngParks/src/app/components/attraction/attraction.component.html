@@ -1,19 +1,19 @@
 <div *ngIf="selectedAttraction" class="attraction-details">
   <div class="attraction-details-container row">
     <div class="col-7">
-      <img class="attraction-img" src="{{ selectedAttraction.image }}" />
+      <img id="attraction-img" src="{{ selectedAttraction.image }}" />
     </div>
     <div class="col-5">
       <h5>{{ selectedAttraction.name }}</h5>
       <blockquote>{{ selectedAttraction.description }}</blockquote>
       <a target="_blank" href="{{ selectedAttraction.website }}"><button class="btn btn-info" id="websiteButton">Visit their Website</button></a>
-      <button class="btn btn-danger" id="backButton" (click)="displayAllAttractions()">Back to Park Details</button>
+      <button class="btn btn-danger" id="backButton" (click)="displayAllAttractions()">Display All Attractions</button>
     </div>
   </div>
 
 <hr>
 
-  <h6>User Comments about this Place</h6>
+  <h5>User Comments about this Place</h5>
     <ng-container *ngFor="let comment of selectedAttraction.attractionComments">
       <div *ngIf="comment.comment === null && comment.enabled" class="attraction-comment">
       <blockquote class="row attraction-comments">
