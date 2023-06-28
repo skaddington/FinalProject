@@ -11,6 +11,9 @@
     <ng-container *ngIf="comment.replies && comment.replies.length > 0">
       <div class="nested-replies">
         <ng-container *ngFor="let reply of comment.replies">
+  <!-- <app-comment [reply]="reply"> -->
+
+
           <div *ngIf="reply.enabled" class="park-reply">
             {{ reply.id }}
             <span>{{ reply.user.firstName }}</span> Replying to <span>{{ comment.user.firstName }}</span>
@@ -26,7 +29,7 @@
                   {{ nestedReply.id }}
                   <span>{{ nestedReply.user.firstName }}</span> Replying to <span>{{ reply.user.firstName }}</span>
                   <blockquote>{{ nestedReply.content }}</blockquote>
-                  <!-- <button *ngIf="nestedReply" (click)="selectedComment = nestedReply">Reply</button> -->
+                   <button *ngIf="nestedReply" (click)="selectedComment = nestedReply">Reply</button>
                   <div *ngIf="loggedInUser?.id === nestedReply.user.id">
                     <button (click)="deleteComment(nestedReply.id)">Delete</button>
                   </div>
