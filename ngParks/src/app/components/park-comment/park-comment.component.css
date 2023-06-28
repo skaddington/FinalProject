@@ -1,0 +1,10 @@
+.park-comments{
+  display: flex;
+  align-items: center;
+  text-align: left;
+  border: 1px;
+  border-color: white;
+  border-style: solid;
+  margin-top: 10px;
+}
+
