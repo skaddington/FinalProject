@@ -26,18 +26,20 @@
           {{ user.firstName }} {{ user.lastName }}
         </td>
         <td (click)="displayUserDetails(user)">{{ user.username }}</td>
-        <td *ngIf="loggedInUser?.role === 'ADMIN'">
+        <td *ngIf="loggedInUser?.role === 'ADMIN' || loggedInUser?.id === user.id">
           <button *ngIf="user.enabled && user.role != 'ADMIN'" class="btn btn-danger" (click)="disableUser(user)">Disable
           </button>
-          <button *ngIf="!user.enabled && user.role != 'ADMIN'" class="btn btn-success" (click)="enableUser(user)">Enable
+          <button *ngIf="!user.enabled && user.role != 'ADMIN'" class="btn btn-success" (click)="disableUser(user)">Enable
           </button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
-
-<div *ngIf="selectedUser && !editUser" id="selectedUserDetailsDiv" class="container">
+<div *ngIf="selectedUser && !selectedUser.enabled && !editUser">
+  <span>This User Is No Longer Active</span>
+</div>
+<div *ngIf="selectedUser && selectedUser.enabled && !editUser" id="selectedUserDetailsDiv" class="container">
   <div class="row">
       <div class="col-8">
          <h1>User Page</h1>
