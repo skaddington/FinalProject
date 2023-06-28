@@ -1,20 +1,27 @@
-<div id="homeTableDiv" class="container">
-  <h2>Welcome to Parks Website:</h2>
+<div id="homeDiv" class="container">
+  <div class="row">
+    <h1>Travel the U.S. National Parks</h1>
+  </div>
+  <hr>
+  <div class="row homeIntroDiv">
+    <h5>Want to visit a National Park, but are unsure if it's worth the trip?</h5>
+    <h2>We're here to help!</h2>
+    <div class="col-4">
+      <blockquote>Browse through the National Parks of the United States and see what other visitors have said about a park, its available activities, and other places to go nearby.</blockquote>
+    </div>
+    <div class="col-4">
+      <blockquote>Create an account and share your experiences through photos, ratings, comments boards, and recommendations!</blockquote>
+    </div>
+    <div class="col-4">
+      <blockquote>Already have an account? Interact with other registered users!</blockquote>
+    </div>
+  </div>
 
-  <ul>
-    <li>Explore National Parks.</li>
-    <li>Find Local Shops and Attactions.</li>
-    <li>
-      Registered Users can Share their photos, local experinces, and socialize
-      with other users.
-    </li>
-  </ul>
 </div>
 
-<hr />
+<hr>
 
-
-  <ngb-carousel *ngIf="parks">
+  <ngb-carousel [interval]="0" *ngIf="parks">
     <ng-template
       ngbSlide
       carousel-item
@@ -24,24 +31,23 @@
     >
       <div class="cards-wrapper">
         <div
-          class="card {{ i == 0 ? 'active' : 'd-none d-md-block' }}"
+          id="carouselPhoto"
+          class= "card col {{ i == 0 ? 'active' : 'd-none d-md-block' }}"
           *ngFor="let park of chunk; let i = index"
           (click)="displayParkDetails(park)"
         >
-          <div *ngIf="selectedPark">
-            <app-park [selectedPark]="selectedPark"></app-park>
-          </div>
+
           <img
             src="{{ park.image }}"
             class="d-block"
             alt="Photo of {{ park.name }}"
           />
-          <div class="carousel-caption d-md-block">
-            <h5>{{ park.name }}</h5>
+          <div class="carousel-caption d-block">
+            <h6>{{ park.name }}</h6>
           </div>
         </div>
       </div>
     </ng-template>
   </ngb-carousel>
 
-<hr />
+<hr>
