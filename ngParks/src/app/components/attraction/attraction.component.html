@@ -1,78 +1,78 @@
 <div *ngIf="selectedAttraction" class="attraction-details">
-  <div class="attraction-details-container">
-    <button (click)="displayAllAttractions()">x</button>
-    <div class="attraction-img-container">
+  <div class="attraction-details-container row">
+    <div class="col-7">
       <img class="attraction-img" src="{{ selectedAttraction.image }}" />
     </div>
-    <div>
-      <span>{{ selectedAttraction.name }}</span>
+    <div class="col-5">
+      <h5>{{ selectedAttraction.name }}</h5>
       <blockquote>{{ selectedAttraction.description }}</blockquote>
-      <button class="btn btn-btn-danger">
-        <a target="_blank" href="{{ selectedAttraction.website }}"
-          >Go To Website</a
-        >
-      </button>
+      <a target="_blank" href="{{ selectedAttraction.website }}"><button class="btn btn-info" id="websiteButton">Visit their Website</button></a>
+      <button class="btn btn-danger" id="backButton" (click)="displayAllAttractions()">Back to Park Details</button>
     </div>
   </div>
-  <div class="attraction-comments">
-    <div *ngFor="let comment of selectedAttraction.attractionComments">
-      <div
-        *ngIf="comment.comment === null && comment.enabled"
-        class="attraction-comment"
-      >
-        <span>{{ comment.user.firstName }}</span>
-        <blockquote>{{ comment.content }}</blockquote>
-        <button *ngIf="comment" (click)="this.selectedComment = comment">
-          Reply
-        </button>
-        <div *ngIf="this.loggedInUser?.id === comment.user.id">
-          <button (click)="deleteComment(comment.id)">Delete</button>
-        </div>
-      </div>
 
-      <div
-        class="attraction-comment-replies"
-        *ngFor="let reply of comment.replies"
-      >
-        <ng-container *ngIf="reply.enabled">
-          <span>{{ reply.user.firstName }}</span> Replying To
-          <span>{{ reply.comment?.user?.firstName }}</span>
-          <blockquote>{{ reply.content }}</blockquote>
-          <button *ngIf="comment" (click)="this.selectedComment = reply">
-            Reply
-          </button>
-          <div *ngIf="this.loggedInUser?.id === reply.user.id">
-            <button (click)="deleteComment(reply.id)">Delete</button>
-          </div>
-        </ng-container>
-      </div>
+<hr>
+
+  <h6>User Comments about this Place</h6>
+    <ng-container *ngFor="let comment of selectedAttraction.attractionComments">
+      <div *ngIf="comment.comment === null && comment.enabled" class="attraction-comment">
+      <blockquote class="row attraction-comments">
+        <div class="col-8">
+          "{{ comment.content }}"
+          {{ comment.user.firstName }} {{ comment.user.lastName }}
+        </div>
+        <div class="col-2">
+          <button class="btn btn-warning" *ngIf="comment" (click)="this.selectedComment = comment">Reply</button>
+        </div>
+        <div class="col-2" *ngIf="this.loggedInUser?.id === comment.user.id">
+          <button class="btn btn-danger" (click)="deleteComment(comment.id)">Delete</button>
+        </div>
+
+        <div class="attraction-comment-replies" *ngFor="let reply of comment.replies">
+          <ng-container *ngIf="reply.enabled">
+            <blockquote class="row attraction-comments">
+              <div class="col-8">
+                {{ reply.content }} <br />
+                {{ reply.user.firstName }} {{ reply.user.lastName }} replied
+                to {{ comment.user.firstName }} {{ comment.user.lastName }}
+              </div>
+              <div class="col-2">
+                <button class="btn btn-warning" *ngIf="comment" (click)="this.selectedComment = reply">Reply</button>
+              </div>
+              <div class="col-2" *ngIf="this.loggedInUser?.id === reply.user.id">
+                <button class="btn btn-danger" (click)="deleteComment(reply.id)">Delete</button>
+              </div>
+            </blockquote>
+          </ng-container>
+        </div>
+      </blockquote>
     </div>
-  </div>
+  </ng-container>
 
   <div *ngIf="!selectedComment" class="add-comment-form">
-    <form>
+    <form class="row">
       <input
         type="text"
         name="content"
         [(ngModel)]="comment.content"
         placeholder="Leave a comment"
-        class="form-control"
+        class="col-8"
       />
-      <button (click)="addComment()">Submit</button>
+      <button class="btn btn-success col-4" (click)="addComment()">Submit</button>
     </form>
   </div>
 
   <div *ngIf="selectedComment">
-    <form>
+    <form class="row">
       <input
         type="text"
         name="content"
         [(ngModel)]="comment.content"
         placeholder="Replying to {{ selectedComment.user.firstName }}"
-        class="form-control"
+        class="col-8"
       />
-      <button (click)="addReplyComment()">Submit</button>
-      <button (click)="selectedComment = null">Cancel</button>
+      <button class="btn btn-success col-2" (click)="addReplyComment()">Submit</button>
+      <button class="btn btn-danger col-2" (click)="selectedComment = null">Cancel</button>
     </form>
   </div>
 </div>

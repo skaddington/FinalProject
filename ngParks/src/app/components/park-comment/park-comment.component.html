@@ -95,20 +95,20 @@
 </ng-container>
 
 <div *ngIf="!selectedComment && loggedInUser" class="add-comment-form">
-  <form class="form">
+  <form class="row">
     <input
       type="text"
       name="content"
       [(ngModel)]="comment.content"
       placeholder="Leave a comment about the Park"
-      class="form-control"
+      class="col-8"
     />
-    <button class="btn btn-success" (click)="addComment()">Submit</button>
+    <button class="btn btn-success col-4" (click)="addComment()">Submit</button>
   </form>
 </div>
 
 <div *ngIf="selectedComment && loggedInUser">
-  <form>
+  <form class="row">
     <input
       type="text"
       name="content"
@@ -116,10 +116,10 @@
       placeholder="Replying to {{ selectedComment.user.firstName }} {{
         selectedComment.user.lastName
       }}"
-      class="form-control"
+      class="col-8"
     />
-    <button class="btn btn-success" (click)="addReplyComment()">Submit</button>
-    <button class="btn btn-danger" (click)="selectedComment = null">
+    <button class="btn btn-success col-2" (click)="addReplyComment()">Submit</button>
+    <button class="btn btn-danger col-2" (click)="selectedComment = null">
       Cancel
     </button>
   </form>
