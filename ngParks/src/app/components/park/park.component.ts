@@ -90,7 +90,11 @@ export class ParkComponent {
     private router: Router,
     private authService: AuthService,
     private userService: UserService
-  ) {}
+  ) {
+    this.parkService.getSelectedPark().subscribe(selectedPark => {
+      this.selectedPark = selectedPark;
+    });
+}
 
   checkUser(): User | null {
     this.authService.getLoggedInUser().subscribe({
@@ -135,6 +139,8 @@ export class ParkComponent {
       },
     });
   }
+
+
 
   displayParkDetails(park: Park) {
     return (this.selectedPark = park);

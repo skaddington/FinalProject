@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Park } from '../models/park';
 import { AuthService } from './auth.service';
@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 })
 export class ParkService {
   private url = environment.baseUrl + 'api/parks';
+  private selectedParkSubject: BehaviorSubject<Park | null> = new BehaviorSubject<Park | null>(null);
 
   constructor(
     private http: HttpClient,
@@ -39,6 +40,7 @@ export class ParkService {
       );
   }
 
+
   show(parkId: number): Observable<Park> {
     return this.http
       .get<Park>(this.url + '/' + parkId)
@@ -64,6 +66,15 @@ export class ParkService {
           );
         })
       );
+  }
+
+
+  setSelectedPark(park: Park | null) {
+    this.selectedParkSubject.next(park);
+  }
+
+  getSelectedPark(): Observable<Park | null> {
+    return this.selectedParkSubject.asObservable();
   }
 
 }

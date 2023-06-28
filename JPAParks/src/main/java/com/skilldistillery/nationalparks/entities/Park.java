@@ -44,7 +44,6 @@ public class Park {
 	@OneToMany(mappedBy = "park")
 	private List<Attraction> attractions;
 	
-	//@JsonIgnore
 	@JsonIgnoreProperties({"parks"})
 	@ManyToMany(mappedBy = "parks")
 	private List<State> states;

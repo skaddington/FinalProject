@@ -29,8 +29,8 @@ public class Activity {
 	
 	@ManyToMany
 	@JoinTable(name = "park_has_activity", 
-	joinColumns = @JoinColumn(name = "park_id"), 
-	inverseJoinColumns = @JoinColumn(name = "activity_id"))
+	joinColumns = @JoinColumn(name = "activity_id"), 
+	inverseJoinColumns = @JoinColumn(name = "park_id"))
 	private List<Park> parks;
 
 	public Activity() {

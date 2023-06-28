@@ -4,7 +4,7 @@
       <button class="btn btn-success" type="button">Home</button></a
     >
     <a [routerLink]="['/parks']" class="nav-link">
-      <button class="btn btn-primary" type="button">Parks</button></a
+      <button class="btn btn-primary" type="button" (click)="clearSelectedPark()">Parks</button></a
     >
     <a [routerLink]="['/gallery']" class="nav-link">
       <button class="btn btn-primary" type="button">Gallery</button></a
@@ -13,7 +13,7 @@
       <button class="btn btn-info" type="button"*ngIf="!checkLoginStatus()">Register</button></a
     >
     <a [routerLink]="['/users']" class="nav-link">
-      <button class="btn btn-warning" type="button"*ngIf="checkLoginStatus()">User Page</button></a
+      <button (click)="clearSelectedUser()" class="btn btn-warning" type="button"*ngIf="checkLoginStatus()">User Page</button></a
     >
     <app-login *ngIf="!checkLoginStatus()" (loginSuccess)="handleLoginSuccess($event)">Login</app-login>
 
