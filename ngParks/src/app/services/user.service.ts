@@ -64,6 +64,20 @@ export class UserService {
   //   );
   // }
 
+
+  toggle(user: User): Observable<User> {
+    return this.http
+      .delete<User>(this.url + '/' + user.id, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.error(err);
+          return throwError(
+            () => new Error('UserService.update(): error updating User: ' + err)
+          );
+        })
+      );
+  }
+
   update(user: User): Observable<User> {
     return this.http
       .put<User>(this.url + '/' + user.id, user, this.getHttpOptions())
