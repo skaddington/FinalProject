@@ -35,3 +35,25 @@
   grid-auto-rows: minmax(500px, auto);
 
 }
+
+.parkDetailsHeader{
+  display: flex;
+  justify-content: space-between;
+}
+
+#parkAddress {
+  text-align: right;
+}
+
+.activitiesDiv{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: 10px;
+}
+
+#activity-img{
+  max-width: 50px;
+}

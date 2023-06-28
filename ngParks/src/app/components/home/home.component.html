@@ -1,8 +1,9 @@
-<div id="homeDiv" class="container">
   <div class="row">
     <h1>Travel the U.S. National Parks</h1>
   </div>
-  <hr>
+
+<hr>
+
   <div class="row homeIntroDiv">
     <h5>Want to visit a National Park, but are unsure if it's worth the trip?</h5>
     <h2>We're here to help!</h2>
@@ -16,9 +17,7 @@
       <blockquote>Already have an account? Interact with other registered users!</blockquote>
     </div>
   </div>
-
-</div>
-
+  
 <hr>
 
   <ngb-carousel [interval]="0" *ngIf="parks">
@@ -32,7 +31,7 @@
       <div class="cards-wrapper">
         <div
           id="carouselPhoto"
-          class= "card col {{ i == 0 ? 'active' : 'd-none d-md-block' }}"
+          class= "card {{ i == 0 ? 'active' : 'd-none d-md-block' }}"
           *ngFor="let park of chunk; let i = index"
           (click)="displayParkDetails(park)"
         >

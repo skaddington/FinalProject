@@ -23,6 +23,7 @@ import { AttractionComponent } from './components/attraction/attraction.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ParkCommentComponent } from './components/park-comment/park-comment.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
+import { ParkRatingComponent } from './components/park-rating/park-rating.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { GalleryComponent } from './components/gallery/gallery.component';
     FooterComponent,
     TeamComponent,
     ParkCommentComponent,
-    GalleryComponent
+    GalleryComponent,
+    ParkRatingComponent
   ],
   imports: [
     BrowserModule,
