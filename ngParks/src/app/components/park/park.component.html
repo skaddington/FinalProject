@@ -48,9 +48,11 @@
     <div class="col-5">
       <h4>Established in {{ selectedPark.dateEstablished }}</h4>
       <blockquote>{{ selectedPark.description }}</blockquote>
-      <app-park-rating
+      <p>{{selectedPark.parkRatings | averageParkRating}}</p>
+
+      <!-- <app-park-rating
         [selectedPark]="selectedPark"
-      ></app-park-rating>
+      ></app-park-rating> -->
     </div>
     <div class="col-7">
       <img

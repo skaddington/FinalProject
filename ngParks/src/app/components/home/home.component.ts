@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
       next: (parkList) => {
         this.parks = this.chunks(parkList, 3);
         // this.parks = parkList;
-        console.log(this.parks);
+        // console.log(this.parks);
       },
       error: (problem) => {
         console.error('HomeComponent.reloadCarousel(): error loading Parks');
