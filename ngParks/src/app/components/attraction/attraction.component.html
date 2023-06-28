@@ -1,50 +1,78 @@
-<button class="offset-10" (click)="displayAllAttractions()">x</button>
 <div *ngIf="selectedAttraction" class="attraction-details">
-  <img src="{{selectedAttraction.image}}">
-  <span>{{selectedAttraction.name}}</span>
-  <blockquote>{{selectedAttraction.description}}</blockquote>
-  <a target="_blank" href="{{selectedAttraction.website}}"><button class="btn btn-btn-success">Go To Website</button></a>
-
-
+  <div class="container">
+    <button class="btn btn-btn-danger offset-10" (click)="displayAllAttractions()">x</button>
+    <div class="attraction-img-container">
+      <img class="attraction-img" src="{{ selectedAttraction.image }}" />
+    </div>
+    <div class="offset-6">
+      <span>{{ selectedAttraction.name }}</span>
+      <blockquote>{{ selectedAttraction.description }}</blockquote>
+      <button class="btn btn-btn-danger">
+        <a target="_blank" href="{{ selectedAttraction.website }}"
+          >Go To Website</a
+        >
+      </button>
+    </div>
+  </div>
   <div class="attraction-comments">
     <div *ngFor="let comment of selectedAttraction.attractionComments">
-      <div *ngIf="comment.comment===null" class="attraction-comment">
-      <span>{{comment.user.firstName}}</span>
-      <blockquote>{{comment.content}}</blockquote>
-      <button *ngIf="comment" (click)="this.replyToComment = comment">Reply</button>
-    </div>
-      <div class="attraction-comment-replies" *ngFor="let reply of comment.replies">
-        <span>{{reply.user.firstName}}</span> Replying To <span>{{reply.comment?.user?.firstName}}</span>
-      <blockquote>{{reply.content}}</blockquote>
-      <button *ngIf="comment" (click)="this.replyToComment = reply">Reply</button>
+      <div
+        *ngIf="comment.comment === null && comment.enabled"
+        class="attraction-comment"
+      >
+        <span>{{ comment.user.firstName }}</span>
+        <blockquote>{{ comment.content }}</blockquote>
+        <button *ngIf="comment" (click)="this.selectedComment = comment">
+          Reply
+        </button>
+        <div *ngIf="this.loggedInUser?.id === comment.user.id">
+          <button (click)="deleteComment(comment.id)">Delete</button>
+        </div>
+      </div>
+
+      <div
+        class="attraction-comment-replies"
+        *ngFor="let reply of comment.replies"
+      >
+        <ng-container *ngIf="reply.enabled">
+          <span>{{ reply.user.firstName }}</span> Replying To
+          <span>{{ reply.comment?.user?.firstName }}</span>
+          <blockquote>{{ reply.content }}</blockquote>
+          <button *ngIf="comment" (click)="this.selectedComment = reply">
+            Reply
+          </button>
+          <div *ngIf="this.loggedInUser?.id === reply.user.id">
+            <button (click)="deleteComment(reply.id)">Delete</button>
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>
-</div>
 
-<div *ngIf="!replyToComment" class="add-comment-form">
-  <form>
-    <input
-      type="text"
-      name="content"
-      [(ngModel)]="comment.content"
-      placeholder="Leave a comment"
-      class="form-control"
-    />
-    <button (click)="addComment()">Submit</button>
-  </form>
-</div>
+  <div *ngIf="!selectedComment" class="add-comment-form">
+    <form>
+      <input
+        type="text"
+        name="content"
+        [(ngModel)]="comment.content"
+        placeholder="Leave a comment"
+        class="form-control"
+      />
+      <button (click)="addComment()">Submit</button>
+    </form>
+  </div>
 
-<div *ngIf="replyToComment">
-  <form>
-    <input
-      type="text"
-      name="content"
-      [(ngModel)]="comment.content"
-      placeholder="Replying to {{replyToComment.user.firstName}}"
-      class="form-control"
-    />
-    <button (click)="addReplyComment()">Submit</button>
-    <button (click)="replyToComment=null">Cancel</button>
-  </form>
+  <div *ngIf="selectedComment">
+    <form>
+      <input
+        type="text"
+        name="content"
+        [(ngModel)]="comment.content"
+        placeholder="Replying to {{ selectedComment.user.firstName }}"
+        class="form-control"
+      />
+      <button (click)="addReplyComment()">Submit</button>
+      <button (click)="selectedComment = null">Cancel</button>
+    </form>
+  </div>
 </div>

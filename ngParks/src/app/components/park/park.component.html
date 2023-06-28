@@ -87,7 +87,7 @@
       <app-park-comment
         [loggedInUser]="loggedInUser"
         [selectedPark]="selectedPark"
-        (reloadPark)= "refreshSelectedPark($event)"
+        (reloadPark)="refreshSelectedPark($event)"
       >
       </app-park-comment>
     </div>
@@ -115,6 +115,9 @@
       <app-attraction
         [selectedAttraction]="selectedAttraction"
         (deselectAtraction)="handleDeselectAttraction($event)"
+        [selectedPark] = "selectedPark"
+        [loggedInUser]="loggedInUser"
+        (reloadPark)="refreshSelectedPark($event)"
       >
       </app-attraction>
     </div>

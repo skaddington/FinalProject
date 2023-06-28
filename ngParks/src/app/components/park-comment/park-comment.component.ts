@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Park } from 'src/app/models/park';
 import { ParkComment } from 'src/app/models/park-comment';
 import { User } from 'src/app/models/user';
@@ -9,14 +9,21 @@ import { ParkCommentService } from 'src/app/services/park-comment.service';
   templateUrl: './park-comment.component.html',
   styleUrls: ['./park-comment.component.css'],
 })
-export class ParkCommentComponent {
+export class ParkCommentComponent implements OnInit {
   @Input() loggedInUser: User | null = null;
   @Input() selectedPark: Park | null = null;
   comment: ParkComment = new ParkComment();
   selectedComment: ParkComment | null = null;
   @Output() reloadPark = new EventEmitter<number>();
-
+  // comments:ParkComment[]=[]
   constructor(private parkCommentService: ParkCommentService) {}
+
+
+  ngOnInit(): void {
+    // if(this.comments && this.selectedPark) {
+    // this.comments = this.selectedPark.parkComments;
+    // }
+  }
 
   addComment() {
     if (this.selectedPark && this.comment) {

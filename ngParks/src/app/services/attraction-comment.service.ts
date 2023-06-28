@@ -26,6 +26,19 @@ export class AttractionCommentService {
     return options;
   }
 
+  show(attractionId:number):Observable<Attraction> {
+    return this.http
+      .get<Attraction>(this.url + '/' + attractionId , this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.error(err);
+          return throwError(
+            () => new Error('AttractionCommntService.update(): error adding AttractionComment: ' + err)
+          );
+        })
+      );
+  }
+
   addComment(attraction: Attraction, comment:AttractionComment): Observable<AttractionComment> {
     return this.http
       .post<AttractionComment>(this.url + '/' + attraction.id + "/comments" , comment, this.getHttpOptions())
@@ -42,6 +55,19 @@ export class AttractionCommentService {
   addReply(attraction: Attraction, cid:number, reply:AttractionComment): Observable<AttractionComment> {
     return this.http
       .post<AttractionComment>(this.url + '/' + attraction.id + "/comments/"+ cid , reply, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.error(err);
+          return throwError(
+            () => new Error('ParkCommntService.update(): error adding ReplyParkComment: ' + err)
+          );
+        })
+      );
+  }
+
+  deleteComment(attraction: Attraction, cid:number): Observable<AttractionComment> {
+    return this.http
+      .delete<AttractionComment>(this.url + '/' + attraction.id + "/comments/"+ cid , this.getHttpOptions())
       .pipe(
         catchError((err: any) => {
           console.error(err);

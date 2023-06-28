@@ -1,0 +1,9 @@
+.attraction-img-container {
+  max-height: 500px;
+  max-width: 500px;
+}
+
+.attraction-img {
+  height: 100%;
+  width: 100%;
+}
