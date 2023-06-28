@@ -1,10 +1,10 @@
 <div *ngIf="selectedAttraction" class="attraction-details">
-  <div class="container">
-    <button class="btn btn-btn-danger offset-10" (click)="displayAllAttractions()">x</button>
+  <div class="attraction-details-container">
+    <button (click)="displayAllAttractions()">x</button>
     <div class="attraction-img-container">
       <img class="attraction-img" src="{{ selectedAttraction.image }}" />
     </div>
-    <div class="offset-6">
+    <div>
       <span>{{ selectedAttraction.name }}</span>
       <blockquote>{{ selectedAttraction.description }}</blockquote>
       <button class="btn btn-btn-danger">

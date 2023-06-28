@@ -7,6 +7,7 @@ import { ParkRating } from '../models/park-rating';
 export class AverageParkRatingPipe implements PipeTransform {
 
   transform(ratings: ParkRating[]): number | string {
+    console.log(ratings)
     if (ratings.length < 1){
       return "Park not yet Rated";
     }

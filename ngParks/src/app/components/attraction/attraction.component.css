@@ -1,9 +1,75 @@
+.attraction-details {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.attraction-details-container {
+  display: flex;
+  align-items: center;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: auto;
+}
+
 .attraction-img-container {
-  max-height: 500px;
-  max-width: 500px;
+  flex: 0 0 200px;
+  margin-right: 20px;
 }
 
 .attraction-img {
-  height: 100%;
   width: 100%;
+  height: auto;
+}
+
+.attraction-details span {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.attraction-details blockquote {
+  margin: 10px 0;
+}
+
+.attraction-comments {
+  margin-top: 20px;
+}
+
+.attraction-comment {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.attraction-comment span {
+  font-weight: bold;
+}
+
+.attraction-comment blockquote {
+  margin: 5px 0;
+}
+
+.add-comment-form {
+  margin-top: 20px;
+}
+
+.add-comment-form input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.add-comment-form button {
+  margin-right: 10px;
+}
+
+.attraction-comment-replies {
+  margin-left: 20px;
+  border-left: 1px solid #ccc;
+  padding-left: 10px;
 }
