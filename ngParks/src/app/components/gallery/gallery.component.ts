@@ -16,7 +16,7 @@ export class GalleryComponent implements OnInit {
 
   loggedInUser: User | null = null;
   parks: Park[] = [];
-  options: string[] = [];
+  states: string[] = [];
   selectedOption: string = '';
 
 

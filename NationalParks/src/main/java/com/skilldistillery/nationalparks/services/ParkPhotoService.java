@@ -7,4 +7,6 @@ import com.skilldistillery.nationalparks.entities.ParkPhoto;
 public interface ParkPhotoService {
 	
 	public List<ParkPhoto> index();
+
+	public List<ParkPhoto> filterOptions(String keyword);
 }

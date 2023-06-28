@@ -18,4 +18,10 @@ public class ParkPhotoServiceImpl implements ParkPhotoService {
 	public List<ParkPhoto> index() {
 		return parkPhotoRepo.findAll();
 	}
+
+	@Override
+	public List<ParkPhoto> filterOptions(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

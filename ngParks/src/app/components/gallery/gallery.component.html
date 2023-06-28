@@ -2,7 +2,7 @@
 
 <select name="states" id="selectState" (change)="onOptionSelected($event)">
   <option value="">Select a State</option>
-  <option *ngFor="let option of options" value="option">{{option}}</option>
+  <option *ngFor="let state of states" value="option">{{states}}</option>
 </select>
 
 <p>Selected State: {{selectedOption}}</p>
