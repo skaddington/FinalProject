@@ -40,6 +40,9 @@
       <h5>Established in {{ selectedPark.dateEstablished }}</h5>
       <blockquote>{{ selectedPark.description }}</blockquote>
       <h4>Average Park Rating : {{ selectedPark.parkRatings | averageParkRating }}</h4>
+        <div *ngFor="let state of selectedPark.states">
+        <h4>{{state.name}}</h4>
+        </div>
     </div>
     <div class="col-7">
       <img

@@ -96,7 +96,7 @@
 
 .activitiesDiv{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
   border: none;
@@ -105,4 +105,13 @@
 
 #activity-img{
   max-width: 50px;
+}
+
+.activitiesDiv img {
+  max-width: 50px;
+  transition: transform 0.3s ease;
+}
+
+.activitiesDiv img:hover {
+  transform: translateY(-5px);
 }

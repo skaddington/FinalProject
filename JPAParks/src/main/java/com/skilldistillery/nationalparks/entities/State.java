@@ -23,7 +23,9 @@ public class State {
 	private String name;
 
 	@ManyToMany
-	@JoinTable(name = "park_has_state", joinColumns = @JoinColumn(name = "park_id"), inverseJoinColumns = @JoinColumn(name = "state_id"))
+	@JoinTable(name = "park_has_state", 
+	joinColumns = @JoinColumn(name = "state_id"), 
+	inverseJoinColumns = @JoinColumn(name = "park_id"))
 	private List<Park> parks;
 
 	public State() {
