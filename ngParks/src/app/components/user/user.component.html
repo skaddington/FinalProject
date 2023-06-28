@@ -36,8 +36,10 @@
     </tbody>
   </table>
 </div>
-
-<div *ngIf="selectedUser && !editUser" id="selectedUserDetailsDiv" class="container">
+<div *ngIf="selectedUser && !selectedUser.enabled && !editUser">
+  <span>This User Is No Longer Active</span>
+</div>
+<div *ngIf="selectedUser && selectedUser.enabled && !editUser" id="selectedUserDetailsDiv" class="container">
   <div class="row">
       <div class="col-8">
          <h1>User Page</h1>
