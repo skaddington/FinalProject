@@ -23,6 +23,7 @@ import { AttractionComponent } from './components/attraction/attraction.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ParkCommentComponent } from './components/park-comment/park-comment.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
+import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { GalleryComponent } from './components/gallery/gallery.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    NgPipesModule
   ],
   providers: [AuthService, StatePipe],
   bootstrap: [AppComponent]
