@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="park_photo")
 public class ParkPhoto {
@@ -25,10 +28,12 @@ public class ParkPhoto {
 	@Column(name="image_date")
 	private LocalDate imageDate;
 	
+	@JsonIgnoreProperties({"parkPhotos", "users"})
 	@ManyToOne
 	@JoinColumn(name="park_id")
 	private Park park;
 	
+	@JsonIgnoreProperties({"parkPhotos", "favoriteParks"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

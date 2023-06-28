@@ -23,6 +23,7 @@ import { AttractionComponent } from './components/attraction/attraction.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ParkCommentComponent } from './components/park-comment/park-comment.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
+import { NgPipesModule } from 'ngx-pipes';
 import { ParkRatingComponent } from './components/park-rating/park-rating.component';
 import { AverageParkRatingPipe } from './pipes/average-park-rating.pipe';
 import { DatePipe } from '@angular/common';
@@ -54,7 +55,8 @@ import { DatePipe } from '@angular/common';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    NgPipesModule
   ],
   providers: [AuthService, StatePipe, DatePipe],
   bootstrap: [AppComponent]
