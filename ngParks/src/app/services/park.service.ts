@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Park } from '../models/park';
 import { AuthService } from './auth.service';
 import { ParkRating } from '../models/park-rating';
+import { Attraction } from '../models/attraction';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ import { ParkRating } from '../models/park-rating';
 export class ParkService {
   private url = environment.baseUrl + 'api/parks';
   private selectedParkSubject: BehaviorSubject<Park | null> = new BehaviorSubject<Park | null>(null);
+  private selectedAttractionSubject: BehaviorSubject<Attraction | null> = new BehaviorSubject<Attraction | null>(null);
 
   constructor(
     private http: HttpClient,
@@ -92,6 +94,14 @@ export class ParkService {
 
   getSelectedPark(): Observable<Park | null> {
     return this.selectedParkSubject.asObservable();
+  }
+
+  setSelectedAttraction(attraction: Attraction | null) {
+    this.selectedAttractionSubject.next(attraction);
+  }
+
+  getSelectedAttraction(): Observable<Attraction | null> {
+    return this.selectedAttractionSubject.asObservable();
   }
 
 }
