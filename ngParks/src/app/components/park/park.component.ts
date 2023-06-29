@@ -96,6 +96,9 @@ export class ParkComponent {
     this.parkService.getSelectedPark().subscribe((selectedPark) => {
       this.selectedPark = selectedPark;
     });
+    this.parkService.getSelectedAttraction().subscribe((selelectedAttraction) => {
+      this.selectedAttraction = selelectedAttraction;
+    })
   }
 
   checkUser(): User | null {
