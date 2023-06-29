@@ -40,7 +40,7 @@ public class Park {
 	@ManyToMany(mappedBy = "parks")
 	private List<Activity> activities;
 	
-	@JsonIgnoreProperties({"user", "park"})
+	@JsonIgnoreProperties({"user", "park", "attractionComments"})
 	@OneToMany(mappedBy = "park")
 	private List<Attraction> attractions;
 	

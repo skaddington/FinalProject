@@ -1,10 +1,10 @@
 <h5 style="text-align: center">User Comments about the Park</h5>
 <ng-container *ngFor="let comment of selectedPark?.parkComments">
-  <div *ngIf="comment.comment === null && comment.enabled && comment.user.enabled" class="park-comment">
+  <div *ngIf="comment.user && comment.comment === null && comment.enabled && comment.user?.enabled" class="park-comment">
     <blockquote class="row park-comments">
       <div class="col-8">
         "{{ comment.content }}"<br />
-        {{ comment.user.firstName }} {{ comment.user.lastName }} on
+        {{ comment.user?.firstName }} {{ comment.user?.lastName }} on
         {{ comment.createdAt | date : "shortDate" }}
       </div>
       <div class="col-2">
@@ -26,7 +26,7 @@
         <div class="nested-replies">
           <ng-container *ngFor="let reply of comment.replies">
             <!-- <app-comment [reply]="reply"> -->
-            <div *ngIf="reply.enabled && reply.user.enabled" class="park-reply">
+            <div *ngIf="reply.user && reply.enabled && reply.user.enabled" class="park-reply">
               <blockquote class="row park-comments">
                 <div class="col-8">
                   {{ reply.content }} <br />
@@ -54,7 +54,7 @@
 
                 <ng-container *ngIf="reply.replies && reply.replies.length > 0">
                   <ng-container *ngFor="let nestedReply of reply.replies">
-                    <div *ngIf="nestedReply.enabled" class="park-reply">
+                    <div *ngIf="nestedReply.enabled && nestedReply.user" class="park-reply">
                       <blockquote class="row park-comments">
                         <div class="col-8">
                           {{ nestedReply.content }}
@@ -107,7 +107,7 @@
   </form>
 </div>
 
-<div *ngIf="selectedComment && loggedInUser">
+<div *ngIf="selectedComment && loggedInUser && selectedComment.user">
   <form class="row">
     <input
       type="text"

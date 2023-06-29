@@ -37,7 +37,7 @@
                 to {{ comment.user.firstName }} {{ comment.user.lastName }}
               </div>
               <div class="col-2">
-                <button class="btn btn-warning" *ngIf="comment && loggedInUser" (click)="this.selectedComment = reply">Reply</button>
+                <!-- <button class="btn btn-warning" *ngIf="comment && loggedInUser" (click)="this.selectedComment = reply">Reply</button> -->
               </div>
               <div class="col-2" *ngIf="this.loggedInUser?.id === reply.user.id">
                 <button class="btn btn-danger" (click)="deleteComment(reply.id)">Delete</button>

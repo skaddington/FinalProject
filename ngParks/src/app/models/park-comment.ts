@@ -6,8 +6,8 @@ export class ParkComment {
   content: string;
   createdAt: Date | null;
   enabled: boolean;
-  user: User;
-  park: Park;
+  user: User|null;
+  park: Park|null;
   comment: ParkComment | null;
   replies: ParkComment[];
 

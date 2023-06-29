@@ -27,6 +27,8 @@ export class ParkCommentService {
   }
 
   addComment(park: Park, comment:ParkComment): Observable<ParkComment> {
+    comment.user = null;
+    comment.park = null;
     return this.http
       .post<ParkComment>(this.url + '/' + park.id + "/comments" , comment, this.getHttpOptions())
       .pipe(
@@ -40,6 +42,8 @@ export class ParkCommentService {
   }
 
   addReply(park: Park, cid:number, reply:ParkComment): Observable<ParkComment> {
+    reply.user = null;
+    reply.park = null;
     return this.http
       .post<ParkComment>(this.url + '/' + park.id + "/comments/"+ cid , reply, this.getHttpOptions())
       .pipe(
@@ -63,7 +67,7 @@ export class ParkCommentService {
           );
         })
       );
-      
+
   }
 
 

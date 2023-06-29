@@ -52,7 +52,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<AttractionComment> attractionComments;
 
-	@JsonIgnoreProperties({ "users" })
+	@JsonIgnoreProperties({ "users", "activities" })
 	@ManyToMany
 	@JoinTable(name = "user_favorites", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "park_id"))
 	private List<Park> favoriteParks;

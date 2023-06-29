@@ -9,6 +9,7 @@ import { Park } from 'src/app/models/park';
 import { State } from 'src/app/models/state';
 import { User } from 'src/app/models/user';
 import { StatePipe } from 'src/app/pipes/state.pipe';
+import { AttractionCommentService } from 'src/app/services/attraction-comment.service';
 import { ParkService } from 'src/app/services/park.service';
 import { StateService } from 'src/app/services/state.service';
 import { UserService } from 'src/app/services/user.service';
@@ -89,7 +90,8 @@ export class ParkComponent {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private attractionCommentService: AttractionCommentService
   ) {
     this.parkService.getSelectedPark().subscribe((selectedPark) => {
       this.selectedPark = selectedPark;
@@ -115,22 +117,19 @@ export class ParkComponent {
   ngOnInit() {
     this.checkUser();
     this.reload();
-    this.route.paramMap.subscribe(
-      params=> {
-        let idString = params.get('id');
-        if (!this.selectedPark && idString) {
-          // console.log(idString);
-          let parkId: number = Number.parseInt(idString);
-          // console.log(parkId);
-          if (isNaN(parkId)) {
-            this.router.navigateByUrl('loser');
-          } else {
-            this.showPark(parkId);
-          }
+    this.route.paramMap.subscribe((params) => {
+      let idString = params.get('id');
+      if (!this.selectedPark && idString) {
+        // console.log(idString);
+        let parkId: number = Number.parseInt(idString);
+        // console.log(parkId);
+        if (isNaN(parkId)) {
+          this.router.navigateByUrl('loser');
+        } else {
+          this.showPark(parkId);
         }
-
       }
-    );
+    });
   }
 
   reload(): void {
@@ -154,8 +153,16 @@ export class ParkComponent {
     return (this.selectedPark = null);
   }
 
-  selectAttraction(attraction: Attraction) {
-    this.selectedAttraction = attraction;
+  selectAttraction(attractionId: number) {
+    this.attractionCommentService.show(attractionId).subscribe({
+      next: (attraction) => {
+        this.selectedAttraction = attraction;
+      },
+      error: (nothingChanged) => {
+        console.error('ParkComponent.updatePark(): error updating Park:');
+        console.error(nothingChanged);
+      },
+    });
   }
 
   submitUserRating() {
@@ -166,16 +173,16 @@ export class ParkComponent {
     this.parkService.show(parkId).subscribe({
       next: (foundPark) => {
         this.selectedPark = foundPark;
-         this.authService.getLoggedInUser().subscribe({
-           next: (user) => {
-             this.loggedInUser = user;
-             this.checkUserParkRatings(foundPark);
-           },
-           error: (problem) => {
-             console.error('ParkComponent.reload(): error loading Parks');
-             console.error('User is ' + problem);
-           },
-         });
+        this.authService.getLoggedInUser().subscribe({
+          next: (user) => {
+            this.loggedInUser = user;
+            this.checkUserParkRatings(foundPark);
+          },
+          error: (problem) => {
+            console.error('ParkComponent.reload(): error loading Parks');
+            console.error('User is ' + problem);
+          },
+        });
         this.reload();
       },
       error: (somethingBlewUp) => {
@@ -227,23 +234,18 @@ export class ParkComponent {
 
   hadRatedPark: boolean | undefined = false;
   checkUserParkRatings(park: Park) {
-    this.hadRatedPark= false;
+    this.hadRatedPark = false;
     console.log('beginning of rating check ' + this.hadRatedPark);
     console.log(this.loggedInUser);
     if (this.loggedInUser && park) {
       for (let userParkRating of this.loggedInUser?.parkRatings) {
         console.log('middle of rating check ' + userParkRating.park.id);
-          if (userParkRating.park.id === park.id) {
-            this.hadRatedPark = true;
-            console.log('end of rating check ' + this.hadRatedPark);
-            break;
-          }
+        if (userParkRating.park.id === park.id) {
+          this.hadRatedPark = true;
+          console.log('end of rating check ' + this.hadRatedPark);
+          break;
         }
+      }
     }
   }
-
-
-
-
-
 }
