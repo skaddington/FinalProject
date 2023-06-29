@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Park } from 'src/app/models/park';
 import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { ParkService } from 'src/app/services/park.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -13,15 +14,20 @@ import { UserService } from 'src/app/services/user.service';
 export class UserComponent {
   users: User[] = [];
 
+  loggedInUser: User | null= null;
   editUser: User | null = null;
   selectedUser: User | null = null;
 
   constructor(
     private userService: UserService,
-    // private incompletePipe: IncompletePipe,
+    private authService:AuthService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.userService.getSelectedUser().subscribe(selectedUser => {
+      this.selectedUser = selectedUser;
+    });
+  }
 
   ngOnInit() {
     let idString = this.route.snapshot.paramMap.get('id');
@@ -36,6 +42,27 @@ export class UserComponent {
       }
     }
     this.reload();
+    this.checkUser();
+  }
+
+  checkUser(): User | null {
+    this.authService.getLoggedInUser().subscribe({
+      next: (user) => {
+        return (this.loggedInUser = user);
+      },
+      error: (problem) => {
+        console.error('UserComponent.reload(): error loading Users');
+        console.error(problem);
+      },
+    });
+    if (this.loggedInUser) {
+      return this.loggedInUser;
+    }
+    return null;
+  }
+
+  logoutUser(){
+    this.loggedInUser = null;
   }
 
   reload(): void {
@@ -55,7 +82,10 @@ export class UserComponent {
   // }
 
   displayUserDetails(user: User) {
-    return (this.selectedUser = user);
+    this.selectedUser = user;
+    console.log(this.selectedUser.username)
+    console.log(this.loggedInUser?.username);
+    return this.selectedUser;
   }
 
   displayUserTable() {
@@ -96,17 +126,36 @@ export class UserComponent {
     });
   }
 
-  // deletePark(parkId: number): void {
-  //   this.parkService.destroy(parkId).subscribe({
-  //     next: () => {
-  //       this.reload();
-  //       this.selectedPark = null;
-  //     },
-  //     error: (somethingWentWrong) => {
-  //       console.error('ParkListComponent.deleteTodo(): error deleting Park:');
-  //       console.error(somethingWentWrong);
-  //     },
-  //   });
-  //   this.reload();
-  // }
+// disableUser(user: User){
+//   user.enabled = false;
+//   this.updateUser(user, false);
+// }
+
+disableUser(user: User){
+  this.userService.toggle(user)
+  .subscribe({
+    next: (result) => {
+      this.reload();
+    },
+    error: (nothingChanged) => {
+      console.error('ParkCommentComponent.deleteComment(): error removing ParkComment:');
+      console.error(nothingChanged);
+    },
+  });
+}
+
+
+enableUser(user: User){
+  user.enabled = true;
+  this.updateUser(user, false);
+}
+
+
+
+  handleRemovalSuccess(loggedInUser:User) {
+    this.loggedInUser = loggedInUser;
+    this.selectedUser = this.loggedInUser;
+    this.reload();
+    this.showUser(loggedInUser.id);
+  }
 }

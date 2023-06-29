@@ -4,9 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -14,12 +13,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="park_rating")
 public class ParkRating {
 
-	@Id
-	@Embedded
+	@EmbeddedId
 	private ParkRatingId id;
 	
 	private int rating;
@@ -29,10 +29,12 @@ public class ParkRating {
 	@CreationTimestamp
 	private LocalDateTime ratingDate;
 	
+	@JsonIgnoreProperties({"attractions", "attractionComments", "favoriteParks", "parkComments", "parkRatings", "parkPhotos"})
 	@ManyToOne
 	@JoinColumn(name = "user_id") // DB column name
 	@MapsId(value = "userId") 
 	private User user;
+	@JsonIgnoreProperties({"activities", "attractions", "states", "users", "parkPhotos", "parkComments", "parkRatings"})
 	@ManyToOne
 	@JoinColumn(name = "park_id") // DB column
 	@MapsId(value = "parkId")

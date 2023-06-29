@@ -17,7 +17,6 @@
     <class>com.skilldistillery.nationalparks.entities.ParkRatingId</class>
     <class>com.skilldistillery.nationalparks.entities.State</class>
     <class>com.skilldistillery.nationalparks.entities.User</class>
-    <class>com.skilldistillery.nationalparks.entities.UserFavorites</class>
     <!-- end entities  -->
 
     <properties>

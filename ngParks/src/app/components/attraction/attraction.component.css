@@ -1,0 +1,52 @@
+.attraction-details {
+  margin-top: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.3)
+
+}
+
+.attraction-details-container {
+  display: flex;
+  align-items: center;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: auto;
+}
+
+#attraction-img {
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  border: 3px solid white;
+  border-radius: 10px;
+}
+
+.attraction-details span {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.attraction-details blockquote {
+  margin: 10px 0;
+}
+
+h5{
+  text-align: center;
+}
+
+.attraction-comments{
+  display: flex;
+  align-items: center;
+  text-align: left;
+  border: 1px;
+  border-color: white;
+  border-style: solid;
+  margin-top: 10px;
+}

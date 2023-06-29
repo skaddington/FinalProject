@@ -1,3 +1,4 @@
+import { NgPipesModule } from 'ngx-pipes';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,10 +17,21 @@ import { StatePipe } from './pipes/state.pipe';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserComponent } from './components/user/user.component';
 import { AddToFavoritesComponent } from './components/add-to-favorites/add-to-favorites.component';
+import { RemoveFromFavoritesComponent } from './components/remove-from-favorites/remove-from-favorites.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { TeamComponent } from './components/team/team.component';
+import { AttractionComponent } from './components/attraction/attraction.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ParkCommentComponent } from './components/park-comment/park-comment.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { ParkRatingComponent } from './components/park-rating/park-rating.component';
+import { AverageParkRatingPipe } from './pipes/average-park-rating.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AttractionComponent,
     NavbarComponent,
     HomeComponent,
     RegisterComponent,
@@ -29,15 +41,24 @@ import { AddToFavoritesComponent } from './components/add-to-favorites/add-to-fa
     StatePipe,
     NotFoundComponent,
     UserComponent,
-    AddToFavoritesComponent
+    AddToFavoritesComponent,
+    RemoveFromFavoritesComponent,
+    FooterComponent,
+    TeamComponent,
+    ParkCommentComponent,
+    GalleryComponent,
+    ParkRatingComponent,
+    AverageParkRatingPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    NgPipesModule
   ],
-  providers: [AuthService, StatePipe],
+  providers: [AuthService, StatePipe, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

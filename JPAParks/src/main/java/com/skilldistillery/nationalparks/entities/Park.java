@@ -36,27 +36,27 @@ public class Park {
 	private String state;
 	private String zip;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"parks"})
 	@ManyToMany(mappedBy = "parks")
 	private List<Activity> activities;
-	@JsonIgnore
+	
+	@JsonIgnoreProperties({"user", "park"})
 	@OneToMany(mappedBy = "park")
 	private List<Attraction> attractions;
 	
-	//@JsonIgnore
 	@JsonIgnoreProperties({"parks"})
 	@ManyToMany(mappedBy = "parks")
 	private List<State> states;
 	@JsonIgnore
 	@ManyToMany(mappedBy = "favoriteParks")
 	private List<User> users;
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "park")
 	private List<ParkPhoto> parkPhotos;
-	@JsonIgnore
+	@JsonIgnoreProperties({"park"})
 	@OneToMany(mappedBy = "park")
 	private List<ParkComment> parkComments;
-	@JsonIgnore
+	@JsonIgnoreProperties({"park", "user"})
 	@OneToMany(mappedBy = "park")
 	private List<ParkRating> parkRatings;
 

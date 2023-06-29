@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: max-content;
+}
+
+h1{
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
+
+.homeIntroDiv{
+  align-items: center;
+}
+
+ngb-carousel{
+  min-height: 400px;
+  display: flex !important;
+  align-items: center;
+}
+
+.cards-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items:center;
+  height: 100%;
+}
+
+#carouselPhoto  {
+  max-width: 30%;
+  max-height: 100%;
+  padding: 10px;
+  border-style: ridge;
+  border-width: 2px;
+  margin: 20px;
+  background-color: transparent;
+  border-color: white;
+  contain: content;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.carousel-caption{
+  background-color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+}

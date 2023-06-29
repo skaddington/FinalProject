@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Attraction {
 
@@ -36,15 +39,19 @@ public class Attraction {
 	@Column(name = "website_url")
 	private String website;
 	private Boolean enabled;
-
+	
+	@JsonIgnoreProperties({"attractions"})
 	@ManyToOne
 	@JoinColumn(name = "park_id")
 	private Park park;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	@JsonIgnoreProperties({"attractions"})
 	@OneToMany(mappedBy = "attraction")
 	private List<AttractionComment> attractionComments;
+	@JsonIgnore
 	@OneToMany(mappedBy = "attraction")
 	private List<AttractionRating> ratings;
 

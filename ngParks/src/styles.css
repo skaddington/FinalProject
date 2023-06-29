@@ -1,6 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 
-#allParksTablePhoto {
-  width: 200px;
+body, html {
+  background-image: url('https://wallpaperaccess.com/full/1302133.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-blend-mode: overlay;
+  height: 100vw;
+  background-color: #333;
+  color: #fff;
+}
+
+hr{
+border-width: 3px;
+}
+
+.navbar,
+.footer {
+  margin: 15px;
+  padding: 10px;
+  display: flex;
+  border-radius: 5px;
+}
+
+.navbar {
+  justify-content: space-between;
+}
+
+.footer {
+  justify-content: center;
+}
+
+blockquote{
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+#allParksTablePhoto, #allUsersTablePhoto, #detailsUserPhoto{
+  width: 250px;
+  padding: 5px;
+  border: 3px solid white;
+  border-radius: 5px;
+}
+
+#detailsParkPhoto {
+  width: 100%;
+  padding: 5px;
+  border: 3px solid white;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+#editButton,
+#backButton,
+#websiteButton,
+#addToFavoritesButton {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+tr,td {
+  text-align: center;
+}
+
+input{
+  border: none;
+  border-radius: 5px;
 }

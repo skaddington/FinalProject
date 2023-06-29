@@ -1,0 +1,65 @@
+.users-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.users {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  height: 550px;
+  max-height: 550px;
+}
+
+.users-header h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.users-header blockquote {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.user-table-image img {
+  width: 100%;
+  height: 350px;
+  border-radius: 4px;
+}
+
+.users-footer h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+.favorite-parks-table {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.favorite-parks-table th,
+.favorite-parks-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.favorite-parks-table thead th {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+.favorite-parks-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.favorite-parks-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Activity {
 
@@ -24,11 +26,11 @@ public class Activity {
 	@Column(name = "image_url")
 	private String image;
 	private Boolean enabled;
-
+	
 	@ManyToMany
 	@JoinTable(name = "park_has_activity", 
-	joinColumns = @JoinColumn(name = "park_id"), 
-	inverseJoinColumns = @JoinColumn(name = "activity_id"))
+	joinColumns = @JoinColumn(name = "activity_id"), 
+	inverseJoinColumns = @JoinColumn(name = "park_id"))
 	private List<Park> parks;
 
 	public Activity() {

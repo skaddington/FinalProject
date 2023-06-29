@@ -1,0 +1,126 @@
+<h5 style="text-align: center">User Comments about the Park</h5>
+<ng-container *ngFor="let comment of selectedPark?.parkComments">
+  <div *ngIf="comment.comment === null && comment.enabled && comment.user.enabled" class="park-comment">
+    <blockquote class="row park-comments">
+      <div class="col-8">
+        "{{ comment.content }}"<br />
+        {{ comment.user.firstName }} {{ comment.user.lastName }} on
+        {{ comment.createdAt | date : "shortDate" }}
+      </div>
+      <div class="col-2">
+        <button
+          class="btn btn-warning"
+          *ngIf="comment && loggedInUser"
+          (click)="selectedComment = comment"
+        >
+          Reply
+        </button>
+      </div>
+        <div class="col-2" *ngIf="loggedInUser?.id === comment.user.id">
+          <button class="btn btn-danger" (click)="deleteComment(comment.id)">
+            Delete
+          </button>
+        </div>
+
+      <ng-container *ngIf="comment.replies && comment.replies.length > 0">
+        <div class="nested-replies">
+          <ng-container *ngFor="let reply of comment.replies">
+            <!-- <app-comment [reply]="reply"> -->
+            <div *ngIf="reply.enabled && reply.user.enabled" class="park-reply">
+              <blockquote class="row park-comments">
+                <div class="col-8">
+                  {{ reply.content }} <br />
+                  {{ reply.user.firstName }} {{ reply.user.lastName }} replied
+                  to {{ comment.user.firstName }} {{ comment.user.lastName }} on
+                  {{ reply.createdAt | date : "shortDate" }}
+                </div>
+                <div class="col-2">
+                  <button
+                    class="btn btn-warning"
+                    *ngIf="reply && loggedInUser"
+                    (click)="selectedComment = reply"
+                  >
+                    Reply
+                  </button>
+                </div>
+                  <div class="col-2" *ngIf="loggedInUser?.id === reply.user.id">
+                    <button
+                      class="btn btn-danger"
+                      (click)="deleteComment(reply.id)"
+                    >
+                      Delete
+                    </button>
+                  </div>
+
+                <ng-container *ngIf="reply.replies && reply.replies.length > 0">
+                  <ng-container *ngFor="let nestedReply of reply.replies">
+                    <div *ngIf="nestedReply.enabled" class="park-reply">
+                      <blockquote class="row park-comments">
+                        <div class="col-8">
+                          {{ nestedReply.content }}
+                          {{ nestedReply.user.firstName }}
+                          {{ nestedReply.user.lastName }} replied to
+                          {{ reply.user.firstName }}
+                          {{ reply.user.lastName }} on
+                          {{ nestedReply.createdAt | date : "shortDate" }}
+                        </div>
+                        <div class="col-2">
+                          <button
+                            class="btn btn-warning"
+                            *ngIf="nestedReply && loggedInUser"
+                            (click)="selectedComment = nestedReply"
+                          >
+                            Reply
+                          </button>
+                        </div>
+                          <div class="col-2" *ngIf="loggedInUser?.id === nestedReply.user.id">
+                            <button
+                              class="btn btn-danger"
+                              (click)="deleteComment(nestedReply.id)"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                      </blockquote>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </blockquote>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </blockquote>
+  </div>
+</ng-container>
+
+<div *ngIf="!selectedComment && loggedInUser" class="add-comment-form">
+  <form class="row">
+    <input
+      type="text"
+      name="content"
+      [(ngModel)]="comment.content"
+      placeholder="Leave a comment about the Park"
+      class="col-8"
+    />
+    <button class="btn btn-success col-4" (click)="addComment()">Submit</button>
+  </form>
+</div>
+
+<div *ngIf="selectedComment && loggedInUser">
+  <form class="row">
+    <input
+      type="text"
+      name="content"
+      [(ngModel)]="comment.content"
+      placeholder="Replying to {{ selectedComment.user.firstName }} {{
+        selectedComment.user.lastName
+      }}"
+      class="col-8"
+    />
+    <button class="btn btn-success col-2" (click)="addReplyComment()">Submit</button>
+    <button class="btn btn-danger col-2" (click)="selectedComment = null">
+      Cancel
+    </button>
+  </form>
+</div>
