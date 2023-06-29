@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { ParkComponent } from '../park/park.component';
 import { ParkService } from 'src/app/services/park.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -28,6 +27,7 @@ loggedInUser:User|null=null;
   }
 
   clearSelectedPark() {
+    this.parkService.setSelectedAttraction(null);
     this.parkService.setSelectedPark(null);
 }
 

@@ -11,8 +11,10 @@ import { ParkService } from 'src/app/services/park.service';
 export class HomeComponent implements OnInit {
   parks: any[] = [];
 
-  constructor(private parkService: ParkService,
-    private router: Router) {}
+  constructor(
+    private parkService: ParkService,
+    private router: Router
+    ) {}
 
   ngOnInit(): void {
     this.reloadCarousel();

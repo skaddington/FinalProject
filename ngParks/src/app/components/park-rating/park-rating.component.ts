@@ -16,7 +16,9 @@ export class ParkRatingComponent {
 
   @Output() reloadPark = new EventEmitter<number>();
 
-  constructor(private parkService: ParkService) {}
+  constructor(
+    private parkService: ParkService
+    ) {}
 
   setRatingValue(value: number) {
     this.parkRating.rating = value;

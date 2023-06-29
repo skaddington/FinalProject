@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LogoutComponent {
   @Input() loggedInUser: User | null = null;
+
   constructor(
     private auth: AuthService,
     private router: Router

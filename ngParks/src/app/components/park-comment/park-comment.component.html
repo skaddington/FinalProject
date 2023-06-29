@@ -1,10 +1,10 @@
 <h5 style="text-align: center">User Comments about the Park</h5>
 <ng-container *ngFor="let comment of selectedPark?.parkComments">
-  <div *ngIf="comment.user && comment.comment === null && comment.enabled && comment.user?.enabled" class="park-comment">
+  <div *ngIf="comment.user && comment.comment === null && comment.enabled && comment.user.enabled" class="park-comment">
     <blockquote class="row park-comments">
       <div class="col-8">
         "{{ comment.content }}"<br />
-        {{ comment.user?.firstName }} {{ comment.user?.lastName }} on
+        {{ comment.user.firstName }} {{ comment.user.lastName }} on
         {{ comment.createdAt | date : "shortDate" }}
       </div>
       <div class="col-2">

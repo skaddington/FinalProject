@@ -5,14 +5,11 @@ import { Park } from 'src/app/models/park';
 import { ParkPhoto } from 'src/app/models/park-photo';
 import { User } from 'src/app/models/user';
 import { ParkPhotosService } from 'src/app/services/park-photos.service';
-import { state } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Attraction } from 'src/app/models/attraction';
 import { StatePipe } from 'src/app/pipes/state.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { StateService } from 'src/app/services/state.service';
 import { UserService } from 'src/app/services/user.service';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -86,13 +83,9 @@ export class GalleryComponent implements OnInit {
   constructor(
     private parkService: ParkService,
     private parkPhotosService: ParkPhotosService,
-    private http: HttpClient,
-    private stateService: StateService,
-    private statePipe: StatePipe,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private userService: UserService
   ) {}
 
   checkUser(): User | null {

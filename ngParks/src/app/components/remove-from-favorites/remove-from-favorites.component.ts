@@ -13,7 +13,10 @@ export class RemoveFromFavoritesComponent {
   @Input() loggedInUser: User | null = null;
   @Input() selectedPark: Park | null = null;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   removeParkFromFavorites() {
     if (this.selectedPark && this.loggedInUser) {

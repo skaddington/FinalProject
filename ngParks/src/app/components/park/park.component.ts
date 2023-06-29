@@ -1,19 +1,11 @@
 import { Attraction } from './../../models/attraction';
 import { AuthService } from './../../services/auth.service';
-import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, throwError } from 'rxjs';
 import { Park } from 'src/app/models/park';
-import { State } from 'src/app/models/state';
 import { User } from 'src/app/models/user';
-import { StatePipe } from 'src/app/pipes/state.pipe';
 import { AttractionCommentService } from 'src/app/services/attraction-comment.service';
 import { ParkService } from 'src/app/services/park.service';
-import { StateService } from 'src/app/services/state.service';
-import { UserService } from 'src/app/services/user.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-park',
@@ -84,13 +76,10 @@ export class ParkComponent {
   ];
 
   constructor(
-    private stateService: StateService,
     private parkService: ParkService,
-    private statePipe: StatePipe,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private userService: UserService,
     private attractionCommentService: AttractionCommentService
   ) {
     this.parkService.getSelectedPark().subscribe((selectedPark) => {

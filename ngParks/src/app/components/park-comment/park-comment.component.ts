@@ -15,8 +15,11 @@ export class ParkCommentComponent implements OnInit {
   comment: ParkComment = new ParkComment();
   selectedComment: ParkComment | null = null;
   @Output() reloadPark = new EventEmitter<number>();
-  // comments:ParkComment[]=[]
-  constructor(private parkCommentService: ParkCommentService) {}
+
+
+  constructor(
+    private parkCommentService: ParkCommentService
+    ) {}
 
 
   ngOnInit(): void {
@@ -34,6 +37,7 @@ export class ParkCommentComponent implements OnInit {
             this.selectedPark?.parkComments.push(addedComment);
             this.loggedInUser?.parkComments.push(addedComment);
             this.comment = new ParkComment();
+            this.reloadPark.emit(this.selectedPark?.id);
           },
           error: (nothingChanged) => {
             console.error('ParkComponent.updatePark(): error updating Park:');
@@ -53,6 +57,7 @@ export class ParkCommentComponent implements OnInit {
             this.loggedInUser?.parkComments.push(addedComment);
             this.selectedComment?.replies.push(addedComment);
             this.comment = new ParkComment();
+            this.reloadPark.emit(this.selectedPark?.id);
           },
           error: (nothingChanged) => {
             console.error('ParkCommentComponent.addReplyComment(): error adding replyParkcomment:');
@@ -81,6 +86,6 @@ export class ParkCommentComponent implements OnInit {
     }
   }
 
-  
+
 
 }
