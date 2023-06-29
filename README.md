@@ -9,34 +9,33 @@
 
 * **What is the End Goal?**
 <p>
-	//TODO NEED TO UPDATE<br> 
+We wanted to create an application that would allow a user to browse the national parks and their surrounding attractions.
+This allows a user to determine if the trip is worth it and help in planning what else they'd like to do while in the area.
 
 * **User Story 1 :**
 <p>
-	//TODO NEED TO UPDATE
 
-	A User that is NOT logged in has the options to:<br>
-	 	* Create a new User Account<br>
-	 	* Login using an existing Account.<br>
-	 	* View National Parks stored in the MySQL Relational Database<br>
-	 	* View a carosel of pictures of Parks stored in the Database<br> 
-	 	* View a gallery of User Submitted Pictures of Parks stored in the database.<br>
-	 	* Click the link to view details for existing Parks stored in the Database<br>
-	 	* View The About the Developers page<br>
+	A User that is NOT logged in has the options to:
+	 	* Create a new User Account
+	 	* Login using an existing Account.
+	 	* View National Parks stored in the MySQL Relational Database
+	 	* View a carosel of pictures of Parks stored in the Database
+	 	* View a gallery of User Submitted Pictures of Parks stored in the database.
+	 	* Click the link to view details for existing Parks stored in the Database
+	 	* View The About the Developers page
 
 * **User Story 2 :** 
 <p>
-	//TODO NEED TO UPDATE
 
 	A Logged in User can:
 		* View their Account page
 		* View Other Users Account Page
 		* Update their Account page Details
 		* View a carousel of pictures of Parks stored in the Database
-	 	* Click the link to view details for existing Parks stored in the Database<br>
-	 	* Leave Comments or Reply to existing comments on the Park Details page<br>
-	 	* Disable Comments AND Replies they have left on the Park Details page<br>
-	 	* Provide a Rating for Parks<br>
+	 	* Click the link to view details for existing Parks stored in the Database
+	 	* Leave Comments or Reply to existing comments on the Park Details page
+	 	* Disable Comments AND Replies they have left on the Park Details page
+	 	* Provide a Rating for Parks
 	 	* Add Parks from the database to a list of Favorite Parks they enjoyed
 	 	* Remove Parks from their Favorites List
 	 	* Disable their Own Account
@@ -45,13 +44,12 @@
 
 * **User Story 3 :** 
 <p>
-	//TODO NEED TO UPDATE
 	
-	A Logged in Admin can:<br>
-		* Perform ALL actions of a Logged in User EXCEPT disabling their own account<br>
-		* View all Users stored in the Database<br>
-		* Disable or Enable Users in the Database<br>
-		* View the Account page of All Users<br>
+	A Logged in Admin can:
+		* Perform ALL actions of a Logged in User EXCEPT disabling their own account
+		* View all Users stored in the Database
+		* Disable or Enable Users in the Database
+		* View the Account page of All Users
 		* Disable comments of other users
 
 ## Workflow
@@ -60,7 +58,6 @@
 	![](DB/parksdbSchema.png)
 
 * **JPA & REST -> Paths :**
-	//TODO NEED TO UPDATE
 	| HTTP Verb | URI                  | Request Body | Response Body | Purpose |
 	|-----------|----------------------|--------------|---------------|---------|
 	| POST| `/api/register`      | Representation of New User resource   |Description of Operation Results | Representation of a new _User_ resource |
@@ -87,8 +84,8 @@
 	| POST | `/api/attractions/{attrId}/comments` | Representation of new _AttractionComment_ Resource | | **Create** endpoint |
 	| POST | `/api/attractions/{attrId}/comments/{commentId}` | representation of new _AttractionComment_ Resource | | **Create** endpoint |
 
-* **Visual Studio Code -> Angular :**
-	//TODO NEED TO UPDATE
+* **Visual Studio Code -> Angular -> Front-End Development & Design:**
+	![](ngParks/images/homePageScreenshot.png)
 
 ## Technologies Used
 * Spring Tool Suite - Spring JPA, Spring Boot, Spring REST Framework, Spring Security
@@ -109,5 +106,5 @@
 * Angular with Authentication
 * MySQL Workbench
 * Most Prominent BrainBlocks
-<br>- Adding a park to a user's list of favorite parks: eventually we figured out that the Join Column and Inverse Join Column were backwards in the Many to Many annotations in the User Entity.
-<br>- 
+<br>- Adding a park to a user's list of favorite parks: eventually we figured out that the Join Column and Inverse Join Column were backwards in the Many to Many annotations in the User Entity. This situation actually occured a few times throughout the project.
+<br>- Determining whether to use JSON Ignore and JSON Ignore Properties in particular situations.
