@@ -98,7 +98,7 @@ reloadSelectedAttraction(id:number) {
 
 
 displayAllAttractions() {
-  console.log(this.selectedAttraction?.attractionComments);
+  // console.log(this.selectedAttraction?.attractionComments);
   this.selectedAttraction = null;
   this.handleDeselectAttraction(this.selectedAttraction);
 }

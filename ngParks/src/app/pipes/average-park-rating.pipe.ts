@@ -11,8 +11,6 @@ export class AverageParkRatingPipe implements PipeTransform {
     if (ratings.length < 1){
       return "Park not yet Rated";
     }
-
-
     let averageRating: number = 0;
     let count: number = 0;
     ratings.forEach(parkRating => {

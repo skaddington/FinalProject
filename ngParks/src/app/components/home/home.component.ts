@@ -45,16 +45,4 @@ export class HomeComponent implements OnInit {
     return results;
   }
 
-  prevBtnClick() {
-    let carouselObj = (document.querySelector('.carousel') as any)
-      .ej2_instances[0];
-    carouselObj.prev();
-  }
-
-  nextBtnClick() {
-    console.log('click');
-    let carouselObj = (document.querySelector('.carousel') as any)
-      .ej2_instances[0];
-    carouselObj.next();
-  }
 }

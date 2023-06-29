@@ -27,7 +27,7 @@ export class ParkPhotosService {
         catchError((err: any) => {
           console.error(err);
           return throwError(
-            () => new Error('AttractionCommntService.update(): error adding AttractionComment: ' + err)
+            () => new Error('ParkPhotoService.update(): error getting ParkPhotos by State Name: ' + err)
           );
         })
       );

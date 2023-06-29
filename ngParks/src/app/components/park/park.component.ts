@@ -158,10 +158,6 @@ export class ParkComponent {
     this.selectedAttraction = attraction;
   }
 
-  submitUserRating() {
-    console.log();
-  }
-
   showPark(parkId: number) {
     this.parkService.show(parkId).subscribe({
       next: (foundPark) => {
@@ -228,22 +224,18 @@ export class ParkComponent {
   hadRatedPark: boolean | undefined = false;
   checkUserParkRatings(park: Park) {
     this.hadRatedPark= false;
-    console.log('beginning of rating check ' + this.hadRatedPark);
-    console.log(this.loggedInUser);
+    // console.log('beginning of rating check ' + this.hadRatedPark);
+    // console.log(this.loggedInUser);
     if (this.loggedInUser && park) {
       for (let userParkRating of this.loggedInUser?.parkRatings) {
-        console.log('middle of rating check ' + userParkRating.park.id);
+        // console.log('middle of rating check ' + userParkRating.park.id);
           if (userParkRating.park.id === park.id) {
             this.hadRatedPark = true;
-            console.log('end of rating check ' + this.hadRatedPark);
+            // console.log('end of rating check ' + this.hadRatedPark);
             break;
           }
         }
     }
   }
-
-
-
-
 
 }
