@@ -5,8 +5,16 @@
   <option *ngFor="let state of states" value={{state}}>{{state}}</option>
 </select>
 
-<div class="gallery">
-    <ng-container *ngFor="let photo of parkPhotos">
-      <img class="parkImage" src="{{photo.image}}" alt="{{photo.park.name}}">
-    </ng-container>
+<div class="gallery-container">
+    <div class="gallery" *ngFor="let photo of parkPhotos">
+      <div class="photo-header">
+        <p (click)="displayParkDetails(photo.park)">{{photo.park.name}}</p>
+      </div>
+
+    <img class="parkImage"
+    (click)="displayParkDetails(photo.park)"
+    id="parks-per-state"
+    src="{{photo.image}}"
+    alt="{{photo.park.name}}">
+    </div>
 </div>
