@@ -61,7 +61,31 @@
 
 * **JPA & REST -> Paths :**
 	//TODO NEED TO UPDATE
-	
+	| HTTP Verb | URI                  | Request Body | Response Body | Purpose |
+	|-----------|----------------------|--------------|---------------|---------|
+	| POST| `/api/register`      | Representation of New User resource   |Description of Operation Results | Representation of a new _User_ resource |
+	| GET | `/api/authenticate` | Username and Password fields of _User_ resource | Representation of _User_ resource | Retrieve representation of _User_ resource|
+	| GET | `/api/users` |  |Representation of all _User_ resources | **Retrieve** endpoint |
+	| GET | `/api/users/1` |  | Representation of _User_ `1` | **Retrieve** endpoint |
+	| PUT | `/api/users/2`   | Representation of a new version of _User_ `2` | | **Replace** endpoint |
+	| DELETE | `/api/users/{UserId}` | | Description Of Results of Operation | **Delete** endpoint |
+	| PUT | `/api/users/{ParkId}/parks` | | Representation of a new version of _User_ Resource | **Update** endpoint|
+	| PUT | `/api/users/parks{ParkId}` | | Representation of a new version of _User_ Resource | **Update** endpoint |
+	| GET | `/api/parks` | | Representation of All _Park_ Resources | **Retrieve** endpoint |
+	| GET | `/api/parks/10`   || Representation of _Park_ `10` | **Retrieve** endpoint |
+	| PUT | `/api/parks/{ParkId}` | Representation of new Version of _Park_ Resource | Representation of new Version of _Park_ Resource | **Update** endpoint |
+	| GET | `api/parks/{parkId}/comments` | | Representation of _ParkComment_ resources related to _Park_ Resource | **Retrieve** endpoint |
+	| POST | `/api/parks/parkId/comments` | Representation of a new _ParkComment_ resource | Description of the result of the operation | **Create** endpoint |
+	| DELETE | `/api/parks/{parkId}/comments/{commentId}`| | Description of operation Results | **Delete** endpoint |
+	| POST | `/api/parks/{parkId}/comments/{commentId}` | Representation of new _ParkComment_ resource | | **Create** endpoint |
+	| POST | `/api/parks/{ParkId}/ratings` | Representation of new _ParkRating_ Resource | Representation of new _ParkRating_ Resource | **Create** endpoint |
+	| GET | `/api/parkPhotos` | | Representation of All _Park_ Resources | **Retrieve** endpoint
+	| GET | `/api/parkPhotos/{stateName}`|  | Representation of All _ParkPhoto_ resources in relation to _State_ resource | **Retrieve** endpoint |
+	| GET | `/api/states` | | Representation of all _State_ Resources | **Retrieve** endpoint |
+	| GET | `/api/attractions/{attrId}` | | Representation of _Attraction_ Resource | **Retrieve** endpoint |
+	| GET | `/api/attractions/{attrId}` | | Representation of _AttractionComment_ Resources related to _Attraction_ Resource | **Retrieve** endpoint |
+	| POST | `/api/attractions/{attrId}/comments` | Representation of new _AttractionComment_ Resource | | **Create** endpoint |
+	| POST | `/api/attractions/{attrId}/comments/{commentId}` | representation of new _AttractionComment_ Resource | | **Create** endpoint |
 
 * **Visual Studio Code -> Angular :**
 	//TODO NEED TO UPDATE
