@@ -95,7 +95,7 @@ export class ParkService {
     return this.selectedParkSubject.asObservable();
   }
 
-  setSelectedAttraction(attraction:Attraction | null){
+  setSelectedAttraction(attraction: Attraction | null) {
     this.selectedAttractionSubject.next(attraction);
   }
 

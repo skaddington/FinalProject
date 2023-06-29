@@ -29,9 +29,11 @@ loggedInUser:User|null=null;
   clearSelectedPark() {
     this.parkService.setSelectedAttraction(null);
     this.parkService.setSelectedPark(null);
+    this.parkService.setSelectedAttraction(null);
 }
 
 clearSelectedUser() {
   this.userService.setSelectedUser(null);
 }
+
 }

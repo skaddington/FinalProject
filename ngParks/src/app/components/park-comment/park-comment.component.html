@@ -64,7 +64,7 @@
                           {{ reply.user.lastName }} on
                           {{ nestedReply.createdAt | date : "shortDate" }}
                         </div>
-                        <div class="col-2">
+                        <!-- <div class="col-2">
                           <button
                             class="btn btn-warning"
                             *ngIf="nestedReply && loggedInUser"
@@ -72,7 +72,7 @@
                           >
                             Reply
                           </button>
-                        </div>
+                        </div>-->
                           <div class="col-2" *ngIf="loggedInUser?.id === nestedReply.user.id">
                             <button
                               class="btn btn-danger"
