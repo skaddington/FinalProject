@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ParkPhotosService {
 
-  private url = environment.baseUrl + 'api/gallery';
+  private url = environment.baseUrl + 'api/parkPhotos';
 
   constructor(private http: HttpClient) { }
 

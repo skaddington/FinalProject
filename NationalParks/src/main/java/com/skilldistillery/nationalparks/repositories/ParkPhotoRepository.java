@@ -10,7 +10,9 @@ public interface ParkPhotoRepository extends JpaRepository<ParkPhoto, Integer>{
 	
 	ParkPhoto findById(int id);
 	
-	List<ParkPhoto> findByPark_States_Name(String state);
+	List<ParkPhoto> findByPark_States_Name(String stateName);
+	
+	
 	
 	//@Query("SELECT p FROM Park p WHERE p.state.name = :stateName")
    // List<ParkPhoto> findByParkStateName(@Param("stateName") String stateName);
