@@ -93,39 +93,6 @@ export class GalleryComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  getParkPicturesByState(state: string) {
-
-    this.parkPhotosService.show(state).subscribe((data: any) => {
-      this.parkPhotos = data;
-    })
-
-  }
-
-  getParkPhotos(stateName:string) {
-    this.parkPhotosService.show(stateName).subscribe({
-      next: (parkPhotoList) => {
-        this.parkPhotos = parkPhotoList;
-      },
-      error: (problem) => {
-        console.error('ParkComponent.reload(): error loading Parks');
-        console.error(problem);
-      },
-    });
-  }
-
-  onStateChange(event: any) {
-    this.selectedOption = event.target.value;
-    this.getParkPhotos(this.selectedOption);
-  }
-
-
-
-
-
-
-
-
-
   checkUser(): User | null {
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
@@ -146,9 +113,7 @@ export class GalleryComponent implements OnInit {
     this.checkUser();
     let idString = this.route.snapshot.paramMap.get('id');
     if (!this.selectedPark && idString) {
-      // console.log(idString);
       let parkId: number = Number.parseInt(idString);
-      // console.log(parkId);
       if (isNaN(parkId)) {
         this.router.navigateByUrl('loser');
       } else {
@@ -205,6 +170,31 @@ export class GalleryComponent implements OnInit {
   });
 
 
+  }
+
+  getParkPicturesByState(state: string): void {
+    this.parkPhotosService.show(state).subscribe((data: any) => {
+      this.parkPhotos = data;
+    })
+  }
+
+  getParkPhotos(stateName:string) {
+    this.parkPhotosService.show(stateName).subscribe({
+      next: (parkPhotoList) => {
+        this.parkPhotos = parkPhotoList;
+      },
+      error: (problem) => {
+        console.error('ParkComponent.reload(): error loading Parks');
+        console.error(problem);
+      },
+    });
+  }
+
+  onStateChange(event: any) {
+    console.log(event);
+    this.selectedOption = event.target.value;
+    console.log(event.target.value);
+    this.getParkPhotos(this.selectedOption);
   }
 
 
