@@ -103,7 +103,7 @@ export class ParkComponent {
       },
       error: (problem) => {
         console.error('ParkComponent.reload(): error loading Parks');
-        console.error(problem);
+        console.error('User is ' + problem);
       },
     });
     if (this.loggedInUser) {
@@ -152,6 +152,10 @@ export class ParkComponent {
 
   selectAttraction(attraction: Attraction) {
     this.selectedAttraction = attraction;
+  }
+
+  submitUserRating(){
+    console.log()
   }
 
   showPark(parkId: number) {

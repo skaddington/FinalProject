@@ -39,10 +39,11 @@
     <div class="col-5">
       <h5>Established in {{ selectedPark.dateEstablished }}</h5>
       <blockquote>{{ selectedPark.description }}</blockquote>
-      <h4>Average Park Rating : {{ selectedPark.parkRatings | averageParkRating }}</h4>
-        <div *ngFor="let state of selectedPark.states">
-        <h4>{{state.name}}</h4>
+      <h4>Located in the Following State(s) : </h4>
+      <div *ngFor="let state of selectedPark.states">
+        <h5>{{state.name}}</h5>
         </div>
+      <h4>Average Park Rating : {{ selectedPark.parkRatings | averageParkRating }}</h4>
     </div>
     <div class="col-7">
       <img
@@ -72,6 +73,18 @@
       </ng-container>
     </span>
   </div>
+
+  <hr />
+
+  <ng-container *ngIf="loggedInUser">
+    <div class="row park-rating">
+      <app-park-rating
+        [loggedInUser]="loggedInUser"
+        [selectedPark]="selectedPark"
+        (reloadPark)="refreshSelectedPark($event)"
+      ></app-park-rating>
+    </div>
+  </ng-container>
 
   <hr />
 
