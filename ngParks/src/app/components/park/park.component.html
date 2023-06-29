@@ -76,7 +76,7 @@
 
   <hr />
 
-  <ng-container *ngIf="loggedInUser">
+  <ng-container *ngIf="loggedInUser && !hadRatedPark">
     <div class="row park-rating">
       <app-park-rating
         [loggedInUser]="loggedInUser"
@@ -84,6 +84,10 @@
         (reloadPark)="refreshSelectedPark($event)"
       ></app-park-rating>
     </div>
+  </ng-container>
+
+  <ng-container *ngIf="loggedInUser && hadRatedPark">
+    <h5 style="text-align: center">You have already rated this Park</h5>
   </ng-container>
 
   <hr />

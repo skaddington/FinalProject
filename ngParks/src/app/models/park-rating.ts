@@ -1,8 +1,9 @@
 import { Park } from './park';
+import { ParkRatingId } from './park-rating-id';
 import { User } from './user';
 
 export class ParkRating {
-  id: number;
+  id: ParkRatingId;
   rating: number;
   ratingComment: string;
   ratingDate: Date | null;
@@ -10,7 +11,7 @@ export class ParkRating {
   park: Park;
 
   constructor(
-    id: number = 0,
+    id: ParkRatingId = new ParkRatingId(),
     rating: number = 0,
     ratingComment: string = '',
     ratingDate: Date | null = null,

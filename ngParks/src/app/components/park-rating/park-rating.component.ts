@@ -28,7 +28,7 @@ export class ParkRatingComponent {
   }
 
   submitUserRating(parkRating:ParkRating) {
-    console.log(this.parkRating.rating);
+    console.log(this.parkRating);
     if (this.selectedPark) {
       this.parkService
         .addParkRating(this.parkRating, this.selectedPark.id)
@@ -37,6 +37,7 @@ export class ParkRatingComponent {
             this.parkRating = addedRating;
             this.loggedInUser?.parkRatings.push(parkRating);
             this.selectedPark?.parkRatings.push(parkRating);
+            this.reloadPark.emit(this.selectedPark?.id);
           },
           error: (problem) => {
             console.error(

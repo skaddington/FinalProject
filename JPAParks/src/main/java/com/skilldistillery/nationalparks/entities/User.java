@@ -45,7 +45,7 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	@JsonIgnoreProperties({ "user", "park" })
+	@JsonIgnoreProperties({ "user", "park"})
 	@OneToMany(mappedBy = "user")
 	private List<Attraction> attractions;
 	@JsonIgnoreProperties({"attraction", "user"})
@@ -60,7 +60,7 @@ public class User {
 	@JsonIgnoreProperties({"park", "user"})
 	@OneToMany(mappedBy = "park")
 	private List<ParkComment> parkComments;
-	@JsonIgnore
+	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy = "user")
 	private List<ParkRating> parkRatings;
 	// @JsonIgnore

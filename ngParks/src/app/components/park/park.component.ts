@@ -83,7 +83,7 @@ export class ParkComponent {
   ];
 
   constructor(
-    private stateService:StateService,
+    private stateService: StateService,
     private parkService: ParkService,
     private statePipe: StatePipe,
     private route: ActivatedRoute,
@@ -91,15 +91,15 @@ export class ParkComponent {
     private authService: AuthService,
     private userService: UserService
   ) {
-    this.parkService.getSelectedPark().subscribe(selectedPark => {
+    this.parkService.getSelectedPark().subscribe((selectedPark) => {
       this.selectedPark = selectedPark;
     });
-}
+  }
 
   checkUser(): User | null {
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
-        return (this.loggedInUser = user);
+        this.loggedInUser = user;
       },
       error: (problem) => {
         console.error('ParkComponent.reload(): error loading Parks');
@@ -114,18 +114,23 @@ export class ParkComponent {
 
   ngOnInit() {
     this.checkUser();
-    let idString = this.route.snapshot.paramMap.get('id');
-    if (!this.selectedPark && idString) {
-      // console.log(idString);
-      let parkId: number = Number.parseInt(idString);
-      // console.log(parkId);
-      if (isNaN(parkId)) {
-        this.router.navigateByUrl('loser');
-      } else {
-        this.showPark(parkId);
-      }
-    }
     this.reload();
+    this.route.paramMap.subscribe(
+      params=> {
+        let idString = params.get('id');
+        if (!this.selectedPark && idString) {
+          // console.log(idString);
+          let parkId: number = Number.parseInt(idString);
+          // console.log(parkId);
+          if (isNaN(parkId)) {
+            this.router.navigateByUrl('loser');
+          } else {
+            this.showPark(parkId);
+          }
+        }
+
+      }
+    );
   }
 
   reload(): void {
@@ -140,9 +145,8 @@ export class ParkComponent {
     });
   }
 
-
-
   displayParkDetails(park: Park) {
+    this.checkUserParkRatings(park);
     return (this.selectedPark = park);
   }
 
@@ -154,18 +158,28 @@ export class ParkComponent {
     this.selectedAttraction = attraction;
   }
 
-  submitUserRating(){
-    console.log()
+  submitUserRating() {
+    console.log();
   }
 
   showPark(parkId: number) {
     this.parkService.show(parkId).subscribe({
       next: (foundPark) => {
         this.selectedPark = foundPark;
+         this.authService.getLoggedInUser().subscribe({
+           next: (user) => {
+             this.loggedInUser = user;
+             this.checkUserParkRatings(foundPark);
+           },
+           error: (problem) => {
+             console.error('ParkComponent.reload(): error loading Parks');
+             console.error('User is ' + problem);
+           },
+         });
         this.reload();
       },
       error: (somethingBlewUp) => {
-        console.error('ParkComponent.showTodo(): error getting Park:');
+        console.error('ParkComponent.showPark(): error getting Park:');
         console.error(somethingBlewUp);
         this.router.navigateByUrl('still a loser');
       },
@@ -196,17 +210,40 @@ export class ParkComponent {
     this.selectedAttraction = selectedAttraction;
   }
 
-  refreshSelectedPark(parkId:number) {
-  this.parkService.show(parkId).subscribe({
-    next: (updatedPark) => {
-      this.selectedPark = updatedPark;
-    },
-    error: (nothingChanged) => {
-      console.error('ParkComponent.RefreshSelectedPark(): error refreshing Park:');
-      console.error(nothingChanged);
-    },
-  });
-
-
+  refreshSelectedPark(parkId: number) {
+    this.parkService.show(parkId).subscribe({
+      next: (updatedPark) => {
+        this.selectedPark = updatedPark;
+        this.checkUserParkRatings(this.selectedPark);
+      },
+      error: (nothingChanged) => {
+        console.error(
+          'ParkComponent.RefreshSelectedPark(): error refreshing Park:'
+        );
+        console.error(nothingChanged);
+      },
+    });
   }
+
+  hadRatedPark: boolean | undefined = false;
+  checkUserParkRatings(park: Park) {
+    this.hadRatedPark= false;
+    console.log('beginning of rating check ' + this.hadRatedPark);
+    console.log(this.loggedInUser);
+    if (this.loggedInUser && park) {
+      for (let userParkRating of this.loggedInUser?.parkRatings) {
+        console.log('middle of rating check ' + userParkRating.park.id);
+          if (userParkRating.park.id === park.id) {
+            this.hadRatedPark = true;
+            console.log('end of rating check ' + this.hadRatedPark);
+            break;
+          }
+        }
+    }
+  }
+
+
+
+
+
 }
