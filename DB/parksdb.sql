@@ -1136,7 +1136,7 @@ INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`)
 INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (127, 43, 3, 'https://greatruns.com/wp-content/uploads/2017/05/mt-rainier-natl-park.jpeg', NULL);
 INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (128, 43, 5, 'https://images.seattletimes.com/wp-content/uploads/2023/04/04282023_tzr_tzr_104102.jpg?d=1200x630', NULL);
 INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (129, 43, 1, 'https://www.rei.com/adventures/assets/adventures/images/trip/gallery/northamerica/rai_02', NULL);
-INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (130, 44, 4, 'https://www.travelawaits.com/2560770/new-river-gorge-national-park-things-to-know/', NULL);
+INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (130, 44, 4, 'https://wvexplorer.com/wp-content/uploads/2017/05/New-River-Gorge-by-Wendy-Parks-Scott.jpg', NULL);
 INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (131, 44, 3, 'https://wvtourism.com/wp-content/uploads/2021/03/DSC09895-720x480-d230ded7-8d0f-40e4-af62-24080a3453c3.jpg', NULL);
 INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (132, 44, 2, 'https://www.nps.gov/common/uploads/grid_builder/neri/crop16_9/7C7B0247-1DD8-B71B-0B21F09BD8D7BB80.jpg?width=640&quality=90&mode=crop', NULL);
 INSERT INTO `park_photo` (`id`, `park_id`, `user_id`, `image_url`, `image_date`) VALUES (133, 45, 2, 'https://seattleoasisvacations.com/wp-content/uploads/sites/833/2020/01/lake-ann_cropped-for-nat-geo-1020x680.jpg', NULL);
