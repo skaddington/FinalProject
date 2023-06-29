@@ -25,6 +25,7 @@ export class GalleryComponent implements OnInit {
   states: string[] = [
   'Alabama',
   'Alaska',
+  'American Samoa',
   'Arizona',
   'Arkansas',
   'California',
@@ -69,6 +70,7 @@ export class GalleryComponent implements OnInit {
   'Utah',
   'Vermont',
   'Virginia',
+  'Virgin Islands',
   'Washington',
   'West Virgina',
   'Wisconsin',
