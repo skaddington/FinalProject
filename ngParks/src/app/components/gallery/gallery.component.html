@@ -1,0 +1,20 @@
+<h1>Gallery</h1>
+
+<select *ngIf="!selectedState" name="states" id="selectState" (change)="onStateChange($event)">
+  <option value="">Select a State</option>
+  <option *ngFor="let state of states" value={{state}}>{{state}}</option>
+</select>
+
+<div class="gallery-container">
+    <div class="gallery" *ngFor="let photo of parkPhotos">
+      <div class="photo-header">
+        <p (click)="displayParkDetails(photo.park)">{{photo.park.name}}</p>
+      </div>
+
+    <img class="parkImage"
+    (click)="displayParkDetails(photo.park)"
+    id="parks-per-state"
+    src="{{photo.image}}"
+    alt="{{photo.park.name}}">
+    </div>
+</div>
