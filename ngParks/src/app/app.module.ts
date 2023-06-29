@@ -1,3 +1,4 @@
+import { NgPipesModule } from 'ngx-pipes';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,7 +24,6 @@ import { AttractionComponent } from './components/attraction/attraction.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ParkCommentComponent } from './components/park-comment/park-comment.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
-import { NgPipesModule } from 'ngx-pipes';
 import { ParkRatingComponent } from './components/park-rating/park-rating.component';
 import { AverageParkRatingPipe } from './pipes/average-park-rating.pipe';
 import { DatePipe } from '@angular/common';

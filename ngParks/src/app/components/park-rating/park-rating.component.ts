@@ -1,6 +1,8 @@
 import { ParkRating } from './../../models/park-rating';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Park } from 'src/app/models/park';
+import { User } from 'src/app/models/user';
+import { ParkService } from 'src/app/services/park.service';
 
 @Component({
   selector: 'app-park-rating',
@@ -8,16 +10,42 @@ import { Park } from 'src/app/models/park';
   styleUrls: ['./park-rating.component.css'],
 })
 export class ParkRatingComponent {
+  @Input() loggedInUser: User | null = null;
   @Input() selectedPark: Park | null = null;
-  parkRatings: number[] = [];
-  averageParkRating: number | undefined = undefined;
+  parkRating: ParkRating = new ParkRating();
 
-  // getParkRatings(): void(
-  //   if(selectedPark){
-  //     for(let rating of this.selectedPark.parkRatings){
+  @Output() reloadPark = new EventEmitter<number>();
 
-  //     }
-  //   }
-  // )
+  constructor(private parkService: ParkService) {}
 
+  setRatingValue(value: number) {
+    this.parkRating.rating = value;
+    if (this.loggedInUser && this.selectedPark){
+      this.parkRating.user = this.loggedInUser;
+      this.parkRating.park = this.selectedPark;
+    }
+    this.submitUserRating(this.parkRating);
+  }
+
+  submitUserRating(parkRating:ParkRating) {
+    console.log(this.parkRating.rating);
+    if (this.selectedPark) {
+      this.parkService
+        .addParkRating(this.parkRating, this.selectedPark.id)
+        .subscribe({
+          next: (addedRating) => {
+            this.parkRating = addedRating;
+            this.loggedInUser?.parkRatings.push(parkRating);
+            this.selectedPark?.parkRatings.push(parkRating);
+          },
+          error: (problem) => {
+            console.error(
+              'ParkRatingComponent.submitUserRating(): error adding Park Rating'
+            );
+            console.error(problem);
+          },
+        });
+    }
+  }
 }
+// parks / { pid } / ratings;

@@ -1,1 +1,29 @@
-<p>park-rating works!</p>
+<h5 style="text-align: center">Rate this Park</h5>
+<blockquote>
+  <form class="park-rating-form">
+    <label for="rating">&#11088;</label>
+    <input
+      type="radio"
+      name="rating"
+      value="1"
+      [(ngModel)]="parkRating.rating"
+      (click)="setRatingValue(1)"
+    />
+    <label for="rating">&#11088;&#11088;</label>
+    <input
+      type="radio"
+      name="rating"
+      value="2"
+      [(ngModel)]="parkRating.rating"
+      (click)="setRatingValue(2)"
+    />
+    <label for="rating">&#11088;&#11088;&#11088;</label>
+    <input
+      type="radio"
+      name="rating"
+      value="3"
+      [(ngModel)]="parkRating.rating"
+      (click)="setRatingValue(3)"
+    />
+  </form>
+</blockquote>

@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Park } from '../models/park';
 import { AuthService } from './auth.service';
+import { ParkRating } from '../models/park-rating';
 
 @Injectable({
   providedIn: 'root',
@@ -68,6 +69,22 @@ export class ParkService {
       );
   }
 
+  addParkRating(rating: ParkRating, parkId:number): Observable<ParkRating> {
+    return this.http
+      .post<ParkRating>(
+        this.url + '/' + parkId + '/ratings',
+        rating,
+        this.getHttpOptions()
+      )
+      .pipe(
+        catchError((err: any) => {
+          console.error(err);
+          return throwError(
+            () => new Error('ParkService.addParkRating(): error adding Park Rating: ' + err)
+          );
+        })
+      );
+  }
 
   setSelectedPark(park: Park | null) {
     this.selectedParkSubject.next(park);
