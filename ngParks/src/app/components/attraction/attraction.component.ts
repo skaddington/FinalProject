@@ -50,7 +50,7 @@ addReplyComment() {
           this.selectedAttraction?.attractionComments.push(addedComment);
           this.loggedInUser?.attractionComments.push(addedComment);
           if(this.selectedComment?.replies) {
-          this.selectedComment?.replies.push(addedComment);
+            this.selectedComment?.replies.push(addedComment);
           }
           this.comment = new AttractionComment();
         },
@@ -59,7 +59,8 @@ addReplyComment() {
           console.error(nothingChanged);
         },
       });
-  }
+      this.reloadSelectedAttraction(this.selectedAttraction?.id);
+    }
 }
 
 deleteComment(commentId:number) {
