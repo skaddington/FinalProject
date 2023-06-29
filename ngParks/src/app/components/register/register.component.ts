@@ -18,7 +18,7 @@ export class RegisterComponent {
      ) {}
 
   register(user: User): void {
-     console.log(user);
+    //  console.log(user);
      this.auth.register(user).subscribe({
         next: (registeredUser) => {
            this.auth.login(user.username, user.password).subscribe({

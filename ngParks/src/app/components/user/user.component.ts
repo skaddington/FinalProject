@@ -32,9 +32,9 @@ export class UserComponent {
   ngOnInit() {
     let idString = this.route.snapshot.paramMap.get('id');
     if (!this.selectedUser && idString) {
-      console.log(idString);
+      // console.log(idString);
       let userId: number = Number.parseInt(idString);
-      console.log(userId);
+      // console.log(userId);
       if (isNaN(userId)) {
         this.router.navigateByUrl('loser');
       } else {
@@ -77,14 +77,10 @@ export class UserComponent {
     });
   }
 
-  // getActiveUsersCount(): number {
-  //   return this.incompletePipe.transform(this.todos, false).length;
-  // }
-
   displayUserDetails(user: User) {
     this.selectedUser = user;
-    console.log(this.selectedUser.username)
-    console.log(this.loggedInUser?.username);
+    // console.log(this.selectedUser.username)
+    // console.log(this.loggedInUser?.username);
     return this.selectedUser;
   }
 
@@ -126,11 +122,6 @@ export class UserComponent {
     });
   }
 
-// disableUser(user: User){
-//   user.enabled = false;
-//   this.updateUser(user, false);
-// }
-
 disableUser(user: User){
   this.userService.toggle(user)
   .subscribe({
@@ -144,13 +135,10 @@ disableUser(user: User){
   });
 }
 
-
 enableUser(user: User){
   user.enabled = true;
   this.updateUser(user, false);
 }
-
-
 
   handleRemovalSuccess(loggedInUser:User) {
     this.loggedInUser = loggedInUser;

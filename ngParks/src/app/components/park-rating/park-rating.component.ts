@@ -28,7 +28,7 @@ export class ParkRatingComponent {
   }
 
   submitUserRating(parkRating:ParkRating) {
-    console.log(this.parkRating);
+    // console.log(this.parkRating);
     if (this.selectedPark) {
       this.parkService
         .addParkRating(this.parkRating, this.selectedPark.id)
@@ -49,4 +49,3 @@ export class ParkRatingComponent {
     }
   }
 }
-// parks / { pid } / ratings;

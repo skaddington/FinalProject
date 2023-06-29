@@ -53,18 +53,6 @@ export class UserService {
       );
   }
 
-  // create(newTodo: Todo): Observable<Todo> {
-  //   return this.http.post<Todo>(this.url, newTodo, this.getHttpOptions()).pipe(
-  //     catchError((err: any) => {
-  //       console.error(err);
-  //       return throwError(
-  //         () => new Error('TodoService.create(): error creating Todo: ' + err)
-  //       );
-  //     })
-  //   );
-  // }
-
-
   toggle(user: User): Observable<User> {
     return this.http
       .delete<User>(this.url + '/' + user.id, this.getHttpOptions())
@@ -105,7 +93,7 @@ export class UserService {
   }
 
   removeFavoritePark(user: User, pid:number): Observable<User> {
-    console.log(pid);
+    // console.log(pid);
     return this.http
       .put<User>(this.url + "/parks/" + pid, user, this.getHttpOptions())
       .pipe(
@@ -127,16 +115,3 @@ export class UserService {
   }
 
 }
-  // destroy(todoId: number): Observable<void> {
-  //   return this.http
-  //     .delete<void>(this.url + '/' + todoId, this.getHttpOptions())
-  //     .pipe(
-  //       catchError((err: any) => {
-  //         console.error(err);
-  //         return throwError(
-  //           () =>
-  //             new Error('TodoService.destroy(): error deleting todo: ' + err)
-  //         );
-  //       })
-  //     );
-  // }

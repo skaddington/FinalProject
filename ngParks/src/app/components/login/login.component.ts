@@ -18,7 +18,7 @@ export class LoginComponent {
    ) {}
 
    login(loginUser: User): void {
-      console.log(loginUser);
+      // console.log(loginUser);
       this.auth.login(loginUser.username, loginUser.password).subscribe({
          next: (loggedInUser) => {
             this.router.navigateByUrl('');
