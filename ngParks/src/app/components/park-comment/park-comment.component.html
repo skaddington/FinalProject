@@ -1,6 +1,6 @@
 <h5 style="text-align: center">User Comments about the Park</h5>
 <ng-container *ngFor="let comment of selectedPark?.parkComments">
-  <div *ngIf="comment.comment === null && comment.enabled" class="park-comment">
+  <div *ngIf="comment.comment === null && comment.enabled && comment.user.enabled" class="park-comment">
     <blockquote class="row park-comments">
       <div class="col-8">
         "{{ comment.content }}"<br />
@@ -26,7 +26,7 @@
         <div class="nested-replies">
           <ng-container *ngFor="let reply of comment.replies">
             <!-- <app-comment [reply]="reply"> -->
-            <div *ngIf="reply.enabled" class="park-reply">
+            <div *ngIf="reply.enabled && reply.user.enabled" class="park-reply">
               <blockquote class="row park-comments">
                 <div class="col-8">
                   {{ reply.content }} <br />

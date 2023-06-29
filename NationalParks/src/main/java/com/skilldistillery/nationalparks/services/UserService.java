@@ -13,4 +13,5 @@ public interface UserService {
 	User addParkToUserFavorites(String username, int pid);
 	User findByUsername(String username);
 	User removeParkFromUserFavorites(String username, int pid);
+	boolean disableUser(int id);
 }

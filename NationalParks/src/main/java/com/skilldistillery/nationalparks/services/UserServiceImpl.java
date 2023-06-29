@@ -70,6 +70,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public boolean disableUser(int id) {
+		User userForDisable = userRepo.findById(id);
+		boolean initialEnabled = userForDisable.isEnabled();
+		userForDisable.setEnabled(!userForDisable.isEnabled());
+		if (userForDisable.isEnabled() != initialEnabled) {
+			userRepo.saveAndFlush(userForDisable);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public User addParkToUserFavorites(String username, int pid) {
 		User loggedInUser = userRepo.findByUsername(username);
 		Park existingPark = parkRepo.findById(pid);
@@ -77,22 +89,18 @@ public class UserServiceImpl implements UserService {
 			List<Park> favoriteParks = loggedInUser.getFavoriteParks();
 			favoriteParks.add(existingPark);
 			loggedInUser.setFavoriteParks(favoriteParks);
-//			existingPark.addUser(loggedInUser);
-//			userRepo.saveAndFlush(loggedInUser);
 			parkRepo.saveAndFlush(existingPark);
 		}
 		return loggedInUser;
 
 	}
-	
+
 	@Override
 	public User removeParkFromUserFavorites(String username, int pid) {
 		User loggedInUser = userRepo.findByUsername(username);
 		Park existingPark = parkRepo.findById(pid);
 		if (existingPark != null) {
 			loggedInUser.removePark(existingPark);
-//			existingPark.addUser(loggedInUser);
-//			userRepo.saveAndFlush(loggedInUser);
 			parkRepo.saveAndFlush(existingPark);
 		}
 		return loggedInUser;

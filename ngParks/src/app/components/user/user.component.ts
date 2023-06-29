@@ -126,10 +126,24 @@ export class UserComponent {
     });
   }
 
+// disableUser(user: User){
+//   user.enabled = false;
+//   this.updateUser(user, false);
+// }
+
 disableUser(user: User){
-  user.enabled = false;
-  this.updateUser(user, false);
+  this.userService.toggle(user)
+  .subscribe({
+    next: (result) => {
+      this.reload();
+    },
+    error: (nothingChanged) => {
+      console.error('ParkCommentComponent.deleteComment(): error removing ParkComment:');
+      console.error(nothingChanged);
+    },
+  });
 }
+
 
 enableUser(user: User){
   user.enabled = true;
