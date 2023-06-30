@@ -134,11 +134,11 @@
   <hr />
 
   <div class="row">
-    <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">
+    <!-- <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">
       <button class="btn btn-success" id="editButton" (click)="setEditPark()">
         Edit Park Information
       </button>
-    </div>
+    </div> -->
     <div class="col" *ngIf="loggedInUser">
       <app-add-to-favorites
         [selectedPark]="selectedPark"
