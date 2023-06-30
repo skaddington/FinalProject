@@ -18,7 +18,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ngb-carousel{
-  min-height: 400px;
+  /* min-height: 500px; */
+  height: 650px;
   display: flex !important;
   align-items: center;
 }
@@ -32,7 +33,7 @@ ngb-carousel{
 
 #carouselPhoto  {
   max-width: 30%;
-  max-height: 100%;
+  max-height:625px;
   padding: 10px;
   border-style: ridge;
   border-width: 2px;
@@ -44,7 +45,7 @@ ngb-carousel{
 
 img {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 600px;
 }
 .carousel-caption{
   background-color: rgba(0, 0, 0, 0.3);
