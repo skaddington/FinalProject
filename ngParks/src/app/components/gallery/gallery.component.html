@@ -5,16 +5,29 @@
   <option *ngFor="let state of states" value={{state}}>{{state}}</option>
 </select>
 
-<div class="gallery-container">
+<div class="gallery-container" *ngIf="!selectedPhoto">
     <div class="gallery" *ngFor="let photo of parkPhotos">
       <div class="photo-header">
-        <p (click)="displayParkDetails(photo.park)">{{photo.park.name}}</p>
+        <p>{{photo.park.name}}</p>
       </div>
 
     <img class="parkImage"
-    (click)="displayParkDetails(photo.park)"
+    (click)="displayParkPhoto(photo)"
     id="parks-per-state"
     src="{{photo.image}}"
     alt="{{photo.park.name}}">
     </div>
 </div>
+
+<ng-container *ngIf="selectedPhoto">
+  <div class="selectedPhotoDiv">
+    <h4>{{selectedPhoto.park.name}}</h4>
+    <img id="selectedPhoto"
+      src="{{selectedPhoto.image}}"
+      alt="{{selectedPhoto.park.name}}">
+    <div class="row">
+      <button class="btn btn-info col-4" id="goToButton" (click)="displayParkDetails(selectedPhoto.park)">See More About This Park</button>
+      <button class="btn btn-danger col-4" id="backButton" (click)="displayAllPhotos()">Back to Gallery</button>
+    </div>
+  </div>
+</ng-container>

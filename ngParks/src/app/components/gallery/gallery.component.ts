@@ -15,42 +15,42 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.css']
+  styleUrls: ['./gallery.component.css'],
 })
 export class GalleryComponent implements OnInit {
-
   states: string[] = [
-  'Alaska',
-  'American Samoa',
-  'Arizona',
-  'Arkansas',
-  'California',
-  'Colorado',
-  'Florida',
-  'Hawaii',
-  'Idaho',
-  'Indiana',
-  'Kentucky',
-  'Maine',
-  'Michigan',
-  'Minnesota',
-  'Montana',
-  'Nevada',
-  'New Mexico',
-  'North Carolina',
-  'North Dakota',
-  'Ohio',
-  'Oregon',
-  'South Carolina',
-  'Tennessee',
-  'Texas',
-  'South Dakota',
-  'Utah',
-  'Virginia',
-  'Virgin Islands',
-  'Washington',
-  'West Virgina',
-  'Wyoming',];
+    'Alaska',
+    'American Samoa',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Florida',
+    'Hawaii',
+    'Idaho',
+    'Indiana',
+    'Kentucky',
+    'Maine',
+    'Michigan',
+    'Minnesota',
+    'Montana',
+    'Nevada',
+    'New Mexico',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oregon',
+    'South Carolina',
+    'Tennessee',
+    'Texas',
+    'South Dakota',
+    'Utah',
+    'Virginia',
+    'Virgin Islands',
+    'Washington',
+    'West Virgina',
+    'Wyoming',
+  ];
 
   loggedInUser: User | null = null;
   parks: Park[] = [];
@@ -58,13 +58,14 @@ export class GalleryComponent implements OnInit {
   parkPhotos: ParkPhoto[] = [];
   @Input() selectedPark: Park | null = null;
   selectedState: any;
+  selectedPhoto: ParkPhoto | null = null;
 
   constructor(
     private parkService: ParkService,
     private parkPhotosService: ParkPhotosService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   checkUser(): User | null {
@@ -109,14 +110,17 @@ export class GalleryComponent implements OnInit {
     });
   }
 
+  displayParkPhoto(photo: ParkPhoto) {
+    return (this.selectedPhoto = photo);
+  }
+
+  displayAllPhotos() {
+    return (this.selectedPhoto = null);
+  }
+
   displayParkDetails(park: Park) {
-    return (this.selectedPark = park);
+    this.router.navigateByUrl('parks/' + park.id);
   }
-
-  displayParkTable() {
-    return (this.selectedPark = null);
-  }
-
 
   showPark(parkId: number) {
     this.parkService.show(parkId).subscribe({
@@ -132,27 +136,27 @@ export class GalleryComponent implements OnInit {
     });
   }
 
-  refreshSelectedPark(parkId:number) {
-  this.parkService.show(parkId).subscribe({
-    next: (updatedPark) => {
-      this.selectedPark = updatedPark;
-    },
-    error: (nothingChanged) => {
-      console.error('ParkComponent.RefreshSelectedPark(): error refreshing Park:');
-      console.error(nothingChanged);
-    },
-  });
-
-
+  refreshSelectedPark(parkId: number) {
+    this.parkService.show(parkId).subscribe({
+      next: (updatedPark) => {
+        this.selectedPark = updatedPark;
+      },
+      error: (nothingChanged) => {
+        console.error(
+          'ParkComponent.RefreshSelectedPark(): error refreshing Park:'
+        );
+        console.error(nothingChanged);
+      },
+    });
   }
 
   getParkPicturesByState(state: string): void {
     this.parkPhotosService.show(state).subscribe((data: any) => {
       this.parkPhotos = data;
-    })
+    });
   }
 
-  getParkPhotos(stateName:string) {
+  getParkPhotos(stateName: string) {
     this.parkPhotosService.show(stateName).subscribe({
       next: (parkPhotoList) => {
         this.parkPhotos = parkPhotoList;
@@ -170,6 +174,4 @@ export class GalleryComponent implements OnInit {
     // console.log(event.target.value);
     this.getParkPhotos(this.selectedOption);
   }
-
-
 }
