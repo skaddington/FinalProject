@@ -27,6 +27,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { ParkRatingComponent } from './components/park-rating/park-rating.component';
 import { AverageParkRatingPipe } from './pipes/average-park-rating.pipe';
 import { DatePipe } from '@angular/common';
+import { AttractionCommentComponent } from './components/attraction-comment/attraction-comment.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { DatePipe } from '@angular/common';
     ParkCommentComponent,
     GalleryComponent,
     ParkRatingComponent,
-    AverageParkRatingPipe
+    AverageParkRatingPipe,
+    AttractionCommentComponent
   ],
   imports: [
     BrowserModule,

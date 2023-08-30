@@ -19,160 +19,113 @@
 </div>
 
 <div *ngIf="selectedPark && !editPark" id="parkDetailsDiv" class="container">
-  <div class="row parkDetailsHeader">
-    <div class="col-auto">
-      <h1>{{ selectedPark.name }} | Id No. {{ selectedPark.id }}</h1>
-    </div>
-    <div class="col-auto">
-      <blockquote id="parkAddress">
-        {{ selectedPark.street }}<br />
-        {{ selectedPark.city }},
-        {{ selectedPark.state }}
-        {{ selectedPark.zip }}
-      </blockquote>
-    </div>
+<div class="row parkDetailsHeader">
+  <div class="col-auto">
+    <h1>{{ selectedPark.name }} | Id No. {{ selectedPark.id }}</h1>
   </div>
-
-  <hr />
-
-  <div class="row">
-    <div class="col-5">
-      <h5>Established in {{ selectedPark.dateEstablished }}</h5>
-      <blockquote>{{ selectedPark.description }}</blockquote>
-      <h4>Located in the Following State(s) : </h4>
-      <div *ngFor="let state of selectedPark.states">
-        <h5>{{state.name}}</h5>
-        </div>
-      <h4>Average Park Rating : {{ selectedPark.parkRatings | averageParkRating }}</h4>
-    </div>
-    <div class="col-7">
-      <img
-        id="detailsParkPhoto"
-        src="{{ selectedPark.image }}"
-        alt="Photo of {{ selectedPark.name }}"
-      />
-      <a target="_blank" href="{{ selectedPark.website }}"
-        ><button class="btn btn-info" id="websiteButton">
-          Visit this Park's Website
-        </button></a
-      >
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="row">
-    <h5 style="text-align: center">Activities Available</h5>
-    <span class="activitiesDiv">
-      <ng-container *ngFor="let activity of selectedPark?.activities">
-        <img
-          id="activity-img"
-          src="{{ activity.image }}"
-          alt="{{ activity.name }}"
-        />
-      </ng-container>
-    </span>
-  </div>
-
-  <hr />
-
-  <ng-container *ngIf="loggedInUser && !hadRatedPark">
-    <div class="row park-rating">
-      <app-park-rating
-        [loggedInUser]="loggedInUser"
-        [selectedPark]="selectedPark"
-        (reloadPark)="refreshSelectedPark($event)"
-      ></app-park-rating>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="loggedInUser && hadRatedPark">
-    <h5 style="text-align: center">You have already rated this Park</h5>
-  </ng-container>
-
-  <hr />
-
-  <div class="row">
-    <div class="park-comments">
-      <app-park-comment
-        [loggedInUser]="loggedInUser"
-        [selectedPark]="selectedPark"
-        (reloadPark)="refreshSelectedPark($event)"
-      >
-      </app-park-comment>
-    </div>
-  </div>
-
-  <hr />
-
-  <div *ngIf="!selectedAttraction" class="container attraction-container">
-    <div
-      class="attractions"
-      *ngFor="let attraction of selectedPark.attractions"
-    >
-      <div class="attraction-card-header">
-        <span>{{ attraction.name }}</span>
-      </div>
-      <img
-        (click)="selectAttraction(attraction.id)"
-        id="attraction-img"
-        src="{{ attraction.image }}"
-      />
-    </div>
-  </div>
-  <div *ngIf="selectAttraction">
-    <app-attraction
-      [selectedAttraction]="selectedAttraction"
-      (deselectAtraction)="handleDeselectAttraction($event)"
-      [selectedPark]="selectedPark"
-      [loggedInUser]="loggedInUser"
-      (reloadPark)="refreshSelectedPark($event)"
-    >
-    </app-attraction>
-  </div>
-
-  <hr />
-
-  <div class="row">
-    <!-- <div class="col" *ngIf="loggedInUser?.role === 'ADMIN'">
-      <button class="btn btn-success" id="editButton" (click)="setEditPark()">
-        Edit Park Information
-      </button>
-    </div> -->
-    <div class="col" *ngIf="loggedInUser">
-      <app-add-to-favorites
-        [selectedPark]="selectedPark"
-        [loggedInUser]="loggedInUser"
-      >
-      </app-add-to-favorites>
-    </div>
-    <div class="col">
-      <button
-        class="btn btn-primary"
-        id="backButton"
-        (click)="displayParkTable()"
-      >
-        Back To All Parks
-      </button>
-    </div>
+  <div class="col-auto">
+    <blockquote id="parkAddress">
+      {{ selectedPark.street }}<br />
+      {{ selectedPark.city }},
+      {{ selectedPark.state }}
+      {{ selectedPark.zip }}
+    </blockquote>
   </div>
 </div>
 
-<!-- <div *ngIf="editPark" id="parkEditDiv" class="container">
-  <label for="task">Task : </label>
-  <input type="text" name="task" [(ngModel)]="editPark.task" /><br />
-  <label for="description">Description : </label>
-  <input
-    type="text"
-    name="description"
-    [(ngModel)]="editPark.description"
-  /><br />
-  <label for="completed">Completed : </label>
-  <input
-    type="checkbox"
-    name="completed"
-    [(ngModel)]="editPark.completed"
-  /><br />
-  <button class="btn btn-danger" (click)="editPark = null">Cancel</button>
-  <button class="btn btn-success" (click)="updatePark(editPark)">Save</button>
-</div> -->
+<hr />
+
+<div class="row">
+  <div class="col-5">
+    <h5>Established in {{ selectedPark.dateEstablished }}</h5>
+    <blockquote>{{ selectedPark.description }}</blockquote>
+    <h4>Located in the Following State(s) :</h4>
+    <div *ngFor="let state of selectedPark.states">
+      <h5>{{ state.name }}</h5>
+    </div>
+    <h4>
+      Average Park Rating : {{ selectedPark.parkRatings | averageParkRating }}
+    </h4>
+  </div>
+  <div class="col-7">
+    <img
+      id="detailsParkPhoto"
+      src="{{ selectedPark.image }}"
+      alt="Photo of {{ selectedPark.name }}"
+    />
+    <a target="_blank" href="{{ selectedPark.website }}"
+      ><button class="btn btn-info" id="websiteButton">
+        Visit this Park's Website
+      </button></a
+    >
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <h5 style="text-align: center">Activities Available</h5>
+  <span class="activitiesDiv">
+    <ng-container *ngFor="let activity of selectedPark?.activities">
+      <img
+        id="activity-img"
+        src="{{ activity.image }}"
+        alt="{{ activity.name }}"
+      />
+    </ng-container>
+  </span>
+</div>
+
+<hr />
+
+<ng-container *ngIf="loggedInUser && !hadRatedPark">
+  <div class="row park-rating">
+    <app-park-rating
+      [loggedInUser]="loggedInUser"
+      [selectedPark]="selectedPark"
+      (reloadPark)="refreshSelectedPark($event)"
+    ></app-park-rating>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="loggedInUser && hadRatedPark">
+  <h5 style="text-align: center">You have already rated this Park</h5>
+</ng-container>
+
+<hr />
+
+<div class="row">
+  <div class="park-comments">
+    <app-park-comment
+      [loggedInUser]="loggedInUser"
+      [selectedPark]="selectedPark"
+    >
+    </app-park-comment>
+  </div>
+</div>
+
+<hr />
+
+<app-attraction [selectedPark]="selectedPark" [loggedInUser]="loggedInUser">
+</app-attraction>
+
+<hr />
+
+<div class="row">
+  <div class="col" *ngIf="loggedInUser">
+    <app-add-to-favorites
+      [selectedPark]="selectedPark"
+      [loggedInUser]="loggedInUser"
+    >
+    </app-add-to-favorites>
+  </div>
+  <div class="col">
+    <button
+      class="btn btn-primary"
+      id="backButton"
+      (click)="displayParkTable()"
+    >
+      Back To All Parks
+    </button>
+  </div>
+</div>

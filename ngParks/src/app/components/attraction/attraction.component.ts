@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Attraction } from 'src/app/models/attraction';
 import { AttractionComment } from 'src/app/models/attraction-comment';
 import { Park } from 'src/app/models/park';
@@ -9,104 +9,67 @@ import { AttractionCommentService } from 'src/app/services/attraction-comment.se
 @Component({
   selector: 'app-attraction',
   templateUrl: './attraction.component.html',
-  styleUrls: ['./attraction.component.css']
+  styleUrls: ['./attraction.component.css'],
 })
-export class AttractionComponent {
-@Input() selectedAttraction:Attraction|null=null;
-@Input() loggedInUser:User|null = null;
-@Input() selectedPark:Park|null = null
-comment: AttractionComment = new AttractionComment();
-selectedComment: AttractionComment | null = null;
-@Output() reloadPark = new EventEmitter<number>();
-constructor(private attractionCommentService:AttractionCommentService){}
+export class AttractionComponent implements OnInit {
+  @Input() selectedAttraction: Attraction | null = null;
+  @Input() loggedInUser: User | null = null;
+  @Input() selectedPark: Park | null = null;
+  comment: AttractionComment = new AttractionComment();
+  selectedComment: AttractionComment | null = null;
+  attractions: Attraction[] = [];
 
+  constructor(private attractionCommentService: AttractionCommentService) {}
 
-
-
-addComment() {
-  if (this.selectedAttraction && this.comment) {
-    this.attractionCommentService
-      .addComment(this.selectedAttraction, this.comment)
-      .subscribe({
-        next: (addedComment) => {
-          this.selectedAttraction?.attractionComments.push(addedComment);
-          this.loggedInUser?.attractionComments.push(addedComment);
-          this.comment = new AttractionComment();
-        },
-        error: (nothingChanged) => {
-          console.error('ParkComponent.updatePark(): error updating Park:');
-          console.error(nothingChanged);
-        },
-      });
-  }
-}
-
-addReplyComment() {
-  if (this.selectedAttraction && this.comment && this.selectedComment) {
-    this.attractionCommentService
-      .addReply(this.selectedAttraction, this.selectedComment.id, this.comment)
-      .subscribe({
-        next: (addedComment) => {
-          this.selectedAttraction?.attractionComments.push(addedComment);
-          this.loggedInUser?.attractionComments.push(addedComment);
-          if(this.selectedComment?.replies) {
-            this.selectedComment?.replies.push(addedComment);
-          }
-          this.comment = new AttractionComment();
-        },
-        error: (nothingChanged) => {
-          console.error('ParkComponent.updatePark(): error updating Park:');
-          console.error(nothingChanged);
-        },
-      });
-      this.reloadSelectedAttraction(this.selectedAttraction?.id);
+  ngOnInit(): void {
+    if (this.selectedPark) {
+      this.loadAllParkAttractions(this.selectedPark.id);
     }
-}
+  }
 
-deleteComment(commentId:number) {
-  if (this.selectedAttraction) {
-    this.attractionCommentService
-      .deleteComment(this.selectedAttraction, commentId)
-      .subscribe({
+  loadAllParkAttractions(parkId: number) {
+    if (this.selectedPark) {
+      this.attractionCommentService.showByPark(this.selectedPark.id).subscribe({
         next: (result) => {
-          if(this.selectedAttraction && this.selectedPark){
-          this.reloadPark.emit(this.selectedPark.id);
-          this.reloadSelectedAttraction(this.selectedAttraction.id);
-          }
-          this.selectedComment=null;
+          this.attractions = result;
         },
-        error: (nothingChanged) => {
-          console.error('ParkCommentComponent.deleteComment(): error removing ParkComment:');
-          console.error(nothingChanged);
+        error: (noJoy) => {
+          console.error(
+            'AttractionComponent.loadAllParkAttractions(); error loading Attractions'
+          );
+          console.error(noJoy);
         },
       });
-  }
-}
-
-reloadSelectedAttraction(id:number) {
-  this.attractionCommentService.show(id).subscribe({
-    next: (result) => {
-    this.selectedAttraction = result;
-    },
-    error: (nothingChanged) => {
-      console.error('ParkCommentComponent.deleteComment(): error removing ParkComment:');
-      console.error(nothingChanged);
-    },
-  });
-}
-
-
-
-displayAllAttractions() {
-  // console.log(this.selectedAttraction?.attractionComments);
-  this.selectedAttraction = null;
-  this.handleDeselectAttraction(this.selectedAttraction);
-}
-
-  @Output() deselectAtraction: EventEmitter<null> = new EventEmitter<null>();
-  handleDeselectAttraction(selectedAttraction: null) {
-    this.deselectAtraction.emit(selectedAttraction);
+    }
   }
 
+  reloadSelectedAttraction(id: number) {
+    this.attractionCommentService.show(id).subscribe({
+      next: (result) => {
+        this.selectedAttraction = result;
+      },
+      error: (nothingChanged) => {
+        console.error(
+          'ParkCommentComponent.deleteComment(): error removing ParkComment:'
+        );
+        console.error(nothingChanged);
+      },
+    });
+  }
 
+  selectAttraction(attractionId: number) {
+    this.attractionCommentService.show(attractionId).subscribe({
+      next: (attraction) => {
+        this.selectedAttraction = attraction;
+      },
+      error: (nothingChanged) => {
+        console.error('ParkComponent.updatePark(): error updating Park:');
+        console.error(nothingChanged);
+      },
+    });
+  }
+
+  displayAllAttractions() {
+    this.selectedAttraction = null;
+  }
 }

@@ -2,7 +2,7 @@
 
 <select *ngIf="!selectedState" name="states" id="selectState" (change)="onStateChange($event)">
   <option value="">Select a State</option>
-  <option *ngFor="let state of states" value={{state}}>{{state}}</option>
+  <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
 </select>
 
 <div class="gallery-container" *ngIf="!selectedPhoto">

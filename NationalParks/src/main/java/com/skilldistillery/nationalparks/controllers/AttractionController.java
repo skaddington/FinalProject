@@ -36,6 +36,15 @@ public class AttractionController {
 		}
 		return attraction;
 	}
+	
+	@GetMapping("attractions/{parkId}/parks")
+	List<Attraction> showAttractionByPark(@PathVariable Integer parkId, HttpServletResponse res) {
+		List<Attraction> attractions = attrService.showByPark(parkId);
+		if(attractions == null) {
+			res.setStatus(404);
+		}
+		return attractions;
+	}
 
 	@GetMapping("attractions/{attrId}/comments")
 	List<AttractionComment> getAttrComments(@PathVariable Integer attrId, HttpServletResponse res) {

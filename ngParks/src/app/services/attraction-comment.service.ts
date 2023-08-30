@@ -7,14 +7,11 @@ import { AttractionComment } from '../models/attraction-comment';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AttractionCommentService {
   private url = environment.baseUrl + 'api/attractions';
-  constructor(
-    private http: HttpClient,
-    private auth: AuthService
-  ) { }
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   getHttpOptions() {
     let options = {
@@ -26,55 +23,118 @@ export class AttractionCommentService {
     return options;
   }
 
+  showByPark(parkId: number): Observable<Attraction[]> {
+    return this.http.get<Attraction[]>(this.url + '/' + parkId + '/parks').pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () =>
+            new Error(
+              'AttractionCommentService.showByPark(); error showing Attractions'
+            )
+        );
+      })
+    );
+  }
 
-
-  show(attractionId:number):Observable<Attraction> {
+  showCommentByAttraction(attrId: number): Observable<AttractionComment[]> {
     return this.http
-      .get<Attraction>(this.url + '/' + attractionId)
+      .get<AttractionComment[]>(this.url + '/' + attrId + '/comments')
       .pipe(
         catchError((err: any) => {
           console.error(err);
           return throwError(
-            () => new Error('AttractionCommntService.update(): error adding AttractionComment: ' + err)
+            () =>
+              new Error(
+                'AttractionCommentService.showByPark(); error showing Attractions'
+              )
           );
         })
       );
   }
 
-  addComment(attraction: Attraction, comment:AttractionComment): Observable<AttractionComment> {
+  show(attractionId: number): Observable<Attraction> {
+    return this.http.get<Attraction>(this.url + '/' + attractionId).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () =>
+            new Error(
+              'AttractionCommntService.update(): error adding AttractionComment: ' +
+                err
+            )
+        );
+      })
+    );
+  }
+
+  addComment(
+    attraction: Attraction,
+    comment: AttractionComment
+  ): Observable<AttractionComment> {
     return this.http
-      .post<AttractionComment>(this.url + '/' + attraction.id + "/comments" , comment, this.getHttpOptions())
+      .post<AttractionComment>(
+        this.url + '/' + attraction.id + '/comments',
+        comment,
+        this.getHttpOptions()
+      )
       .pipe(
         catchError((err: any) => {
           console.error(err);
           return throwError(
-            () => new Error('AttractionCommntService.update(): error adding AttractionComment: ' + err)
+            () =>
+              new Error(
+                'AttractionCommntService.update(): error adding AttractionComment: ' +
+                  err
+              )
           );
         })
       );
   }
 
-  addReply(attraction: Attraction, cid:number, reply:AttractionComment): Observable<AttractionComment> {
+  addReply(
+    attraction: Attraction,
+    cid: number,
+    reply: AttractionComment
+  ): Observable<AttractionComment> {
     return this.http
-      .post<AttractionComment>(this.url + '/' + attraction.id + "/comments/"+ cid , reply, this.getHttpOptions())
+      .post<AttractionComment>(
+        this.url + '/' + attraction.id + '/comments/' + cid,
+        reply,
+        this.getHttpOptions()
+      )
       .pipe(
         catchError((err: any) => {
           console.error(err);
           return throwError(
-            () => new Error('ParkCommntService.update(): error adding ReplyParkComment: ' + err)
+            () =>
+              new Error(
+                'ParkCommntService.update(): error adding ReplyParkComment: ' +
+                  err
+              )
           );
         })
       );
   }
 
-  deleteComment(attraction: Attraction, cid:number): Observable<AttractionComment> {
+  deleteComment(
+    attraction: Attraction,
+    cid: number
+  ): Observable<AttractionComment> {
     return this.http
-      .delete<AttractionComment>(this.url + '/' + attraction.id + "/comments/"+ cid , this.getHttpOptions())
+      .delete<AttractionComment>(
+        this.url + '/' + attraction.id + '/comments/' + cid,
+        this.getHttpOptions()
+      )
       .pipe(
         catchError((err: any) => {
           console.error(err);
           return throwError(
-            () => new Error('ParkCommntService.update(): error adding ReplyParkComment: ' + err)
+            () =>
+              new Error(
+                'ParkCommntService.update(): error adding ReplyParkComment: ' +
+                  err
+              )
           );
         })
       );

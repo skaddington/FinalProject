@@ -1,21 +1,54 @@
 <h1>Register an Account</h1>
 
 <div class="container-registerDiv">
-   <form class="form-container">
-      <label class="form-label" for="username">Username: </label>
-         <input class="form-input" type="text" name="username" [(ngModel)]="newUser.username"><br>
-      <label class="form-label" for="password">Password: </label>
-         <input class="form-input" type="password" name="password" [(ngModel)]="newUser.password"><br>
+  <form class="form-container">
+    <label class="form-label" for="username">Username: </label>
+    <input
+      class="form-input"
+      type="text"
+      name="username"
+      [(ngModel)]="newUser.username"
+    /><br />
+    <label class="form-label" for="password">Password: </label>
+    <input
+      class="form-input"
+      type="password"
+      name="password"
+      [(ngModel)]="newUser.password"
+    /><br />
 
-         <label class="form-label" for="firstName">First Name: </label>
-         <input class="form-input" type="text" name="firstName" [(ngModel)]="newUser.firstName"><br>
-         <label class="form-label" for="lastName">Last Name: </label>
-         <input class="form-input" type="text" name="lastName" [(ngModel)]="newUser.lastName"><br>
-         <label class="form-label" for="image">Profile Picture: </label>
-         <input class="form-input" type="url" name="image" [(ngModel)]="newUser.image"><br>
+    <label class="form-label" for="firstName">First Name: </label>
+    <input
+      class="form-input"
+      type="text"
+      name="firstName"
+      [(ngModel)]="newUser.firstName"
+    /><br />
+    <label class="form-label" for="lastName">Last Name: </label>
+    <input
+      class="form-input"
+      type="text"
+      name="lastName"
+      [(ngModel)]="newUser.lastName"
+    /><br />
+    <label class="form-label" for="image">Profile Picture: </label>
+    <input
+      class="form-input"
+      type="url"
+      name="image"
+      [(ngModel)]="newUser.image"
+    /><br />
 
-         <label class="form-about" for="description">About You: </label>
-         <textarea class="textarea-description" rows="3" name="description" [(ngModel)]="newUser.description"></textarea><br>
-      <button class="btn btn-success" (click)="register(newUser)">Create Account</button>
-   </form>
+    <label class="form-about" for="description">About You: </label>
+    <textarea
+      class="textarea-description"
+      rows="3"
+      name="description"
+      [(ngModel)]="newUser.description"
+    ></textarea
+    ><br />
+    <button class="btn btn-success" (click)="register(newUser)">
+      Create Account
+    </button>
+  </form>
 </div>

@@ -1,52 +1,60 @@
-  <div class="row">
-    <h1>Travel the U.S. National Parks</h1>
+<div class="row">
+  <h1>Travel the U.S. National Parks</h1>
+</div>
+
+<hr />
+
+<div class="row homeIntroDiv">
+  <h5>Want to visit a National Park, but are unsure if it's worth the trip?</h5>
+  <h2>We're here to help!</h2>
+  <div class="col-4">
+    <blockquote>
+      Browse through the National Parks of the United States and see what other
+      visitors have said about a park, its available activities, and other
+      places to go nearby.
+    </blockquote>
   </div>
-
-<hr>
-
-  <div class="row homeIntroDiv">
-    <h5>Want to visit a National Park, but are unsure if it's worth the trip?</h5>
-    <h2>We're here to help!</h2>
-    <div class="col-4">
-      <blockquote>Browse through the National Parks of the United States and see what other visitors have said about a park, its available activities, and other places to go nearby.</blockquote>
-    </div>
-    <div class="col-4">
-      <blockquote>Create an account and share your experiences through photos, ratings, comment boards, and recommendations!</blockquote>
-    </div>
-    <div class="col-4">
-      <blockquote>Already have an account? Interact with other registered users!</blockquote>
-    </div>
+  <div class="col-4">
+    <blockquote>
+      Create an account and share your experiences through photos, ratings,
+      comment boards, and recommendations!
+    </blockquote>
   </div>
+  <div class="col-4">
+    <blockquote>
+      Already have an account? Interact with other registered users!
+    </blockquote>
+  </div>
+</div>
 
-<hr>
+<hr />
 
-  <ngb-carousel *ngIf="parks">
-    <ng-template
-      ngbSlide
-      carousel-item
-      row
-      text-center
-      *ngFor="let chunk of parks; let i = index"
-    >
-      <div class="cards-wrapper">
-        <div
-          id="carouselPhoto"
-          class= "card {{ i == 0 ? 'active' : 'd-none d-md-block' }}"
-          *ngFor="let park of chunk; let i = index"
-          (click)="displayParkDetails(park)"
-        >
-
-          <img
-            src="{{ park.image }}"
-            class="d-block"
-            alt="Photo of {{ park.name }}"
-          />
-          <div class="carousel-caption d-block">
-            <h6>{{ park.name }}</h6>
-          </div>
+<ngb-carousel *ngIf="parks">
+  <ng-template
+    ngbSlide
+    carousel-item
+    row
+    text-center
+    *ngFor="let chunk of parks; let i = index"
+  >
+    <div class="cards-wrapper">
+      <div
+        id="carouselPhoto"
+        class="card {{ i == 0 ? 'active' : 'd-none d-md-block' }}"
+        *ngFor="let park of chunk; let i = index"
+        (click)="displayParkDetails(park)"
+      >
+        <img
+          src="{{ park.image }}"
+          class="d-block"
+          alt="Photo of {{ park.name }}"
+        />
+        <div class="carousel-caption d-block">
+          <h6>{{ park.name }}</h6>
         </div>
       </div>
-    </ng-template>
-  </ngb-carousel>
+    </div>
+  </ng-template>
+</ngb-carousel>
 
-<hr>
+<hr />

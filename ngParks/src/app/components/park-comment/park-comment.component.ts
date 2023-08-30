@@ -14,18 +14,32 @@ export class ParkCommentComponent implements OnInit {
   @Input() selectedPark: Park | null = null;
   comment: ParkComment = new ParkComment();
   selectedComment: ParkComment | null = null;
-  @Output() reloadPark = new EventEmitter<number>();
+  comments: ParkComment[] = [];
 
-
-  constructor(
-    private parkCommentService: ParkCommentService
-    ) {}
-
+  constructor(private parkCommentService: ParkCommentService) {}
 
   ngOnInit(): void {
-    // if(this.comments && this.selectedPark) {
-    // this.comments = this.selectedPark.parkComments;
-    // }
+    if (this.selectedPark) {
+      this.loadParkComments(this.selectedPark.id);
+    }
+  }
+
+  loadParkComments(parkId: number) {
+    if (this.selectedPark) {
+      this.parkCommentService
+        .indexParkComments(this.selectedPark.id)
+        .subscribe({
+          next: (commentList) => {
+            this.comments = commentList;
+          },
+          error: (nothingChanged) => {
+            console.error(
+              'ParkCommentComponent.loadParkComments(): error loading ParkComments:'
+            );
+            console.error(nothingChanged);
+          },
+        });
+    }
   }
 
   addComment() {
@@ -34,10 +48,10 @@ export class ParkCommentComponent implements OnInit {
         .addComment(this.selectedPark, this.comment)
         .subscribe({
           next: (addedComment) => {
-            this.selectedPark?.parkComments.push(addedComment);
-            this.loggedInUser?.parkComments.push(addedComment);
             this.comment = new ParkComment();
-            this.reloadPark.emit(this.selectedPark?.id);
+            if (this.selectedPark) {
+              this.loadParkComments(this.selectedPark.id);
+            }
           },
           error: (nothingChanged) => {
             console.error('ParkComponent.updatePark(): error updating Park:');
@@ -53,39 +67,39 @@ export class ParkCommentComponent implements OnInit {
         .addReply(this.selectedPark, this.selectedComment.id, this.comment)
         .subscribe({
           next: (addedComment) => {
-            this.selectedPark?.parkComments.push(addedComment);
-            this.loggedInUser?.parkComments.push(addedComment);
-            this.selectedComment?.replies.push(addedComment);
             this.comment = new ParkComment();
-            this.reloadPark.emit(this.selectedPark?.id);
+            if (this.selectedPark) {
+              this.loadParkComments(this.selectedPark.id);
+            }
           },
           error: (nothingChanged) => {
-            console.error('ParkCommentComponent.addReplyComment(): error adding replyParkcomment:');
+            console.error(
+              'ParkCommentComponent.addReplyComment(): error adding replyParkcomment:'
+            );
             console.error(nothingChanged);
           },
         });
     }
   }
 
-  deleteComment(commentId:number) {
+  deleteComment(commentId: number) {
     if (this.selectedPark) {
       this.parkCommentService
         .deleteComment(this.selectedPark.id, commentId)
         .subscribe({
           next: (result) => {
-            if(this.selectedPark){
-            this.reloadPark.emit(this.selectedPark.id);
+            if (this.selectedPark) {
+             this.loadParkComments(this.selectedPark.id);
             }
-            this.selectedComment=null;
+            this.selectedComment = null;
           },
           error: (nothingChanged) => {
-            console.error('ParkCommentComponent.deleteComment(): error removing ParkComment:');
+            console.error(
+              'ParkCommentComponent.deleteComment(): error removing ParkComment:'
+            );
             console.error(nothingChanged);
           },
         });
     }
   }
-
-
-
 }

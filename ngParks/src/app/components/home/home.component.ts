@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   }
 
   displayParkDetails(park: Park) {
-    this.router.navigateByUrl("parks/" + park.id);
+    this.router.navigateByUrl('parks/' + park.id);
   }
 
   chunks(array: Park[], size: number) {

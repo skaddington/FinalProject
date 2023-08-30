@@ -49,7 +49,7 @@ export class UserComponent {
         return (this.loggedInUser = user);
       },
       error: (problem) => {
-        console.error('UserComponent.reload(): error loading Users');
+        console.error('UserComponent.checkUser(): error loading Users');
         console.error(problem);
       },
     });
@@ -127,7 +127,7 @@ disableUser(user: User){
       this.reload();
     },
     error: (nothingChanged) => {
-      console.error('ParkCommentComponent.deleteComment(): error removing ParkComment:');
+      console.error('ParkCommentComponent.disableUser(): error disabling User:');
       console.error(nothingChanged);
     },
   });

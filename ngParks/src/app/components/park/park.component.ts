@@ -19,7 +19,6 @@ export class ParkComponent {
   newPark: Park = new Park();
   editPark: Park | null = null;
   @Input() selectedPark: Park | null = null;
-  selectedAttraction: Attraction | null = null;
   selectedState: string = 'All';
   states = [
     'All',
@@ -53,7 +52,7 @@ export class ParkComponent {
     'Virgin Islands',
     'Washington',
     'West Virgina',
-    'Wyoming'
+    'Wyoming',
   ];
 
   constructor(
@@ -66,9 +65,6 @@ export class ParkComponent {
     this.parkService.getSelectedPark().subscribe((selectedPark) => {
       this.selectedPark = selectedPark;
     });
-    this.parkService.getSelectedAttraction().subscribe((selelectedAttraction) => {
-      this.selectedAttraction = selelectedAttraction;
-    })
   }
 
   checkUser(): User | null {
@@ -126,18 +122,6 @@ export class ParkComponent {
     return (this.selectedPark = null);
   }
 
-  selectAttraction(attractionId: number) {
-    this.attractionCommentService.show(attractionId).subscribe({
-      next: (attraction) => {
-        this.selectedAttraction = attraction;
-      },
-      error: (nothingChanged) => {
-        console.error('ParkComponent.updatePark(): error updating Park:');
-        console.error(nothingChanged);
-      },
-    });
-  }
-
   showPark(parkId: number) {
     this.parkService.show(parkId).subscribe({
       next: (foundPark) => {
@@ -182,10 +166,6 @@ export class ParkComponent {
     });
   }
 
-  handleDeselectAttraction(selectedAttraction: null) {
-    this.selectedAttraction = selectedAttraction;
-  }
-
   refreshSelectedPark(parkId: number) {
     this.parkService.show(parkId).subscribe({
       next: (updatedPark) => {
@@ -203,19 +183,18 @@ export class ParkComponent {
 
   hadRatedPark: boolean | undefined = false;
   checkUserParkRatings(park: Park) {
-    this.hadRatedPark= false;
+    this.hadRatedPark = false;
     // console.log('beginning of rating check ' + this.hadRatedPark);
     // console.log(this.loggedInUser);
     if (this.loggedInUser && park) {
       for (let userParkRating of this.loggedInUser?.parkRatings) {
         // console.log('middle of rating check ' + userParkRating.park.id);
-          if (userParkRating.park.id === park.id) {
-            this.hadRatedPark = true;
-            // console.log('end of rating check ' + this.hadRatedPark);
-            break;
-          }
+        if (userParkRating.park.id === park.id) {
+          this.hadRatedPark = true;
+          // console.log('end of rating check ' + this.hadRatedPark);
+          break;
         }
       }
     }
   }
-
+}

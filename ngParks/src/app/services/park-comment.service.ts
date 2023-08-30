@@ -7,14 +7,11 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Park } from '../models/park';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ParkCommentService {
   private url = environment.baseUrl + 'api/parks';
-  constructor(
-    private http: HttpClient,
-    private auth: AuthService
-  ) { }
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   getHttpOptions() {
     let options = {
@@ -26,50 +23,87 @@ export class ParkCommentService {
     return options;
   }
 
-  addComment(park: Park, comment:ParkComment): Observable<ParkComment> {
+  addComment(park: Park, comment: ParkComment): Observable<ParkComment> {
     comment.user = null;
     comment.park = null;
     return this.http
-      .post<ParkComment>(this.url + '/' + park.id + "/comments" , comment, this.getHttpOptions())
+      .post<ParkComment>(
+        this.url + '/' + park.id + '/comments',
+        comment,
+        this.getHttpOptions()
+      )
       .pipe(
         catchError((err: any) => {
           console.error(err);
           return throwError(
-            () => new Error('ParkCommntService.update(): error adding ParkComment: ' + err)
+            () =>
+              new Error(
+                'ParkCommntService.update(): error adding ParkComment: ' + err
+              )
           );
         })
       );
   }
 
-  addReply(park: Park, cid:number, reply:ParkComment): Observable<ParkComment> {
+  addReply(
+    park: Park,
+    cid: number,
+    reply: ParkComment
+  ): Observable<ParkComment> {
     reply.user = null;
     reply.park = null;
     return this.http
-      .post<ParkComment>(this.url + '/' + park.id + "/comments/"+ cid , reply, this.getHttpOptions())
+      .post<ParkComment>(
+        this.url + '/' + park.id + '/comments/' + cid,
+        reply,
+        this.getHttpOptions()
+      )
       .pipe(
         catchError((err: any) => {
           console.error(err);
           return throwError(
-            () => new Error('ParkCommntService.addReply(): error adding ReplyParkComment: ' + err)
+            () =>
+              new Error(
+                'ParkCommntService.addReply(): error adding ReplyParkComment: ' +
+                  err
+              )
           );
         })
       );
   }
 
-  deleteComment(parkId: Number, cid:number): Observable<ParkComment> {
+  deleteComment(parkId: Number, cid: number): Observable<ParkComment> {
     return this.http
-      .delete<ParkComment>(this.url + '/' + parkId + "/comments/"+ cid, this.getHttpOptions())
+      .delete<ParkComment>(
+        this.url + '/' + parkId + '/comments/' + cid,
+        this.getHttpOptions()
+      )
       .pipe(
         catchError((err: any) => {
           console.error(err);
           return throwError(
-            () => new Error('ParkCommntService.delete(): error deleting ParkComment: ' + err)
+            () =>
+              new Error(
+                'ParkCommntService.delete(): error deleting ParkComment: ' + err
+              )
           );
         })
       );
-
   }
 
-
-
+  indexParkComments(parkId: number): Observable<ParkComment[]> {
+    return this.http
+      .get<ParkComment[]>(this.url + '/' + parkId + '/comments')
+      .pipe(
+        catchError((err: any) => {
+          console.error(err);
+          return throwError(
+            () =>
+              new Error(
+                'ParkCommntService.update(): error adding ParkComment: ' + err
+              )
+          );
+        })
+      );
+  }
 }

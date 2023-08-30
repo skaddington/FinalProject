@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -28,12 +27,12 @@ public class ParkPhoto {
 	@Column(name="image_date")
 	private LocalDate imageDate;
 	
-	@JsonIgnoreProperties({"parkPhotos", "users"})
+	@JsonIgnoreProperties({"parkPhotos", "users", "activities", "attractions", "parkComments", "parkRatings"})
 	@ManyToOne
 	@JoinColumn(name="park_id")
 	private Park park;
 	
-	@JsonIgnoreProperties({"parkPhotos", "favoriteParks"})
+	@JsonIgnoreProperties({"parkPhotos", "favoriteParks", "attractions", "attractionComments", "parkComments", "parkRatings"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

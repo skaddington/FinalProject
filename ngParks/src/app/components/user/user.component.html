@@ -2,7 +2,9 @@
   <ng-container *ngFor="let user of users">
     <div class="users">
       <div class="users-header">
-        <blockquote>{{ user.id }} {{ user.firstName }} {{ user.lastName }}</blockquote>
+        <blockquote>
+          {{ user.id }} {{ user.firstName }} {{ user.lastName }}
+        </blockquote>
       </div>
       <div (click)="displayUserDetails(user)" class="user-table-image">
         <img
@@ -84,8 +86,6 @@
       </button>
     </div>
 
-
-
     <div class="col-7">
       <h3>Favorite Parks</h3>
       <table class="favorite-parks-table">
@@ -111,35 +111,6 @@
         </tbody>
       </table>
     </div>
-
-
-
-
-    <!-- <div class="col-7">
-      <h3>Favorite Parks</h3>
-      <table class="favorite-parks-table table table-striped table-hover">
-        <thead class="table-dark">
-          <tr>
-            <th>ID</th>
-            <th>Park</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody class="fav-park-body">
-          <tr *ngFor="let fav of selectedUser.favoriteParks">
-            <td>{{ fav.id }}</td>
-            <td>{{ fav.name }}</td>
-            <td>
-              <app-remove-from-favorites
-                [loggedInUser]="loggedInUser"
-                [selectedPark]="fav"
-                (removalSuccess)="handleRemovalSuccess($event)"
-              ></app-remove-from-favorites>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
   </div>
 </div>
 

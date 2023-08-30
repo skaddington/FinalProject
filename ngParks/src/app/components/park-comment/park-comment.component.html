@@ -1,6 +1,14 @@
 <h5 style="text-align: center">User Comments about the Park</h5>
 <ng-container *ngFor="let comment of selectedPark?.parkComments">
-  <div *ngIf="comment.user && comment.comment === null && comment.enabled && comment.user.enabled" class="park-comment">
+  <div
+    *ngIf="
+      comment.user &&
+      comment.comment === null &&
+      comment.enabled &&
+      comment.user.enabled
+    "
+    class="park-comment"
+  >
     <blockquote class="row park-comments">
       <div class="col-8">
         "{{ comment.content }}"<br />
@@ -16,17 +24,19 @@
           Reply
         </button>
       </div>
-        <div class="col-2" *ngIf="loggedInUser?.id === comment.user.id">
-          <button class="btn btn-danger" (click)="deleteComment(comment.id)">
-            Delete
-          </button>
-        </div>
+      <div class="col-2" *ngIf="loggedInUser?.id === comment.user.id">
+        <button class="btn btn-danger" (click)="deleteComment(comment.id)">
+          Delete
+        </button>
+      </div>
 
       <ng-container *ngIf="comment.replies && comment.replies.length > 0">
         <div class="nested-replies">
           <ng-container *ngFor="let reply of comment.replies">
-            <!-- <app-comment [reply]="reply"> -->
-            <div *ngIf="reply.user && reply.enabled && reply.user.enabled" class="park-reply">
+            <div
+              *ngIf="reply.user && reply.enabled && reply.user.enabled"
+              class="park-reply"
+            >
               <blockquote class="row park-comments">
                 <div class="col-8">
                   {{ reply.content }} <br />
@@ -43,18 +53,21 @@
                     Reply
                   </button>
                 </div>
-                  <div class="col-2" *ngIf="loggedInUser?.id === reply.user.id">
-                    <button
-                      class="btn btn-danger"
-                      (click)="deleteComment(reply.id)"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                <div class="col-2" *ngIf="loggedInUser?.id === reply.user.id">
+                  <button
+                    class="btn btn-danger"
+                    (click)="deleteComment(reply.id)"
+                  >
+                    Delete
+                  </button>
+                </div>
 
                 <ng-container *ngIf="reply.replies && reply.replies.length > 0">
                   <ng-container *ngFor="let nestedReply of reply.replies">
-                    <div *ngIf="nestedReply.enabled && nestedReply.user" class="park-reply">
+                    <div
+                      *ngIf="nestedReply.enabled && nestedReply.user"
+                      class="park-reply"
+                    >
                       <blockquote class="row park-comments">
                         <div class="col-8">
                           {{ nestedReply.content }}
@@ -64,23 +77,17 @@
                           {{ reply.user.lastName }} on
                           {{ nestedReply.createdAt | date : "shortDate" }}
                         </div>
-                        <!-- <div class="col-2">
+                        <div
+                          class="col-2"
+                          *ngIf="loggedInUser?.id === nestedReply.user.id"
+                        >
                           <button
-                            class="btn btn-warning"
-                            *ngIf="nestedReply && loggedInUser"
-                            (click)="selectedComment = nestedReply"
+                            class="btn btn-danger"
+                            (click)="deleteComment(nestedReply.id)"
                           >
-                            Reply
+                            Delete
                           </button>
-                        </div>-->
-                          <div class="col-2" *ngIf="loggedInUser?.id === nestedReply.user.id">
-                            <button
-                              class="btn btn-danger"
-                              (click)="deleteComment(nestedReply.id)"
-                            >
-                              Delete
-                            </button>
-                          </div>
+                        </div>
                       </blockquote>
                     </div>
                   </ng-container>
@@ -118,7 +125,9 @@
       }}"
       class="col-8"
     />
-    <button class="btn btn-success col-2" (click)="addReplyComment()">Submit</button>
+    <button class="btn btn-success col-2" (click)="addReplyComment()">
+      Submit
+    </button>
     <button class="btn btn-danger col-2" (click)="selectedComment = null">
       Cancel
     </button>

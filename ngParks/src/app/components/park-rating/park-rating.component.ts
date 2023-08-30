@@ -16,21 +16,18 @@ export class ParkRatingComponent {
 
   @Output() reloadPark = new EventEmitter<number>();
 
-  constructor(
-    private parkService: ParkService
-    ) {}
+  constructor(private parkService: ParkService) {}
 
   setRatingValue(value: number) {
     this.parkRating.rating = value;
-    if (this.loggedInUser && this.selectedPark){
+    if (this.loggedInUser && this.selectedPark) {
       this.parkRating.user = this.loggedInUser;
       this.parkRating.park = this.selectedPark;
     }
     this.submitUserRating(this.parkRating);
   }
 
-  submitUserRating(parkRating:ParkRating) {
-    // console.log(this.parkRating);
+  submitUserRating(parkRating: ParkRating) {
     if (this.selectedPark) {
       this.parkService
         .addParkRating(this.parkRating, this.selectedPark.id)
